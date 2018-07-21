@@ -15,7 +15,7 @@ connection.connect(function (err) {
     console.log('DB connected');
     
     createTable(connection);
-    addRow(connection);
+    //addRow(connection);
 });
 
 function createTable(conn) {
@@ -45,7 +45,7 @@ function addRow(conn) {
     const sql = "INSERT INTO `events` (`uuid`, `user_login`, `update_time`, `url_image`, `place`, `date`, `address`, `sale_place`, `sale_place_phone`) VALUES ?";
 
     const values = [
-        ['955b9575-e542-461c-939a-5ef41e733859', 'api@purai.io', '2018-07-20', 'uploads/welcometocat.png', 'Apple Infinite Loop', '25/07/2018', 'Apple Campus, Cupertino, CA 95014, EUA', 'Apple Park Visitor Center', '+1 408-961-1560']
+        ['955b9575-e542-461c-939a-5ef41e733859', 'api@purai.io', new Date().toLocaleString(), 'uploads/welcometocat.png', 'Apple Infinite Loop', '25/07/2018', 'Apple Campus, Cupertino, CA 95014, EUA', 'Apple Park Visitor Center', '+1 408-961-1560']
     ];
     
     conn.query(sql, [values], function (error, results, fields) {

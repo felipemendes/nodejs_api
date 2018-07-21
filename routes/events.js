@@ -1,6 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, new Date().toISOString() + file.originalname)
+    }
+});
+
+const fileFilter = (req, file, cb ) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+
+const upload = multer({
+    storage: storage, 
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 
 router.get('/:id?', function (req, res, next) {
 
@@ -23,9 +50,9 @@ router.get('/:id?', function (req, res, next) {
   
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', upload.single('url_image'), function (req, res, next) {
 
-    Event.addEvent(req.body, function (err, count) {
+    Event.addEvent(req.body, req.file, function (err, count) {
         if (err)
             res.json(err);
         else
@@ -56,9 +83,9 @@ router.delete('/:id', function (req, res, next) {
 
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id', upload.single('url_image'), function (req, res, next) {
 
-    Event.updateEvent(req.params.id, req.body, function (err, rows) {
+    Event.updateEvent(req.params.id, req.body, req.file, function (err, rows) {
         if (err)
         res.json(err);
         else

@@ -1,5 +1,4 @@
 const db = require('../db-connect');
-const uuidv1 = require('uuid/v1');
 
 const Event = {
 
@@ -13,9 +12,9 @@ const Event = {
         return db.query("SELECT * FROM events WHERE id=?", [id], callback);
     },
 
-    addEvent: function (Event, File, callback) {
+    addEvent: function (Event, File, Uuid, callback) {
 
-        return db.query("INSERT INTO events (uuid, user_login, update_time, url_image, place, date, address, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?)", [uuidv1(), Event.user_login, new Date().toLocaleString(), File.path, Event.place, Event.date, Event.address, Event.sale_place, Event.sale_place_phone], callback);
+        return db.query("INSERT INTO events (uuid, user_login, update_time, url_image, place, date, address, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_login, new Date().toLocaleString(), File.path, Event.place, Event.date, Event.address, Event.sale_place, Event.sale_place_phone], callback);
     },
 
     deleteEvent: function (id, callback) {

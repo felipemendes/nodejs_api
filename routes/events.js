@@ -115,17 +115,6 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
 
 });
 
-router.post('/:id', function (req, res, next) {
-
-    Event.deleteAll(req.body, function (err, count) {
-        if (err)
-            res.json(err);
-        else
-            res.json(count);
-    });
-
-});
-
 router.delete('/:id', function (req, res, next) {
 
     Event.deleteEvent(req.params.id, function (err, count) {

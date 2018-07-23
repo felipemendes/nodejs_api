@@ -64,3 +64,6 @@ To test use any API development environment like Postman or via cURL:
 curl -X GET http://localhost:3000/Events
 ```
 ![GET](/screenshots/curl-get.png "GET")
+
+## License
+This project is licensed under the GNU GPLv3 License - see the [LICENSE](LICENSE) file for details

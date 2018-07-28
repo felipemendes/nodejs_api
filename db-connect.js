@@ -22,7 +22,7 @@ function createTable(conn) {
 
     const sql = "CREATE TABLE IF NOT EXISTS `events` (`id` int(10) NOT NULL AUTO_INCREMENT,\n"+
                     "`uuid` varchar(36) NOT NULL,\n"+
-                    "`user_login` varchar(255) NOT NULL,\n"+
+                    "`user_email` varchar(255) NOT NULL,\n"+
                     "`created_at` DATETIME NULL,\n"+
                     "`updated_at` DATETIME NULL,\n"+
                     "`url_image` varchar(255) NOT NULL,\n"+
@@ -43,7 +43,7 @@ function createTable(conn) {
 
 function addRow(conn) {
 
-    const sql = "INSERT INTO `events` (`uuid`, `user_login`, `created_at`, `url_image`, `place`, `date`, `address`, `sale_place`, `sale_place_phone`) VALUES ?";
+    const sql = "INSERT INTO `events` (`uuid`, `user_email`, `created_at`, `url_image`, `place`, `date`, `address`, `sale_place`, `sale_place_phone`) VALUES ?";
 
     const values = [
         ['955b9575-e542-461c-939a-5ef41e733859', 'api@purai.io', new Date(), 'uploads/welcometocat.png', 'Apple Infinite Loop', '25/07/2018', 'Apple Campus, Cupertino, CA 95014, EUA', 'Apple Park Visitor Center', '+1 408-961-1560']

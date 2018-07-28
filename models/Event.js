@@ -23,12 +23,12 @@ const Event = {
 
     postEvent: function (Event, File, Uuid, PhoneNumber, callback) {
 
-        return db.query("INSERT INTO events (uuid, user_login, created_at, url_image, place, date, address, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_login, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, PhoneNumber], callback);
+        return db.query("INSERT INTO events (uuid, user_email, created_at, url_image, place, date, address, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_email, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, PhoneNumber], callback);
     },
 
     putEvent: function (id, PhoneNumber, Event, File, callback) {
 
-        return db.query("UPDATE events SET user_login=?, updated_at=?, url_image=?, place=?, date=?, address=?, sale_place=?, sale_place_phone=? where Id=?", [Event.user_login, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, PhoneNumber, id], callback);
+        return db.query("UPDATE events SET user_email=?, updated_at=?, url_image=?, place=?, date=?, address=?, sale_place=?, sale_place_phone=? where Id=?", [Event.user_email, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, PhoneNumber, id], callback);
     },
 
     deleteEvent: function (id, callback) {

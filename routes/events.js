@@ -54,7 +54,7 @@ router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
 
 router.post('/', upload.single('url_image'), function (req, res, next) {
 
-    const emailFormated = helpers.validateEmail(req.body.user_login);
+    const emailFormated = helpers.validateEmail(req.body.user_email);
     if (!emailFormated) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',
@@ -92,7 +92,7 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
 
 router.put('/:id', upload.single('url_image'), function (req, res, next) {
 
-    const emailFormated = helpers.validateEmail(req.body.user_login);
+    const emailFormated = helpers.validateEmail(req.body.user_email);
     if (!emailFormated) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',

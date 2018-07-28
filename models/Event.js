@@ -2,20 +2,20 @@ const db = require('../db-connect');
 
 const Event = {
 
-    getEvents: function (id, search, page = 1, quantity = 10, callback) {
+    getEvents: function (uuid, search, page = 1, quantity = 10, callback) {
 
         var query = "SELECT * FROM events ";
 
         const validPage = page != 0 ? page : 1;
         const validQuantity = quantity != 0 ? quantity : 10;
         const currentPage = (validPage - 1) * validQuantity;
-        const eventById = id == undefined ? "" : " id=" + id;
+        const eventByUuid = uuid == undefined ? "" : " uuid='" + uuid + "'";
         const eventBySearch = search == undefined ? "" : " place LIKE '%" + search + "%' ";
 
         var whereClause = "";
-        if (eventById != "" && eventBySearch != "") whereClause = "WHERE" + eventById + " AND" + eventBySearch;
-        if (eventById != "" && eventBySearch == "") whereClause = "WHERE" + eventById;
-        if (eventById == "" && eventBySearch != "") whereClause = "WHERE" + eventBySearch;
+        if (eventByUuid != "" && eventBySearch != "") whereClause = "WHERE" + eventByUuid + " AND" + eventBySearch;
+        if (eventByUuid != "" && eventBySearch == "") whereClause = "WHERE" + eventByUuid;
+        if (eventByUuid == "" && eventBySearch != "") whereClause = "WHERE" + eventBySearch;
 
         query += whereClause + " LIMIT " + validQuantity + " OFFSET " + currentPage + "";
         return db.query(query, callback);

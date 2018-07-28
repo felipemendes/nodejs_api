@@ -36,9 +36,9 @@ const upload = multer({
 
 });
 
-router.get('/:id?/:search?/:page?/:quantity?', function (req, res, next) {
+router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
 
-    Event.getEvents(req.query.id, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
+    Event.getEvents(req.query.uuid, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Events cannot be return. Check details message for more info',

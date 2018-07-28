@@ -36,29 +36,17 @@ const upload = multer({
 
 });
 
-router.get('/:id?', function (req, res, next) {
+router.get('/:id?/:search?/:page?/:quantity?', function (req, res, next) {
 
-    if (req.params.id) {
-        Event.getEventById(req.params.id, function (err, rows) {
-            if (err) {
-                res.json({
-                    message: 'Events cannot be return. Check details message for more info',
-                    details: err.sqlMessage
-                });
-            } else
-                res.json(rows);
-        });
-    } else {
-        Event.getAllEvents(function (err, rows) {
-            if (err)
-                res.json({
-                    message: 'Events cannot be return. Check details message for more info',
-                    details: err.sqlMessage
-                });
-            else
-                res.json(rows);
-        });
-    }
+    Event.getEvents(req.query.id, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
+        if (err) {
+            res.json({
+                message: 'Events cannot be return. Check details message for more info',
+                details: err.sqlMessage
+            });
+        } else
+            res.json(rows);
+    });
 
 });
 

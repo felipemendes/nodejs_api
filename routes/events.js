@@ -3,6 +3,7 @@ const router = express.Router();
 const Event = require('../models/Event');
 const multer = require('multer');
 const uuidv1 = require('uuid/v1');
+const helpers = require('../helpers/PurAiHelpers');
 
 const storage = multer.diskStorage({
 
@@ -53,6 +54,15 @@ router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
 
 router.post('/', upload.single('url_image'), function (req, res, next) {
 
+    const emailFormated = helpers.validateEmail(req.body.user_login);
+    if (!emailFormated) {
+        res.json({
+            message: 'Event cannot be register. Check details message for more info',
+            details: 'Email format is invalid'
+        });
+        return;
+    }
+
     if (req.file == undefined) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',
@@ -61,8 +71,10 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
         return;
     }
 
-    let newUuid = uuidv1();
-    Event.postEvent(req.body, req.file, newUuid, function (err, count) {
+    const newUuid = uuidv1();
+    const phoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
+
+    Event.postEvent(req.body, req.file, newUuid, phoneNumberFormated, function (err, count) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -80,6 +92,15 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
 
 router.put('/:id', upload.single('url_image'), function (req, res, next) {
 
+    const emailFormated = helpers.validateEmail(req.body.user_login);
+    if (!emailFormated) {
+        res.json({
+            message: 'Event cannot be register. Check details message for more info',
+            details: 'Email format is invalid'
+        });
+        return;
+    }
+
     if (req.file == undefined) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',
@@ -88,7 +109,10 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
         return;
     }
 
-    Event.putEvent(req.params.id, req.body, req.file, function (err, rows) {
+    const newUuid = uuidv1();
+    const phoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
+    
+    Event.putEvent(req.params.id, phoneNumberFormated, req.body, req.file, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',

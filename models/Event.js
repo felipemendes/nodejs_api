@@ -21,20 +21,20 @@ const Event = {
         return db.query(query, callback);
     },
 
-    postEvent: function (Event, File, Uuid, callback) {
+    postEvent: function (Event, File, Uuid, PhoneNumber, callback) {
 
-        return db.query("INSERT INTO events (uuid, user_login, created_at, url_image, place, date, address, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_login, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, Event.sale_place_phone], callback);
+        return db.query("INSERT INTO events (uuid, user_login, created_at, url_image, place, date, address, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_login, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, PhoneNumber], callback);
+    },
+
+    putEvent: function (id, PhoneNumber, Event, File, callback) {
+
+        return db.query("UPDATE events SET user_login=?, updated_at=?, url_image=?, place=?, date=?, address=?, sale_place=?, sale_place_phone=? where Id=?", [Event.user_login, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, PhoneNumber, id], callback);
     },
 
     deleteEvent: function (id, callback) {
 
         return db.query("DELETE FROM events WHERE id=?", [id], callback);
-    },
-
-    putEvent: function (id, Event, File, callback) {
-
-        return db.query("UPDATE events SET user_login=?, updated_at=?, url_image=?, place=?, date=?, address=?, sale_place=?, sale_place_phone=? where Id=?", [Event.user_login, new Date(), File.path, Event.place, Event.date, Event.address, Event.sale_place, Event.sale_place_phone, id], callback);
-    },
+    }
 };
 
 module.exports = Event;

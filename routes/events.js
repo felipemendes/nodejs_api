@@ -61,7 +61,7 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
     }
 
     let newUuid = uuidv1();
-    Event.addEvent(req.body, req.file, newUuid, function (err, count) {
+    Event.postEvent(req.body, req.file, newUuid, function (err, count) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -87,7 +87,7 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
         return;
     }
 
-    Event.updateEvent(req.params.id, req.body, req.file, function (err, rows) {
+    Event.putEvent(req.params.id, req.body, req.file, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -95,8 +95,8 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
             });
         } else {
             res.json({
-                message: 'Event successfully registered',
-                details: 'New UUID: ' + newUuid
+                message: 'Event successfully updated',
+                details: rows
             });
         }
     });

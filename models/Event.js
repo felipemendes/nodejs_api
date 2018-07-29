@@ -21,12 +21,12 @@ const Event = {
         return db.query(query, callback);
     },
 
-    postEvent: function (Event, File, Uuid, PlacePhoneNumber, SalePlacePhoneNumber, callback) {
+    postEvent: function (Event, File, Uuid, PlacePhoneNumber, dateFormatted, SalePlacePhoneNumber, callback) {
 
         const sql = "INSERT INTO `events` (`uuid`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
         const values = [
-            [Uuid, Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
+            [Uuid, Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, dateFormatted, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
         ];
         
         return db.query(sql, [values], callback);

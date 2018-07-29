@@ -9,5 +9,18 @@ module.exports = {
     validateEmail: function (email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
+    },
+
+    dateFormatter: function (date){
+        var newDate = new Date(date);
+
+        var day = newDate.getDate();
+        if (day.toString().length == 1) day = "0"+day;
+        
+        var month = newDate.getMonth()+1;
+        if (month.toString().length == 1) month = "0"+month;
+        
+        var year = newDate.getFullYear();  
+        return day+"/"+month+"/"+year;
     }
 };

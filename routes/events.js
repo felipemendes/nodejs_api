@@ -54,8 +54,8 @@ router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
 
 router.post('/', upload.single('url_image'), function (req, res, next) {
 
-    const emailFormated = helpers.validateEmail(req.body.user_email);
-    if (!emailFormated) {
+    const emailFormatted = helpers.validateEmail(req.body.user_email);
+    if (!emailFormatted) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',
             details: 'Email format is invalid'
@@ -71,11 +71,20 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
         return;
     }
 
-    const newUuid = uuidv1();
-    const placePhoneNumberFormated = helpers.formatPhoneNumber(req.body.place_phone);
-    const salePlacePhoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
+    const dateFormatted = helpers.dateFormatter(req.body.date);
+    if (dateFormatted == 'NaN/NaN/NaN') {
+        res.json({
+            message: 'Event cannot be register. Check details message for more info',
+            details: 'Date invalid format. Must be yyyy-MM-dd'
+        });
+        return;
+    }
 
-    Event.postEvent(req.body, req.file, newUuid, placePhoneNumberFormated, salePlacePhoneNumberFormated, function (err, count) {
+    const newUuid = uuidv1();
+    const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
+    const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
+
+    Event.postEvent(req.body, req.file, newUuid, placePhoneNumberFormatted, dateFormatted, salePlacePhoneNumberFormatted, function (err, count) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -116,8 +125,8 @@ router.delete('/:uuid', function (req, res, next) {
 
 router.put('/:uuid', upload.single('url_image'), function (req, res, next) {
 
-    const emailFormated = helpers.validateEmail(req.body.user_email);
-    if (!emailFormated) {
+    const emailFormatted = helpers.validateEmail(req.body.user_email);
+    if (!emailFormatted) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',
             details: 'Email format is invalid'
@@ -134,10 +143,10 @@ router.put('/:uuid', upload.single('url_image'), function (req, res, next) {
     }
 
     const newUuid = uuidv1();
-    const placePhoneNumberFormated = helpers.formatPhoneNumber(req.body.place_phone);
-    const salePlacePhoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
+    const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
+    const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
     
-    Event.putEvent(req.params.uuid, placePhoneNumberFormated, salePlacePhoneNumberFormated, req.body, req.file, function (err, rows) {
+    Event.putEvent(req.params.uuid, placePhoneNumberFormatted, salePlacePhoneNumberFormatted, req.body, req.file, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',

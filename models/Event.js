@@ -10,7 +10,7 @@ const Event = {
         const validQuantity = quantity != 0 ? quantity : 10;
         const currentPage = (validPage - 1) * validQuantity;
         const eventByUuid = uuid == undefined ? "" : " uuid='" + uuid + "'";
-        const eventBySearch = search == undefined ? "" : " place LIKE '%" + search + "%' ";
+        const eventBySearch = search == undefined ? "" : " place LIKE '%" + search + "%' or address LIKE '%" + search + "%' or city LIKE '%" + search + "%' or sale_place LIKE '%" + search + "%'";
 
         var whereClause = "";
         if (eventByUuid != "" && eventBySearch != "") whereClause = "WHERE" + eventByUuid + " AND" + eventBySearch;

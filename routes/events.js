@@ -72,9 +72,10 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
     }
 
     const newUuid = uuidv1();
-    const phoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
+    const placePhoneNumberFormated = helpers.formatPhoneNumber(req.body.place_phone);
+    const salePlacePhoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
 
-    Event.postEvent(req.body, req.file, newUuid, phoneNumberFormated, function (err, count) {
+    Event.postEvent(req.body, req.file, newUuid, placePhoneNumberFormated, salePlacePhoneNumberFormated, function (err, count) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -110,9 +111,10 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
     }
 
     const newUuid = uuidv1();
-    const phoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
+    const placePhoneNumberFormated = helpers.formatPhoneNumber(req.body.place_phone);
+    const salePlacePhoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
     
-    Event.putEvent(req.params.id, phoneNumberFormated, req.body, req.file, function (err, rows) {
+    Event.putEvent(req.params.id, placePhoneNumberFormated, salePlacePhoneNumberFormated, req.body, req.file, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',

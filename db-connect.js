@@ -27,8 +27,10 @@ function createTable(conn) {
                     "`updated_at` DATETIME NULL,\n"+
                     "`url_image` varchar(255) NOT NULL,\n"+
                     "`place` varchar(255) NOT NULL,\n"+
+                    "`place_phone` varchar(255) NOT NULL,\n"+
                     "`date` varchar(255) NOT NULL,\n"+
-                    "`address` varchar(255) DEFAULT NULL,\n"+
+                    "`address` varchar(255) NOT NULL,\n"+
+                    "`city` varchar(255) NOT NULL,\n"+
                     "`sale_place` varchar(255) DEFAULT NULL,\n"+
                     "`sale_place_phone` varchar(255) DEFAULT NULL,\n"+
                     "PRIMARY KEY (`id`)\n"+
@@ -43,10 +45,10 @@ function createTable(conn) {
 
 function addRow(conn) {
 
-    const sql = "INSERT INTO `events` (`uuid`, `user_email`, `created_at`, `url_image`, `place`, `date`, `address`, `sale_place`, `sale_place_phone`) VALUES ?";
+    const sql = "INSERT INTO `events` (`uuid`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
     const values = [
-        ['955b9575-e542-461c-939a-5ef41e733859', 'api@purai.io', new Date(), 'uploads/welcometocat.png', 'Apple Infinite Loop', '25/07/2018', 'Apple Campus, Cupertino, CA 95014, EUA', 'Apple Park Visitor Center', '+1 408-961-1560']
+        ['955b9575-e542-461c-939a-5ef41e733859', 'api@purai.io', new Date(), 'uploads/welcometocat.png', 'Apple Infinite Loop', `+1 408-961-1560`, '25/07/2018', 'Apple Campus, Cupertino, CA 95014, EUA', `Cupertino`, 'Apple Park Visitor Center', '+1 408-961-1560']
     ];
     
     conn.query(sql, [values], function (error, results, fields) {

@@ -23,17 +23,29 @@ const Event = {
 
     postEvent: function (Event, File, Uuid, PlacePhoneNumber, SalePlacePhoneNumber, callback) {
 
-        return db.query("INSERT INTO events (uuid, user_email, created_at, url_image, place, place_phone, date, address, city, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber], callback);
+        const sql = "INSERT INTO `events` (`uuid`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
+
+        const values = [
+            [Uuid, Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
+        ];
+        
+        return db.query(sql, [values], callback);
     },
 
     putEvent: function (Uuid, PlacePhoneNumber, SalePlacePhoneNumber, Event, File, callback) {
+        
+        const sql = "UPDATE events SET user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?";
 
-        return db.query("UPDATE events SET user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?", [Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid], callback);
+        const values = [Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid];
+
+        return db.query(sql, values, callback);
     },
 
     deleteEvent: function (Uuid, callback) {
 
-        return db.query("DELETE FROM events WHERE uuid=?", [Uuid], callback);
+        const sql = "DELETE FROM events WHERE uuid=?";
+        
+        return db.query(sql, [Uuid], callback);
     }
 };
 

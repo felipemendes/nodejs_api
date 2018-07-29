@@ -26,14 +26,14 @@ const Event = {
         return db.query("INSERT INTO events (uuid, user_email, created_at, url_image, place, place_phone, date, address, city, sale_place, sale_place_phone) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [Uuid, Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber], callback);
     },
 
-    putEvent: function (id, PlacePhoneNumber, SalePlacePhoneNumber, Event, File, callback) {
+    putEvent: function (Uuid, PlacePhoneNumber, SalePlacePhoneNumber, Event, File, callback) {
 
-        return db.query("UPDATE events SET user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where Id=?", [Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, id], callback);
+        return db.query("UPDATE events SET user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?", [Event.user_email, new Date(), File.path, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid], callback);
     },
 
-    deleteEvent: function (id, callback) {
+    deleteEvent: function (Uuid, callback) {
 
-        return db.query("DELETE FROM events WHERE id=?", [id], callback);
+        return db.query("DELETE FROM events WHERE uuid=?", [Uuid], callback);
     }
 };
 

@@ -91,7 +91,30 @@ router.post('/', upload.single('url_image'), function (req, res, next) {
 
 });
 
-router.put('/:id', upload.single('url_image'), function (req, res, next) {
+router.delete('/:uuid', function (req, res, next) {
+
+    Event.deleteEvent(req.params.uuid, function (err, count) {
+        if (err) {
+            res.json({
+                message: 'Event cannot be remove. Check details message for more info',
+                details: err
+            });
+        } else if (count.affectedRows == 0) {
+            res.json({
+                message: 'Event cannot be remove. Check details message for more info',
+                details: 'Event ' + req.params.uuid + ' not found'
+            });
+        } else {
+            res.json({
+                message: 'Event successfully removed',
+                details: 'Affected rows ' + count.affectedRows
+            });
+        }
+    });
+
+});
+
+router.put('/:uuid', upload.single('url_image'), function (req, res, next) {
 
     const emailFormated = helpers.validateEmail(req.body.user_email);
     if (!emailFormated) {
@@ -114,7 +137,7 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
     const placePhoneNumberFormated = helpers.formatPhoneNumber(req.body.place_phone);
     const salePlacePhoneNumberFormated = helpers.formatPhoneNumber(req.body.sale_place_phone);
     
-    Event.putEvent(req.params.id, placePhoneNumberFormated, salePlacePhoneNumberFormated, req.body, req.file, function (err, rows) {
+    Event.putEvent(req.params.uuid, placePhoneNumberFormated, salePlacePhoneNumberFormated, req.body, req.file, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -124,29 +147,6 @@ router.put('/:id', upload.single('url_image'), function (req, res, next) {
             res.json({
                 message: 'Event successfully updated',
                 details: rows
-            });
-        }
-    });
-
-});
-
-router.delete('/:id', function (req, res, next) {
-
-    Event.deleteEvent(req.params.id, function (err, count) {
-        if (err) {
-            res.json({
-                message: 'Event cannot be remove. Check details message for more info',
-                details: err
-            });
-        } else if (count.affectedRows == 0) {
-            res.json({
-                message: 'Event cannot be remove. Check details message for more info',
-                details: 'Event ' + req.params.id + ' not found'
-            });
-        } else {
-            res.json({
-                message: 'Event successfully removed',
-                details: 'Affected rows ' + count.affectedRows
             });
         }
     });

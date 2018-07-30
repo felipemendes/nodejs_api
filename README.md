@@ -49,8 +49,8 @@ $ nodemon
 | http://localhost:3000/Events       | POST (pass data in body) |
 | http://localhost:3000/Events/{uuid} | PUT (pass data in body)  |
 
-## Testing
-To test use [Swagger](https://swagger.io/) framework.
+## Documentation
+Used [Swagger](https://swagger.io/) framework to document and test.
 ```
 http://localhost:3000/api-docs/
 ```

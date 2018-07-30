@@ -1,0 +1,240 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Swagger PurAí API",
+      "description": "JavaScript PurAí API for Node.js",
+      "contact": {
+        "email": "felipemendes@me.com"
+      },
+      "license": {
+        "name": "GNU GPLv3",
+        "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "events",
+        "description": "JavaScript PurAí API for Node.js",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "https://github.com/felipemendes/purai_nodejs"
+        }
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/events": {
+        "get": {
+          "tags": [
+            "events"
+          ],
+          "summary": "Get all events",
+          "description": "Optional parameters are: UUID, search term, page and quantity",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "uuid",
+              "in": "query",
+              "description": "UUID of event that we want to find",
+              "type": "string"
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search events by term in fields place, address, city or sale place",
+              "type": "string"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number considering quantity value",
+              "type": "string"
+            },
+            {
+              "name": "quantity",
+              "in": "query",
+              "description": "Get vents by quantity informed. Default value is 10",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/Event"
+              }
+            },
+            "400": {
+              "description": "Invalid parameter supplied"
+            },"404": {
+              "description": "Results not found"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "events"
+          ],
+          "summary": "Add a new event",
+          "description": "Pass Event object data in body",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Event object that needs to be added",
+              "required": true,
+              "schema": {
+                  "$ref": "#/definitions/Event"
+                }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/Event"
+              }
+            },
+            "400": {
+              "description": "Invalid parameter supplied"
+            },"404": {
+              "description": "Results not found"
+            }
+          }
+        }
+      },
+      "/events/{uuid}": {
+        "delete": {
+          "tags": [
+            "events"
+          ],
+          "summary": "Delete event with given UUID",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "uuid",
+              "in": "path",
+              "required": true,
+              "description": "UUID of event that we want to delete",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/Event"
+              }
+            },
+            "400": {
+              "description": "Invalid parameter supplied"
+            },"404": {
+              "description": "Results not found"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "events"
+          ],
+          "summary": "Update a existing event",
+          "description": "Pass Event object data in body",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Event object that needs to be updated",
+              "required": true,
+              "schema": {
+                  "$ref": "#/definitions/Event"
+                }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/Event"
+              }
+            },
+            "400": {
+              "description": "Invalid parameter supplied"
+            },"404": {
+              "description": "Results not found"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Event": {
+        "type": "object",
+        "required": [
+          "user_email",
+          "url_image",
+          "place",
+          "place_phone",
+          "date",
+          "address",
+          "city"
+        ],
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "user_email": {
+            "type": "string",
+            "format": "email"
+          },
+          "url_image": {
+            "type": "string",
+            "format": "file"
+          },
+          "place": {
+            "type": "string"
+          },
+          "place_phone": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "sale_place": {
+            "type": "string"
+          },
+          "sale_place_phone": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }

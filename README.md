@@ -42,12 +42,12 @@ $ nodemon
 ## Endpoints
 | Path        | Request Type           
 | ------------------------------ | ------------------------ |
-| http://localhost:3000/Events   | GET all events           |
-| http://localhost:3000/Events/{uuid}{search} | GET filtered by UUID or term            |
-| http://localhost:3000/Events/{page}{quantity} | GET by page or quantity (default quantity is 10)            |
-| http://localhost:3000/Events/{uuid} | DELETE by UUID           |
-| http://localhost:3000/Events       | POST (pass data in body) |
-| http://localhost:3000/Events/{uuid} | PUT (pass data in body)  |
+| http://localhost:3000/Events | GET all events |
+| http://localhost:3000/Events{uuid?}{search?} | GET filtered by UUID or term |
+| http://localhost:3000/Events{page?}{quantity?} | GET by page or quantity (default quantity is 10) |
+| http://localhost:3000/Events/{uuid} | DELETE by UUID |
+| http://localhost:3000/Events | POST (pass data in body) |
+| http://localhost:3000/Events/{uuid} | PUT (pass data in body) |
 
 ## Documentation
 Used [Swagger](https://swagger.io/) framework to document and test.

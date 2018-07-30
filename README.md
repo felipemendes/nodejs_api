@@ -3,8 +3,7 @@ CRUD operation in Node.js, Express and MySQL that provides an RESTful API.
 
 This lib library package the following functions:
 - [ ] Login
-- [ ] Logout
-- [x] Get list of events    
+- [x] CRUD events
 
  ## Installation
 Get via git clone:
@@ -33,37 +32,30 @@ $ npm install
 ## Usage
 Run `npm start` and the application will start at `localhost:3000`
 
-![Server](/screenshots/server.png "Server")
-
 To automatically restart the application when file changes use [nodemon](https://github.com/remy/nodemon).
 
-First install nodemon:
 ```
-$ npm install -g nodemon
-```
-
-Then run:
-```
-$ nodemon purai-nodejs
+$ nodemon
 ```
 ![nodemon](/screenshots/nodemon.png "nodemon")
-
 
 ## Endpoints
 | Path        | Request Type           
 | ------------------------------ | ------------------------ |
-| http://localhost:3000/Events   | GET                      |
-| http://localhost:3000/Events/1 | GET                      |
-| http://localhost:3000/Events/1 | DELETE                   |
-| http://localhost:3000/Events   | POST (pass data in body) |
-| http://localhost:3000/Events/1 | PUT (pass data in body)  |
+| http://localhost:3000/Events   | GET all events           |
+| http://localhost:3000/Events/{uuid}{search} | GET filtered by UUID or term            |
+| http://localhost:3000/Events/{page}{quantity} | GET by page or quantity (default quantity is 10)            |
+| http://localhost:3000/Events/{uuid} | DELETE by UUID           |
+| http://localhost:3000/Events       | POST (pass data in body) |
+| http://localhost:3000/Events/{uuid} | PUT (pass data in body)  |
 
 ## Testing
-To test use any API development environment like Postman or via cURL:
+To test use [Swagger](https://swagger.io/) framework.
 ```
-curl -X GET http://localhost:3000/Events
+http://localhost:3000/api-docs/
 ```
-![GET](/screenshots/curl-get.png "GET")
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the [LICENSE](LICENSE) file for details
+
+Created by [Felipe Mendes](https://github.com/felipemendes).

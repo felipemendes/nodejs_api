@@ -2,6 +2,7 @@ const db = require('../db-connect');
 
 const Event = {
 
+    //Must be improved
     getEvents: function (uuid, search, page = 1, quantity = 10, callback) {
 
         var query = "SELECT * FROM events ";
@@ -23,10 +24,10 @@ const Event = {
 
     postEvent: function (Event, Uuid, PlacePhoneNumber, dateFormatted, SalePlacePhoneNumber, callback) {
 
-        const sql = "INSERT INTO `events` (`uuid`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
+        const sql = "INSERT INTO `events` (`uuid`, `status`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
         const values = [
-            [Uuid, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, dateFormatted, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
+            [Uuid, Event.status, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, dateFormatted, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
         ];
         
         return db.query(sql, [values], callback);
@@ -34,9 +35,9 @@ const Event = {
 
     putEvent: function (Uuid, PlacePhoneNumber, SalePlacePhoneNumber, Event, callback) {
         
-        const sql = "UPDATE events SET user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?";
+        const sql = "UPDATE events SET status=?, user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?";
 
-        const values = [Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid];
+        const values = [Event.status, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid];
 
         return db.query(sql, values, callback);
     },

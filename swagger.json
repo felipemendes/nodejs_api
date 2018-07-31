@@ -208,7 +208,10 @@
           "city"
         ],
         "properties": {
-          "user_email": {
+          "status": {
+            "type": "integer"
+          }
+          ,"user_email": {
             "type": "string",
             "format": "email"
           },

@@ -163,6 +163,13 @@
           ],
           "parameters": [
             {
+              "name": "uuid",
+              "in": "path",
+              "required": true,
+              "description": "UUID of event that we want to delete",
+              "type": "string"
+            },
+            {
               "name": "body",
               "in": "body",
               "description": "Event object that needs to be updated",
@@ -201,9 +208,6 @@
           "city"
         ],
         "properties": {
-          "uuid": {
-            "type": "string"
-          },
           "user_email": {
             "type": "string",
             "format": "email"

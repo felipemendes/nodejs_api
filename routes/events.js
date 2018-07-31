@@ -2,14 +2,23 @@ const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
 const uuidv1 = require('uuid/v1');
+var validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
 router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
 
+    if (req.query.uuid != undefined && !validate(req.query.uuid)){
+        res.json({
+            message: 'Events cannot be returned. Check details message for more info',
+            details: 'UUID format is invalid'
+        });
+        return;
+    }
+
     Event.getEvents(req.query.uuid, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
         if (err) {
             res.json({
-                message: 'Events cannot be return. Check details message for more info',
+                message: 'Events cannot be returned. Check details message for more info',
                 details: err.sqlMessage
             });
         } else
@@ -60,6 +69,14 @@ router.post('/', function (req, res, next) {
 
 router.delete('/:uuid', function (req, res, next) {
 
+    if (req.params.uuid != undefined && !validate(req.params.uuid)){
+        res.json({
+            message: 'Events cannot be deleted. Check details message for more info',
+            details: 'UUID format is invalid'
+        });
+        return;
+    }
+
     Event.deleteEvent(req.params.uuid, function (err, count) {
         if (err) {
             res.json({
@@ -83,6 +100,14 @@ router.delete('/:uuid', function (req, res, next) {
 
 router.put('/:uuid', function (req, res, next) {
 
+    if (req.params.uuid != undefined && !validate(req.params.uuid)){
+        res.json({
+            message: 'Events cannot be updated. Check details message for more info',
+            details: 'UUID format is invalid'
+        });
+        return;
+    }
+
     const emailFormatted = helpers.validateEmail(req.body.user_email);
     if (!emailFormatted) {
         res.json({
@@ -92,7 +117,6 @@ router.put('/:uuid', function (req, res, next) {
         return;
     }
 
-    const newUuid = uuidv1();
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
     

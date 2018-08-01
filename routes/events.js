@@ -5,7 +5,7 @@ const uuidv1 = require('uuid/v1');
 var validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
-router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
+router.get('/:status?/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
 
     if (req.query.uuid != undefined && !validate(req.query.uuid)){
         res.json({
@@ -15,7 +15,7 @@ router.get('/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
         return;
     }
 
-    Event.getEvents(req.query.uuid, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
+    Event.getEvents(req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Events cannot be returned. Check details message for more info',

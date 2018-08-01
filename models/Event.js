@@ -3,19 +3,22 @@ const helpers = require('../helpers/PurAiHelpers');
 
 const Event = {
 
-    getEvents: function (uuid, search, page = 1, quantity = 10, callback) {
+    getEvents: function (status, uuid, search, page = 1, quantity = 10, callback) {
 
         const validPage = page != 0 ? page : 1;
         const validQuantity = quantity != 0 ? quantity : 10;
         const currentPage = (validPage - 1) * validQuantity;
 
+        var statusWhere = "";
+        if (status != undefined) statusWhere = "status='" + status + "'";
+        
         var uuidWhere = "";
         if (uuid != undefined) uuidWhere = "uuid='" + uuid + "'";
 
         var searchWhere = "";
         if (search != undefined) searchWhere = "place LIKE '%" + search + "%' or address LIKE '%" + search + "%' or city LIKE '%" + search + "%' or sale_place LIKE '%" + search + "%'";
 
-        const whereClause = helpers.buildSqlWhereClause(new Array(uuidWhere, searchWhere).filter(item => item != ""));
+        const whereClause = helpers.buildSqlWhereClause(new Array(uuidWhere, searchWhere, statusWhere).filter(item => item != ""));
 
         var query = "SELECT * FROM events" + whereClause + " LIMIT " + validQuantity + " OFFSET " + currentPage + "";
         return db.query(query, callback);

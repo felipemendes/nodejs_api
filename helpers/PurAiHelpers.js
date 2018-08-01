@@ -1,4 +1,5 @@
 module.exports = {
+
     formatPhoneNumber: function (phone) {
         phone = phone.replace(/\D/g,"");
         phone = phone.replace(/^(\d{2})(\d)/g,"($1) $2");
@@ -22,5 +23,15 @@ module.exports = {
         
         var year = newDate.getFullYear();  
         return day+"/"+month+"/"+year;
-    }
+    },
+
+    buildSqlWhereClause: function (items) {
+        var conditions = new Array();
+        items.forEach(function (value, key) {
+            conditions.push(value);
+        });
+
+        return conditions == "" ? "" : " WHERE " + conditions.join(" AND "); 
+    },
+
 };

@@ -41,6 +41,12 @@
           ],
           "parameters": [
             {
+              "name": "status",
+              "in": "query",
+              "description": "Status of event that we want to find",
+              "type": "string"
+            },
+            {
               "name": "uuid",
               "in": "query",
               "description": "UUID of event that we want to find",

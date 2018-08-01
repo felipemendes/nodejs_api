@@ -26,8 +26,11 @@ module.exports = {
     },
 
     buildSqlWhereClause: function (items) {
+
+        if (!Array.isArray(items)) return 'Type is not an Array';
+        
         var conditions = new Array();
-        items.forEach(function (value, key) {
+        items.forEach(function (value) {
             conditions.push(value);
         });
 

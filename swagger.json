@@ -35,7 +35,7 @@
             "events"
           ],
           "summary": "Get all events",
-          "description": "Optional parameters are: UUID, search term, page and quantity",
+          "description": "Optional parameters are: Status, UUID, search term, page and quantity",
           "produces": [
             "application/json"
           ],
@@ -215,7 +215,12 @@
         ],
         "properties": {
           "status": {
-            "type": "integer"
+            "type": "boolean",
+            "default": 1,
+            "enum": [
+              "0",
+              "1"
+            ]
           }
           ,"user_email": {
             "type": "string",

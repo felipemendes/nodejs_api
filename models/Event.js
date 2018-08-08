@@ -3,8 +3,9 @@ const helpers = require('../helpers/PurAiHelpers');
 
 const Event = {
 
-    getEvents: function (status = 1, uuid, search, page = 1, quantity = 10, callback) {
+    getEvents: function (upcoming, status = 1, uuid, search, page = 1, quantity = 10, callback) {
 
+        var upcomingFilter = upcoming != undefined ? upcoming : new Date().toJSON().slice(0, 10);
         var statusWhere = "status='" + status + "'";
         var uuidWhere = uuid == undefined ? "" : uuidWhere = "uuid='" + uuid + "'";
         var searchWhere = search == undefined ? "" : searchWhere = "place LIKE '%" + search + "%' or address LIKE '%" + search + "%' or city LIKE '%" + search + "%' or sale_place LIKE '%" + search + "%'";
@@ -16,7 +17,7 @@ const Event = {
         const validQuantity = quantity != 0 ? quantity : 10;
         const currentPage = (validPage - 1) * validQuantity;
 
-        const query = "SELECT * FROM events" + whereClause + " ORDER BY date LIMIT " + validQuantity + " OFFSET " + currentPage + "";
+        const query = "SELECT * FROM events" + whereClause + " AND date >= '"+ upcomingFilter +"' ORDER BY date LIMIT " + validQuantity + " OFFSET " + currentPage + "";
         return db.query(query, callback);
     },
 

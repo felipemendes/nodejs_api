@@ -41,6 +41,12 @@
           ],
           "parameters": [
             {
+              "name": "upcoming",
+              "in": "query",
+              "description": "Start date to find events. By default only events with a date greater than or equal to the current date will return. Date format yyyy-MM-dd",
+              "type": "string"
+            },
+            {
               "name": "status",
               "in": "query",
               "description": "Status of event that we want to find",
@@ -238,7 +244,8 @@
           },
           "date": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "Date format yyyy-MM-dd"
           },
           "address": {
             "type": "string"

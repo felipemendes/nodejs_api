@@ -12,19 +12,6 @@ module.exports = {
         return re.test(String(email).toLowerCase());
     },
 
-    dateFormatter: function (date){
-        var newDate = new Date(date);
-
-        var day = newDate.getDate();
-        if (day.toString().length == 1) day = "0"+day;
-        
-        var month = newDate.getMonth()+1;
-        if (month.toString().length == 1) month = "0"+month;
-        
-        var year = newDate.getFullYear();  
-        return day+"/"+month+"/"+year;
-    },
-
     buildSqlWhereClause: function (items) {
 
         if (!Array.isArray(items)) return 'Type is not an Array';

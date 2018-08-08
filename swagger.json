@@ -238,7 +238,7 @@
           },
           "date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "address": {
             "type": "string"

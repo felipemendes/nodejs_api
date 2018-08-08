@@ -29,7 +29,7 @@ function createTable(conn) {
                     "`url_image` varchar(255) NOT NULL,\n"+
                     "`place` varchar(255) NOT NULL,\n"+
                     "`place_phone` varchar(255) NOT NULL,\n"+
-                    "`date` varchar(255) NOT NULL,\n"+
+                    "`date` date NOT NULL,\n"+
                     "`address` varchar(255) NOT NULL,\n"+
                     "`city` varchar(255) NOT NULL,\n"+
                     "`sale_place` varchar(255) DEFAULT NULL,\n"+
@@ -49,7 +49,7 @@ function addRow(conn) {
     const sql = "INSERT INTO `events` (`uuid`, `status`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
     const values = [
-        ['955b9575-e542-461c-939a-5ef41e733859', 1, 'api@purai.io', new Date(), 'uploads/welcometocat.png', 'Apple Infinite Loop', `+1 408-961-1560`, '25/07/2018', 'Apple Campus, Cupertino, CA 95014, EUA', `Cupertino`, 'Apple Park Visitor Center', '+1 408-961-1560']
+        ['955b9575-e542-461c-939a-5ef41e733859', 1, 'api@purai.io', new Date(), 'uploads/welcometocat.png', 'Apple Infinite Loop', `+1 408-961-1560`, '2018-07-25', 'Apple Campus, Cupertino, CA 95014, EUA', `Cupertino`, 'Apple Park Visitor Center', '+1 408-961-1560']
     ];
     
     conn.query(sql, [values], function (error, results, fields) {

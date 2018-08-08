@@ -16,16 +16,16 @@ const Event = {
         const validQuantity = quantity != 0 ? quantity : 10;
         const currentPage = (validPage - 1) * validQuantity;
 
-        const query = "SELECT * FROM events" + whereClause + " LIMIT " + validQuantity + " OFFSET " + currentPage + "";
+        const query = "SELECT * FROM events" + whereClause + " ORDER BY date LIMIT " + validQuantity + " OFFSET " + currentPage + "";
         return db.query(query, callback);
     },
 
-    postEvent: function (Event, Uuid, PlacePhoneNumber, dateFormatted, SalePlacePhoneNumber, callback) {
+    postEvent: function (Event, Uuid, PlacePhoneNumber, SalePlacePhoneNumber, callback) {
 
         const sql = "INSERT INTO `events` (`uuid`, `status`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
         const values = [
-            [Uuid, Event.status, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, dateFormatted, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
+            [Uuid, Event.status, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
         ];
 
         return db.query(sql, [values], callback);

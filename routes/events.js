@@ -38,20 +38,11 @@ router.post('/', function (req, res, next) {
         return;
     }
 
-    const dateFormatted = helpers.dateFormatter(req.body.date);
-    if (dateFormatted == 'NaN/NaN/NaN') {
-        res.json({
-            message: 'Event cannot be register. Check details message for more info',
-            details: 'Date invalid format. Must be yyyy-MM-dd'
-        });
-        return;
-    }
-
     const newUuid = uuidv1();
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
 
-    Event.postEvent(req.body, newUuid, placePhoneNumberFormatted, dateFormatted, salePlacePhoneNumberFormatted, function (err, count) {
+    Event.postEvent(req.body, newUuid, placePhoneNumberFormatted, salePlacePhoneNumberFormatted, function (err, count) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',

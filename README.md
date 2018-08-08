@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
     database: 'purai_app'
 });
 ```
-The table and sample data will be add when server get started.
+All tables will be add when server get started.
 
 Get dependencies with the [Node Package Manager](http://npmjs.org/):
 ```
@@ -30,7 +30,7 @@ $ npm install
 ```
 
 ## Usage
-Run `npm start` and the application will start at `localhost:3000`
+Run `npm start` and the application will start at `localhost:3000`. Whoa! That was fast!
 
 To automatically restart the application when file changes use [nodemon](https://github.com/remy/nodemon).
 
@@ -52,7 +52,7 @@ $ nodemon
 ## Documentation
 Used [Swagger](https://swagger.io/) framework to document and test.
 ```
-http://localhost:3000/api-docs/
+http://localhost:3000/documentation/
 ```
 
 ## License

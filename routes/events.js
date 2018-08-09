@@ -5,7 +5,7 @@ const uuidv1 = require('uuid/v1');
 var validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
-router.get('/:status?/:uuid?/:search?/:page?/:quantity?', function (req, res, next) {
+router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
 
     if (req.query.uuid != undefined && !validate(req.query.uuid)){
         res.json({
@@ -15,14 +15,16 @@ router.get('/:status?/:uuid?/:search?/:page?/:quantity?', function (req, res, ne
         return;
     }
 
-    Event.getEvents(req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.quantity, function (err, rows) {
+    Event.getEvents(req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Events cannot be returned. Check details message for more info',
                 details: err.sqlMessage
             });
         } else
-            res.json(rows);
+            res.json({
+                events: rows
+            });
     });
 
 });

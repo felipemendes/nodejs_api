@@ -47,7 +47,7 @@ $ nodemon
 | http://localhost:3000/Events{uuid?} | GET filtered by UUID |
 | http://localhost:3000/Events{search?} | GET filtered by term |
 | http://localhost:3000/Events{page?} | GET by page (default page is 1) |
-| http://localhost:3000/Events{quantity?} | GET by quantity (default quantity is 10) |
+| http://localhost:3000/Events{limit?} | GET by limit (default limit is 10) |
 | http://localhost:3000/Events/{uuid} | DELETE by UUID |
 | http://localhost:3000/Events | POST (pass data in body) |
 | http://localhost:3000/Events/{uuid} | PUT (pass data in body) |

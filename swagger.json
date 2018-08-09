@@ -35,7 +35,7 @@
             "events"
           ],
           "summary": "Get all events",
-          "description": "Optional parameters are: Status, UUID, search term, page and quantity",
+          "description": "Optional parameters are: Status, UUID, search term, page and limit",
           "produces": [
             "application/json"
           ],
@@ -67,13 +67,13 @@
             {
               "name": "page",
               "in": "query",
-              "description": "Page number considering quantity value",
+              "description": "Page number considering limit value",
               "type": "string"
             },
             {
-              "name": "quantity",
+              "name": "limit",
               "in": "query",
-              "description": "Get vents by quantity informed. Default value is 10",
+              "description": "Get vents by limit informed. Default value is 10",
               "type": "string"
             }
           ],

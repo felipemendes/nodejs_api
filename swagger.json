@@ -244,8 +244,7 @@
           },
           "date": {
             "type": "string",
-            "format": "date",
-            "description": "Date format yyyy-MM-dd"
+            "format": "date-time"
           },
           "address": {
             "type": "string"

@@ -17,7 +17,7 @@ const Event = {
         const validLimit = limit != 0 ? limit : 10;
         const currentPage = (validPage - 1) * validLimit;
 
-        const query = "SELECT * FROM events" + whereClause + " AND date >= '"+ upcomingFilter +"' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage + "";
+        const query = "SELECT *, DATE_FORMAT(created_at, '%d/%m/%Y %H:%i:%s') as created_at, DATE_FORMAT(updated_at, '%d/%m/%Y %H:%i:%s') as updated_at, DATE_FORMAT(date, '%d/%m/%Y %H:%i') as date FROM events" + whereClause + " AND date >= '"+ upcomingFilter +"' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage + "";
         return db.query(query, callback);
     },
 

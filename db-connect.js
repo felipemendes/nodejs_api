@@ -29,7 +29,7 @@ function createTable(conn) {
                     "`url_image` varchar(255) NOT NULL,\n"+
                     "`place` varchar(255) NOT NULL,\n"+
                     "`place_phone` varchar(255) NOT NULL,\n"+
-                    "`date` date NOT NULL,\n"+
+                    "`date` DATETIME NOT NULL,\n"+
                     "`address` varchar(255) NOT NULL,\n"+
                     "`city` varchar(255) NOT NULL,\n"+
                     "`sale_place` varchar(255) DEFAULT NULL,\n"+

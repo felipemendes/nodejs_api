@@ -15,7 +15,6 @@
     "morgan": "~1.9.0",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.3",
-    "set-tz": "^0.1.0",
     "swagger-ui-express": "^3.0.10",
     "uuid": "^3.3.2",
     "uuid-validate": "0.0.3"

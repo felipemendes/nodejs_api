@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const setTZ = require('set-tz')
 var swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('./swagger.json');
 
@@ -17,7 +16,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-setTZ('America/Sao_Paulo');
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());

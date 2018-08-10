@@ -61,7 +61,7 @@
             {
               "name": "search",
               "in": "query",
-              "description": "Search events by term in fields place, address, city or sale place",
+              "description": "Search events by term in fields title, place, address, city and sale place",
               "type": "string"
             },
             {
@@ -211,7 +211,7 @@
       "Event": {
         "type": "object",
         "required": [
-          "user_email",
+          "title",
           "url_image",
           "place",
           "place_phone",
@@ -228,9 +228,8 @@
               "1"
             ]
           }
-          ,"user_email": {
-            "type": "string",
-            "format": "email"
+          ,"title": {
+            "type": "string"
           },
           "url_image": {
             "type": "string",

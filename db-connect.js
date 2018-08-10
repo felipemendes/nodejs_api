@@ -15,17 +15,18 @@ connection.connect(function (err) {
     console.log('DB connected');
     
     createTable(connection);
-    //addRow(connection);
+    addRow(connection);
 });
 
 function createTable(conn) {
 
-    const sql = "CREATE TABLE IF NOT EXISTS `events` (`id` int(10) NOT NULL AUTO_INCREMENT,\n"+
+    const sql = "CREATE TABLE IF NOT EXISTS `events` (\n"+
+                    "`id` int(10) NOT NULL AUTO_INCREMENT,\n"+
                     "`uuid` varchar(36) NOT NULL,\n"+
                     "`status` TINYINT(1) NOT NULL,\n"+
-                    "`user_email` varchar(255) NOT NULL,\n"+
                     "`created_at` DATETIME NULL,\n"+
                     "`updated_at` DATETIME NULL,\n"+
+                    "`title` varchar(255) NOT NULL,\n"+
                     "`url_image` varchar(255) NOT NULL,\n"+
                     "`place` varchar(255) NOT NULL,\n"+
                     "`place_phone` varchar(255) NOT NULL,\n"+
@@ -46,10 +47,10 @@ function createTable(conn) {
 
 function addRow(conn) {
 
-    const sql = "INSERT INTO `events` (`uuid`, `status`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
+    const sql = "INSERT INTO `events` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
     const values = [
-        ['955b9575-e542-461c-939a-5ef41e733859', 1, 'api@purai.io', new Date(), 'uploads/welcometocat.png', 'Apple Infinite Loop', `+1 408-961-1560`, '2018-07-25', 'Apple Campus, Cupertino, CA 95014, EUA', `Cupertino`, 'Apple Park Visitor Center', '+1 408-961-1560']
+        ['955b9575-e542-461c-939a-5ef41e733859', 1, new Date(), 'Sample Event', 'uploads/welcometocat.png', 'Apple Infinite Loop', `+1 408-961-1560`, '2022-01-01', 'Apple Campus, Cupertino, CA 95014, EUA', `Cupertino`, 'Apple Park Visitor Center', '+1 408-961-1560']
     ];
     
     conn.query(sql, [values], function (error, results, fields) {

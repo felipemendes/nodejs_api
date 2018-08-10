@@ -31,15 +31,6 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next)
 
 router.post('/', function (req, res, next) {
 
-    const emailFormatted = helpers.validateEmail(req.body.user_email);
-    if (!emailFormatted) {
-        res.json({
-            message: 'Event cannot be register. Check details message for more info',
-            details: 'Email format is invalid'
-        });
-        return;
-    }
-
     const newUuid = uuidv1();
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
@@ -97,15 +88,6 @@ router.put('/:uuid', function (req, res, next) {
         res.json({
             message: 'Events cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
-        });
-        return;
-    }
-
-    const emailFormatted = helpers.validateEmail(req.body.user_email);
-    if (!emailFormatted) {
-        res.json({
-            message: 'Event cannot be register. Check details message for more info',
-            details: 'Email format is invalid'
         });
         return;
     }

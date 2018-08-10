@@ -8,7 +8,7 @@ const Event = {
         var upcomingFilter = upcoming != undefined ? upcoming : new Date().toJSON().slice(0, 10);
         var statusWhere = "status='" + status + "'";
         var uuidWhere = uuid == undefined ? "" : uuidWhere = "uuid='" + uuid + "'";
-        var searchWhere = search == undefined ? "" : searchWhere = "place LIKE '%" + search + "%' or address LIKE '%" + search + "%' or city LIKE '%" + search + "%' or sale_place LIKE '%" + search + "%'";
+        var searchWhere = search == undefined ? "" : searchWhere = "title LIKE '%" + search + "%' or place LIKE '%" + search + "%' or address LIKE '%" + search + "%' or city LIKE '%" + search + "%' or sale_place LIKE '%" + search + "%'";
         
         const valuesForWhere = new Array(uuidWhere, searchWhere, statusWhere).filter(item => item != "");
         const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
@@ -23,10 +23,10 @@ const Event = {
 
     postEvent: function (Event, Uuid, PlacePhoneNumber, SalePlacePhoneNumber, callback) {
 
-        const sql = "INSERT INTO `events` (`uuid`, `status`, `user_email`, `created_at`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
+        const sql = "INSERT INTO `events` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`) VALUES ?";
 
         const values = [
-            [Uuid, Event.status, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
+            [Uuid, Event.status, new Date(), Event.title, Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber]
         ];
 
         return db.query(sql, [values], callback);
@@ -34,9 +34,9 @@ const Event = {
 
     putEvent: function (Uuid, PlacePhoneNumber, SalePlacePhoneNumber, Event, callback) {
 
-        const sql = "UPDATE events SET status=?, user_email=?, updated_at=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?";
+        const sql = "UPDATE events SET status=?, updated_at=?, title=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=? where uuid=?";
 
-        const values = [Event.status, Event.user_email, new Date(), Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid];
+        const values = [Event.status, new Date(), Event.title, Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Uuid];
 
         return db.query(sql, values, callback);
     },

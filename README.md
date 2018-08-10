@@ -52,7 +52,7 @@ http://localhost:3000/documentation/
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
 | `uuid` | string | Optional | GET filtered by UUID |
-| `search` | string | Optional | GET filtered by term in event title, address, city name or sale place |
+| `search` | string | Optional | GET filtered by term in event title, address, city name and sale place |
 | `page` | int | Optional |GET filtered by page. By default page is 1 |
 | `limit` | int | Optional | GET filtered by limit. By default limit is 10 |
 | `upcoming` | string | Optional | GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
@@ -65,9 +65,9 @@ http://localhost:3000/documentation/
       "event_id": 1,
       "uuid": "955b9575-e542-461c-939a-5ef41e733859",
       "status": 1,
-      "user_email": "api@purai.io",
       "created_at": "2018-08-09T01:11:28.000Z",
       "updated_at": null,
+      "title": "Sample Event",
       "url_image": "uploads/welcometocat.png",
       "place": "Apple Infinite Loop",
       "place_phone": "+1 408-961-1560",
@@ -138,7 +138,7 @@ http://localhost:3000/documentation/
 ```json
 {
   "status": 1,
-  "user_email": "user@example.com",
+  "title": "Sample Event",
   "url_image": "path",
   "place": "string",
   "place_phone": "string",

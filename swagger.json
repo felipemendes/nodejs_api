@@ -1,273 +1,462 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "Swagger PurAí API",
-      "description": "JavaScript PurAí API for Node.js",
-      "contact": {
-        "email": "felipemendes@me.com"
-      },
-      "license": {
-        "name": "GNU GPLv3",
-        "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
-      }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger PurAí API",
+    "description": "JavaScript PurAí API for Node.js",
+    "contact": {
+      "email": "felipemendes@me.com"
     },
-    "host": "localhost:3000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "events",
-        "description": "JavaScript PurAí API for Node.js",
-        "externalDocs": {
-          "description": "Find out more",
-          "url": "https://github.com/felipemendes/purai_nodejs"
-        }
-      }
-    ],
-    "schemes": [
-      "http",
-      "https"
-    ],
-    "paths": {
-      "/events": {
-        "get": {
-          "tags": [
-            "events"
-          ],
-          "summary": "Get all events",
-          "description": "Optional parameters are: Status, UUID, search term, page and limit",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "category",
-              "in": "query",
-              "description": "Category name of event the we want to find",
-              "type": "string"
-            },
-            {
-              "name": "upcoming",
-              "in": "query",
-              "description": "Start date to find events. By default only events with a date greater than or equal to the current date will return. Date format yyyy-MM-dd",
-              "type": "string"
-            },
-            {
-              "name": "status",
-              "in": "query",
-              "description": "Status of event that we want to find",
-              "type": "string"
-            },
-            {
-              "name": "uuid",
-              "in": "query",
-              "description": "UUID of event that we want to find",
-              "type": "string"
-            },
-            {
-              "name": "search",
-              "in": "query",
-              "description": "Search events by term in fields title, place, address, city and sale place",
-              "type": "string"
-            },
-            {
-              "name": "page",
-              "in": "query",
-              "description": "Page number considering limit value",
-              "type": "string"
-            },
-            {
-              "name": "limit",
-              "in": "query",
-              "description": "Get vents by limit informed. Default value is 10",
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful operation",
-              "schema": {
-                "$ref": "#/definitions/Event"
-              }
-            },
-            "400": {
-              "description": "Invalid parameter supplied"
-            },"404": {
-              "description": "Results not found"
-            }
-          }
-        },
-        "post": {
-          "tags": [
-            "events"
-          ],
-          "summary": "Add a new event",
-          "description": "Pass Event object data in body",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "body",
-              "in": "body",
-              "description": "Event object that needs to be added",
-              "required": true,
-              "schema": {
-                  "$ref": "#/definitions/Event"
-                }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful operation",
-              "schema": {
-                "$ref": "#/definitions/Event"
-              }
-            },
-            "400": {
-              "description": "Invalid parameter supplied"
-            },"404": {
-              "description": "Results not found"
-            }
-          }
-        }
-      },
-      "/events/{uuid}": {
-        "delete": {
-          "tags": [
-            "events"
-          ],
-          "summary": "Delete event with given UUID",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "uuid",
-              "in": "path",
-              "required": true,
-              "description": "UUID of event that we want to delete",
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful operation",
-              "schema": {
-                "$ref": "#/definitions/Event"
-              }
-            },
-            "400": {
-              "description": "Invalid parameter supplied"
-            },"404": {
-              "description": "Results not found"
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "events"
-          ],
-          "summary": "Update a existing event",
-          "description": "Pass Event object data in body",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "uuid",
-              "in": "path",
-              "required": true,
-              "description": "UUID of event that we want to delete",
-              "type": "string"
-            },
-            {
-              "name": "body",
-              "in": "body",
-              "description": "Event object that needs to be updated",
-              "required": true,
-              "schema": {
-                  "$ref": "#/definitions/Event"
-                }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful operation",
-              "schema": {
-                "$ref": "#/definitions/Event"
-              }
-            },
-            "400": {
-              "description": "Invalid parameter supplied"
-            },"404": {
-              "description": "Results not found"
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "Event": {
-        "type": "object",
-        "required": [
-          "title",
-          "url_image",
-          "place",
-          "place_phone",
-          "date",
-          "address",
-          "city",
-          "id_category"
+    "license": {
+      "name": "GNU GPLv3",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [{
+    "name": "events",
+    "description": "JavaScript PurAí API for Node.js",
+    "externalDocs": {
+      "description": "Find out more",
+      "url": "https://github.com/felipemendes/purai_nodejs"
+    }
+  }],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/events": {
+      "get": {
+        "tags": [
+          "events"
         ],
-        "properties": {
-          "status": {
-            "type": "boolean",
-            "default": 1,
-            "enum": [
-              "0",
-              "1"
-            ]
+        "summary": "Get all events",
+        "description": "Optional parameters are: Category, Upcoming events, Status, UUID, search term, page and limit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "category",
+            "in": "query",
+            "description": "Category name of event the we want to find",
+            "type": "string"
+          },
+          {
+            "name": "upcoming",
+            "in": "query",
+            "description": "Start date to find events. By default only events with a date greater than or equal to the current date will return. Date format yyyy-MM-dd",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status of event that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "UUID of event that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search events by term in fields title, place, address, city and sale place",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number considering limit value",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Get events by limit informed. Default value is 10",
+            "type": "string"
           }
-          ,"title": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Add a new event",
+        "description": "Pass Event object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Event object that needs to be added",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Event"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Get all categories",
+        "description": "Optional parameters are: Status, UUID, search term, page and limit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "status",
+            "in": "query",
+            "description": "Status of category that we want to find",
             "type": "string"
           },
-          "url_image": {
-            "type": "string",
-            "format": "file"
-          },
-          "place": {
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "UUID of category that we want to find",
             "type": "string"
           },
-          "place_phone": {
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search categories by term in title field",
             "type": "string"
           },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "address": {
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number considering limit value",
             "type": "string"
           },
-          "city": {
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Get categories by limit informed. Default value is 10",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Add a new category",
+        "description": "Pass Category object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Category object that needs to be added",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Category"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
+    },
+    "/events/{uuid}": {
+      "delete": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Delete event with given UUID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "uuid",
+          "in": "path",
+          "required": true,
+          "description": "UUID of event that we want to delete",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Update a existing event",
+        "description": "Pass Event object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "UUID of event that we want to delete",
             "type": "string"
           },
-          "sale_place": {
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Event object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
+    },
+    "/categories/{uuid}": {
+      "delete": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Delete category with given UUID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "uuid",
+          "in": "path",
+          "required": true,
+          "description": "UUID of category that we want to delete",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Update a existing category",
+        "description": "Pass Category object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "UUID of category that we want to delete",
             "type": "string"
           },
-          "sale_place_phone": {
-            "type": "string"
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Category object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
           },
-          "id_category": {
-            "type": "integer"
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
           }
         }
       }
     }
+  },
+  "definitions": {
+    "Event": {
+      "type": "object",
+      "required": [
+        "title",
+        "url_image",
+        "place",
+        "place_phone",
+        "date",
+        "address",
+        "city",
+        "id_category"
+      ],
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "default": 1,
+          "enum": [
+            "0",
+            "1"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "url_image": {
+          "type": "string",
+          "format": "file"
+        },
+        "place": {
+          "type": "string"
+        },
+        "place_phone": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "sale_place": {
+          "type": "string"
+        },
+        "sale_place_phone": {
+          "type": "string"
+        },
+        "id_category": {
+          "type": "integer"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "required": [
+        "title",
+        "url_image"
+      ],
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "default": 1,
+          "enum": [
+            "0",
+            "1"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "url_image": {
+          "type": "string",
+          "format": "file"
+        }
+      }
+    }
   }
+}

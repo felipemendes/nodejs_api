@@ -8,7 +8,8 @@ var swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('./swagger.json');
 
 var indexRouter = require('./routes/index');
-var events = require('./routes/events');
+var eventsRouter = require('./routes/events');
+var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
@@ -25,10 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 
 app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/api/v1', events);
+app.use('/api/v1', indexRouter);
 
 app.use('/', indexRouter);
-app.use('/events', events);
+app.use('/events', eventsRouter);
+app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

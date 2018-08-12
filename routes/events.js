@@ -29,10 +29,18 @@ router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', fun
                     fkeys: [{
                         table: 'category',
                         col: 'id_category'
+                    },
+                    {
+                        table: 'sale_place',
+                        col: 'id_sale_place'
                     }]
                 },
                 {
                     tableName: 'category',
+                    pkey: 'id'
+                },
+                {
+                    tableName: 'sale_place',
                     pkey: 'id'
                 },
             ];

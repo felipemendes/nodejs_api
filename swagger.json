@@ -225,6 +225,99 @@
         }
       }
     },
+    "/salePlaces": {
+      "get": {
+        "tags": [
+          "sale places"
+        ],
+        "summary": "Get all sale places",
+        "description": "Optional parameters are: Status, UUID, search term, page and limit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "status",
+            "in": "query",
+            "description": "Status of sale place that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "UUID of sale place that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search sale places by term in title field",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number considering limit value",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Get sale places by limit informed. Default value is 10",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/SalePlace"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sale places"
+        ],
+        "summary": "Add a new sale place",
+        "description": "Pass sale place object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Sale place object that needs to be added",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalePlace"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/SalePlace"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
+    },
     "/events/{uuid}": {
       "delete": {
         "tags": [
@@ -376,6 +469,82 @@
           }
         }
       }
+    },
+    "/salePlaces/{uuid}": {
+      "delete": {
+        "tags": [
+          "sale places"
+        ],
+        "summary": "Delete sale place with given UUID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "uuid",
+          "in": "path",
+          "required": true,
+          "description": "UUID of sale place that we want to delete",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/SalePlace"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sale places"
+        ],
+        "summary": "Update a existing sale place",
+        "description": "Pass sale place object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "UUID of sale place that we want to delete",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Sale place object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SalePlace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/SalePlace"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -455,6 +624,29 @@
         "url_image": {
           "type": "string",
           "format": "file"
+        }
+      }
+    },
+    "SalePlace": {
+      "type": "object",
+      "required": [
+        "title",
+        "phone"
+      ],
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "default": 1,
+          "enum": [
+            "0",
+            "1"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
         }
       }
     }

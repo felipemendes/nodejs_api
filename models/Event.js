@@ -18,7 +18,7 @@ const Event = {
         const validLimit = limit != 0 ? limit : 10;
         const currentPage = (validPage - 1) * validLimit;
 
-        const query = "SELECT * FROM event INNER JOIN category ON event.id_category=category.id" + whereClause + " AND date >= '" + upcomingFilter + "' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage;
+        const query = "SELECT * FROM event INNER JOIN category ON event.id_category=category.id INNER JOIN sale_place ON event.id_sale_place=sale_place.id" + whereClause + " AND date >= '" + upcomingFilter + "' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage;
 
         var options = {
             sql: query,

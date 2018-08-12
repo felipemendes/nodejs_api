@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
 const uuidv1 = require('uuid/v1');
-var validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
+var validate = require('uuid-validate');
 
-router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
+router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
 
-    if (req.query.uuid != undefined && !validate(req.query.uuid)){
+    if (req.query.uuid != undefined && !validate(req.query.uuid)) {
         res.json({
             message: 'Events cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
@@ -15,7 +15,7 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next)
         return;
     }
 
-    Event.getEvents(req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
+    Event.getEvents(req.query.category, req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Events cannot be returned. Check details message for more info',
@@ -53,7 +53,7 @@ router.post('/', function (req, res, next) {
 
 router.delete('/:uuid', function (req, res, next) {
 
-    if (req.params.uuid != undefined && !validate(req.params.uuid)){
+    if (req.params.uuid != undefined && !validate(req.params.uuid)) {
         res.json({
             message: 'Events cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
@@ -84,7 +84,7 @@ router.delete('/:uuid', function (req, res, next) {
 
 router.put('/:uuid', function (req, res, next) {
 
-    if (req.params.uuid != undefined && !validate(req.params.uuid)){
+    if (req.params.uuid != undefined && !validate(req.params.uuid)) {
         res.json({
             message: 'Events cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
@@ -94,7 +94,7 @@ router.put('/:uuid', function (req, res, next) {
 
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
-    
+
     Event.putEvent(req.params.uuid, placePhoneNumberFormatted, salePlacePhoneNumberFormatted, req.body, function (err, rows) {
         if (err) {
             res.json({

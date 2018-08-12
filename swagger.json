@@ -41,6 +41,12 @@
           ],
           "parameters": [
             {
+              "name": "category",
+              "in": "query",
+              "description": "Category name of event the we want to find",
+              "type": "string"
+            },
+            {
               "name": "upcoming",
               "in": "query",
               "description": "Start date to find events. By default only events with a date greater than or equal to the current date will return. Date format yyyy-MM-dd",
@@ -217,7 +223,8 @@
           "place_phone",
           "date",
           "address",
-          "city"
+          "city",
+          "id_category"
         ],
         "properties": {
           "status": {
@@ -256,6 +263,9 @@
           },
           "sale_place_phone": {
             "type": "string"
+          },
+          "id_category": {
+            "type": "integer"
           }
         }
       }

@@ -47,7 +47,7 @@ Used [Swagger](https://swagger.io/) framework to document and test.
 http://localhost:3000/documentation/
 ```
 
-## Routes
+## Event Routes
 
 #### GET `http://localhost:3000/events`
 
@@ -77,7 +77,9 @@ http://localhost:3000/documentation/
 | `uuid` | string | Yes | Event's UUID to get changed |
 | `body` | object | Yes | Pass event data object in body |
 
-### Event data object example
+## Data object example
+
+### Event
 ```json
 {
   "status": 1,
@@ -93,7 +95,7 @@ http://localhost:3000/documentation/
 }
 ```
 
-### Category data object example
+### Category
 ```json
 {
   "status": 1,
@@ -102,7 +104,7 @@ http://localhost:3000/documentation/
 }
 ```
 
-### Category data object example
+### Sale Place
 ```json
 {
   "status": 1,

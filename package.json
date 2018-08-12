@@ -14,6 +14,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "mysql": "^2.16.0",
+    "node-mysql-nesting": "0.0.3",
     "nodemon": "^1.18.3",
     "swagger-ui-express": "^3.0.10",
     "uuid": "^3.3.2",

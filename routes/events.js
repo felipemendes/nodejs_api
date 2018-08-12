@@ -3,6 +3,7 @@ const router = express.Router();
 const Event = require('../models/Event');
 const uuidv1 = require('uuid/v1');
 const helpers = require('../helpers/PurAiHelpers');
+const func = require('../helpers/convertToNestedHelper.js');
 var validate = require('uuid-validate');
 
 router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
@@ -21,10 +22,29 @@ router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', fun
                 message: 'Events cannot be returned. Check details message for more info',
                 details: err.sqlMessage
             });
-        } else
+        } else {
+            var nestingOptions = [
+                {
+                    tableName: 'event',
+                    pkey: 'id',
+                    fkeys: [
+                        {
+                            table: 'category',
+                            col: 'id_category'
+                        }
+                    ]
+                },
+                { 
+                    tableName : 'category', 
+                    pkey: 'id'
+                },
+            ];
+
+            const nestedRows = func.convertToNested(rows, nestingOptions);
             res.json({
-                events: rows
+                events: nestedRows
             });
+        }
     });
 
 });

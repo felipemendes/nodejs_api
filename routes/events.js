@@ -23,19 +23,16 @@ router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', fun
                 details: err.sqlMessage
             });
         } else {
-            var nestingOptions = [
-                {
+            var nestingOptions = [{
                     tableName: 'event',
                     pkey: 'id',
-                    fkeys: [
-                        {
-                            table: 'category',
-                            col: 'id_category'
-                        }
-                    ]
+                    fkeys: [{
+                        table: 'category',
+                        col: 'id_category'
+                    }]
                 },
-                { 
-                    tableName : 'category', 
+                {
+                    tableName: 'category',
                     pkey: 'id'
                 },
             ];

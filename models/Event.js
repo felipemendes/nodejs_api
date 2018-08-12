@@ -18,11 +18,12 @@ const Event = {
         const validLimit = limit != 0 ? limit : 10;
         const currentPage = (validPage - 1) * validLimit;
 
-        const query = "SELECT * FROM event INNER JOIN category ON event.id_category=category.id" + whereClause + " AND date >= '" + upcomingFilter + "' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage + "";
-        
-        //return db.query(query, callback);
-        //return db.query(sqlString, function (err, rows) {});
-        var options = { sql: query, nestTables: true };
+        const query = "SELECT * FROM event INNER JOIN category ON event.id_category=category.id" + whereClause + " AND date >= '" + upcomingFilter + "' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage;
+
+        var options = {
+            sql: query,
+            nestTables: true
+        };
         return db.query(options, callback);
     },
 

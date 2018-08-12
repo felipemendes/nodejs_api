@@ -6,7 +6,7 @@ const helpers = require('../helpers/PurAiHelpers');
 const func = require('../helpers/convertToNestedHelper.js');
 var validate = require('uuid-validate');
 
-router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
+router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
 
     if (req.query.uuid != undefined && !validate(req.query.uuid)) {
         res.json({
@@ -16,7 +16,7 @@ router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', fun
         return;
     }
 
-    Event.getEvents(req.query.category, req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
+    Event.getEvents(req.query.saleplace, req.query.category, req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Events cannot be returned. Check details message for more info',
@@ -27,13 +27,14 @@ router.get('/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', fun
                     tableName: 'event',
                     pkey: 'id',
                     fkeys: [{
-                        table: 'category',
-                        col: 'id_category'
-                    },
-                    {
-                        table: 'sale_place',
-                        col: 'id_sale_place'
-                    }]
+                            table: 'category',
+                            col: 'id_category'
+                        },
+                        {
+                            table: 'sale_place',
+                            col: 'id_sale_place'
+                        }
+                    ]
                 },
                 {
                     tableName: 'category',
@@ -58,9 +59,8 @@ router.post('/', function (req, res, next) {
 
     const newUuid = uuidv1();
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
-    const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
 
-    Event.postEvent(req.body, newUuid, placePhoneNumberFormatted, salePlacePhoneNumberFormatted, function (err, count) {
+    Event.postEvent(req.body, newUuid, placePhoneNumberFormatted, function (err, count) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -118,9 +118,8 @@ router.put('/:uuid', function (req, res, next) {
     }
 
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
-    const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.sale_place_phone);
 
-    Event.putEvent(req.params.uuid, placePhoneNumberFormatted, salePlacePhoneNumberFormatted, req.body, function (err, rows) {
+    Event.putEvent(req.params.uuid, placePhoneNumberFormatted, req.body, function (err, rows) {
         if (err) {
             res.json({
                 message: 'Event cannot be register. Check details message for more info',

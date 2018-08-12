@@ -18,7 +18,7 @@ const Event = {
         const validLimit = limit != 0 ? limit : 10;
         const currentPage = (validPage - 1) * validLimit;
 
-        const query = "SELECT *, DATE_FORMAT(event.created_at, '%d/%m/%Y %H:%i:%s') as created_at, DATE_FORMAT(event.updated_at, '%d/%m/%Y %H:%i:%s') as updated_at, DATE_FORMAT(event.date, '%d/%m/%Y %H:%i') as date, category.title as category FROM event INNER JOIN category ON event.id_category=category.id" + whereClause + " AND date >= '" + upcomingFilter + "' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage + "";
+        const query = "SELECT * FROM event INNER JOIN category ON event.id_category=category.id" + whereClause + " AND date >= '" + upcomingFilter + "' ORDER BY date LIMIT " + validLimit + " OFFSET " + currentPage + "";
         
         //return db.query(query, callback);
         //return db.query(sqlString, function (err, rows) {});

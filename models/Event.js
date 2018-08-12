@@ -5,7 +5,7 @@ const Event = {
 
     getEvents: function (category, upcoming, status = 1, uuid, search, page = 1, limit = 10, callback) {
 
-        var categoryWhere = category == undefined ? "" : categoryWhere = "category.title='" + category + "'";
+        var categoryWhere = category == undefined ? "" : categoryWhere = "category.title LIKE '%" + category + "%'";
         var upcomingFilter = upcoming != undefined ? upcoming : new Date().toJSON().slice(0, 10);
         var statusWhere = "event.status='" + status + "'";
         var uuidWhere = uuid == undefined ? "" : uuidWhere = "event.uuid='" + uuid + "'";

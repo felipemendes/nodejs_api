@@ -26,7 +26,12 @@ const connection = mysql.createConnection({
 ```
 All tables will be add when server get started.
 
-Get dependencies with the [Node Package Manager](http://npmjs.org/):
+Get dependencies with [Yarn](https://github.com/yarnpkg/yarn):
+```
+$ yarn
+```
+
+Or with [NPM](http://npmjs.org/):
 ```
 $ npm install
 ```

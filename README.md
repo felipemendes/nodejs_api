@@ -1,9 +1,11 @@
 # JavaScript PurAí API for Node.js
 CRUD operation in Node.js, Express and MySQL that provides an RESTful API.
 
-This lib library package the following functions:
+This project package the following functions:
 - [ ] Login
-- [x] Events CRUD
+- [x] Events
+- [x] Categoies
+- [x] Sale Places
 
  ## Installation
 Get via git clone:
@@ -12,7 +14,7 @@ $ git clone https://github.com/felipemendes/purai-nodejs.git
 $ cd purai-nodejs
 ```
 
-Create database and set the config at `db-connect.js`:
+Create a MySQL database and set the config at `db-connect.js`:
 ```
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -56,60 +58,18 @@ http://localhost:3000/documentation/
 | `page` | int | Optional |GET filtered by page. By default page is 1 |
 | `limit` | int | Optional | GET filtered by limit. By default limit is 10 |
 | `upcoming` | string | Optional | GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
-
-#### Response body
-```json
-{
-  "events": [
-    {
-      "event_id": 1,
-      "uuid": "955b9575-e542-461c-939a-5ef41e733859",
-      "status": 1,
-      "created_at": "2018-08-09T01:11:28.000Z",
-      "updated_at": null,
-      "title": "Sample Event",
-      "url_image": "uploads/welcometocat.png",
-      "place": "Apple Infinite Loop",
-      "place_phone": "+1 408-961-1560",
-      "date": "2022-01-01T02:00:00.000Z",
-      "address": "Apple Campus, Cupertino, CA 95014, EUA",
-      "city": "Cupertino",
-      "sale_place": "Apple Park Visitor Center",
-      "sale_place_phone": "+1 408-961-1560",
-      "sale_places_id": 1,
-      "name": "Sample place",
-      "phone": "+1 408-961-1560",
-      "id_event": 1
-    }
-  ]
-}
-```
+| `category` | string | Optional | GET filtered by category names |
+| `saleplace` | string | Optional | GET filtered by sale place names |
 
 #### DELETE `http://localhost:3000/events`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
 | `uuid` | string | Yes | Event's UUID to get deleted |
 
-#### Response body
-```json
-{
-  "message": "Event successfully removed",
-  "details": "Affected rows 1"
-}
-```
-
 #### POST `http://localhost:3000/events`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
 | `body` | object | Yes | Pass event data object in body |
-
-#### Response body
-```json
-{
-  "message": "Event successfully registered",
-  "details": "New UUID: 73c1f090-9c40-11e8-981e-317b7184bb89"
-}
-```
 
 #### PUT `http://localhost:3000/events`
 | Parameter | Type | Required | Description
@@ -117,36 +77,37 @@ http://localhost:3000/documentation/
 | `uuid` | string | Yes | Event's UUID to get changed |
 | `body` | object | Yes | Pass event data object in body |
 
-#### Response body
-```json
-{
-  "message": "Event successfully updated",
-  "details": {
-    "fieldCount": 0,
-    "affectedRows": 1,
-    "insertId": 0,
-    "serverStatus": 34,
-    "warningCount": 0,
-    "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
-    "protocol41": true,
-    "changedRows": 1
-  }
-}
-```
-
 ### Event data object example
 ```json
 {
   "status": 1,
   "title": "Sample Event",
-  "url_image": "path",
+  "url_image": "uploads/image.jpg",
   "place": "string",
   "place_phone": "string",
-  "date": "2018-08-10 01:00",
+  "date": "2022-01-01 20:00",
   "address": "string",
   "city": "string",
-  "sale_place": "string",
-  "sale_place_phone": "string"
+  "id_category": 0,
+  "id_sale_place": 0
+}
+```
+
+### Category data object example
+```json
+{
+  "status": 1,
+  "title": "string",
+  "url_image": "string"
+}
+```
+
+### Category data object example
+```json
+{
+  "status": 1,
+  "title": "string",
+  "phone": "string"
 }
 ```
 

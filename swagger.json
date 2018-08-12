@@ -15,7 +15,7 @@
   "host": "localhost:3000",
   "basePath": "/",
   "tags": [{
-    "name": "events",
+    "name": "Documentation",
     "description": "JavaScript PurAí API for Node.js",
     "externalDocs": {
       "description": "Find out more",
@@ -38,9 +38,27 @@
           "application/json"
         ],
         "parameters": [{
+            "name": "status",
+            "in": "query",
+            "description": "Status of event that we want to find. (1: Active, 0: Inactive)",
+            "type": "integer"
+          },
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "UUID of event that we want to find. (e.g.: 955b9575-e542-461c-939a-5ef41e733859)",
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search events by term in fields title, place, address and city",
+            "type": "string"
+          },
+          {
             "name": "category",
             "in": "query",
-            "description": "Category name of event the we want to find",
+            "description": "Search events by terms in category name",
             "type": "string"
           },
           {
@@ -50,34 +68,22 @@
             "type": "string"
           },
           {
-            "name": "status",
+            "name": "saleplace",
             "in": "query",
-            "description": "Status of event that we want to find",
-            "type": "string"
-          },
-          {
-            "name": "uuid",
-            "in": "query",
-            "description": "UUID of event that we want to find",
-            "type": "string"
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "description": "Search events by term in fields title, place, address, city and sale place",
+            "description": "Search events by terms in sale places name",
             "type": "string"
           },
           {
             "name": "page",
             "in": "query",
-            "description": "Page number considering limit value",
-            "type": "string"
+            "description": "Page number considering limit value. (Default page is 1)",
+            "type": "integer"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "Get events by limit informed. Default value is 10",
-            "type": "string"
+            "description": "Get events by limit informed. (Default value is 10)",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -145,13 +151,13 @@
         "parameters": [{
             "name": "status",
             "in": "query",
-            "description": "Status of category that we want to find",
+            "description": "Status of category that we want to find. (1: Active, 0: Inactive)",
             "type": "string"
           },
           {
             "name": "uuid",
             "in": "query",
-            "description": "UUID of category that we want to find",
+            "description": "UUID of category that we want to find. (e.g.: 955b9575-e542-461c-939a-5ef41e733859)",
             "type": "string"
           },
           {
@@ -163,13 +169,13 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Page number considering limit value",
+            "description": "Page number considering limit value. (Default page is 1)",
             "type": "string"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "Get categories by limit informed. Default value is 10",
+            "description": "Get events by limit informed. (Default value is 10)",
             "type": "string"
           }
         ],
@@ -238,13 +244,13 @@
         "parameters": [{
             "name": "status",
             "in": "query",
-            "description": "Status of sale place that we want to find",
+            "description": "Status of sale place that we want to find. (1: Active, 0: Inactive)",
             "type": "string"
           },
           {
             "name": "uuid",
             "in": "query",
-            "description": "UUID of sale place that we want to find",
+            "description": "UUID of sale place that we want to find. (e.g.: 955b9575-e542-461c-939a-5ef41e733859)",
             "type": "string"
           },
           {
@@ -256,13 +262,13 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Page number considering limit value",
+            "description": "Page number considering limit value. (Default page is 1)",
             "type": "string"
           },
           {
             "name": "limit",
             "in": "query",
-            "description": "Get sale places by limit informed. Default value is 10",
+            "description": "Get sale places by limit informed. (Default value is 10)",
             "type": "string"
           }
         ],
@@ -558,6 +564,7 @@
         "date",
         "address",
         "city",
+        "id_category",
         "id_category"
       ],
       "properties": {
@@ -592,13 +599,10 @@
         "city": {
           "type": "string"
         },
-        "sale_place": {
-          "type": "string"
-        },
-        "sale_place_phone": {
-          "type": "string"
-        },
         "id_category": {
+          "type": "integer"
+        },
+        "id_sale_place": {
           "type": "integer"
         }
       }

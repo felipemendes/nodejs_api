@@ -74,7 +74,12 @@ function addCategorySampleData(conn) {
     const sql = "INSERT INTO `category` (`uuid`, `status`, `title`, `url_image`) VALUES ?";
 
     const values = [
-        ['677bab32-8686-4201-a84c-390c0136f948', 1, 'Sample Category', 'uploads/samplecategory.png']
+        ['1670d1f8-8d9e-46bb-8a19-b85cdd27e016', 1, 'Festa e Show', 'uploads/sample-category.png'],
+        ['2ddbd4bd-527a-428b-b640-d3f9318b06b8', 1, 'Curso e Workshop', 'uploads/sample-category.png'],
+        ['f5c0330f-3975-466f-bd13-69264aafe03a', 1, 'Esportivo', 'uploads/sample-category.png'],
+        ['4fd37ef8-a1b3-48cb-b22f-9aeb5d23bc19', 1, 'Congresso e Seminário', 'uploads/sample-category.png'],
+        ['18093681-f35a-4345-bbd6-5880cdffa347', 1, 'Gastronômico', 'uploads/sample-category.png'],
+        ['68000d0d-20cb-4328-840f-565ac1932e5e', 1, 'Encontro e Networking', 'uploads/sample-category.png']
     ];
 
     conn.query(sql, [values], function (error, results, fields) {

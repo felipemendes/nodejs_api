@@ -39,7 +39,7 @@ const Event = {
 
     putEvent: function (Uuid, PlacePhoneNumber, SalePlacePhoneNumber, Event, callback) {
 
-        const sql = "UPDATE events SET status=?, updated_at=?, title=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=?, id_category=? where uuid=?";
+        const sql = "UPDATE event SET status=?, updated_at=?, title=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, sale_place=?, sale_place_phone=?, id_category=? where uuid=?";
 
         const values = [Event.status, new Date(), Event.title, Event.url_image, Event.place, PlacePhoneNumber, Event.date, Event.address, Event.city, Event.sale_place, SalePlacePhoneNumber, Event.id_category, Uuid];
 
@@ -48,7 +48,7 @@ const Event = {
 
     deleteEvent: function (Uuid, callback) {
 
-        const sql = "DELETE FROM events WHERE uuid=?";
+        const sql = "DELETE FROM event WHERE uuid=?";
 
         return db.query(sql, [Uuid], callback);
     }

@@ -1,10 +1,10 @@
 # JavaScript PurAí API for Node.js
 CRUD operation in Node.js, Express and MySQL that provides an RESTful API.
 
-This project package the following functions:
+This project package the following CRUD functions:
 - [ ] Login
 - [x] Events
-- [x] Categoies
+- [x] Categories
 - [x] Sale Places
 
  ## Installation
@@ -37,9 +37,8 @@ $ npm install
 ```
 
 ## Usage
-Run `npm start` and the application will start at `localhost:3000`. Whoa! That was fast!
-
-To automatically restart the application when file changes use [nodemon](https://github.com/remy/nodemon).
+To automatically restart the application when files get changed run with [nodemon](https://github.com/remy/nodemon).
+And the application will start at `localhost:3000`.
 
 ```
 $ nodemon
@@ -58,13 +57,13 @@ http://localhost:3000/documentation/
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Optional | GET filtered by UUID |
-| `search` | string | Optional | GET filtered by term in event title, address, city name and sale place |
-| `page` | int | Optional |GET filtered by page. By default page is 1 |
-| `limit` | int | Optional | GET filtered by limit. By default limit is 10 |
+| `uuid` | string | Optional | GET filtered by UUID. (e.g.: 955b9575-e542-461c-939a-5ef41e733859) |
+| `search` | string | Optional | GET filtered by term in event title, place, address and city |
+| `page` | int | Optional |GET filtered by page number considering limit value. (Default page is 1) |
+| `limit` | int | Optional | GET filtered by limit informed. (Default value is 10) |
 | `upcoming` | string | Optional | GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
-| `category` | string | Optional | GET filtered by category names |
-| `saleplace` | string | Optional | GET filtered by sale place names |
+| `category` | string | Optional | GET filtered by terms in category name |
+| `saleplace` | string | Optional | GET filtered by terms in sale places name |
 
 #### DELETE `http://localhost:3000/events`
 | Parameter | Type | Required | Description
@@ -84,32 +83,32 @@ http://localhost:3000/documentation/
 
 ## Data object example
 
-### Event
+#### Event
 ```json
 {
   "status": 1,
-  "title": "Sample Event",
+  "title": "string",
   "url_image": "uploads/image.jpg",
   "place": "string",
   "place_phone": "string",
   "date": "2022-01-01 20:00",
   "address": "string",
   "city": "string",
-  "id_category": 0,
-  "id_sale_place": 0
+  "id_category": 1,
+  "id_sale_place": 1
 }
 ```
 
-### Category
+#### Category
 ```json
 {
   "status": 1,
   "title": "string",
-  "url_image": "string"
+  "url_image": "uploads/image.jpg"
 }
 ```
 
-### Sale Place
+#### Sale Place
 ```json
 {
   "status": 1,

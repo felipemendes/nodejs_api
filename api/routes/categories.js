@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
         } else {
             res.json({
                 message: 'Category successfully registered',
-                details: `New UUID: ${newUuid}`
+                uuid: `${newUuid}`
             });
         }
     });

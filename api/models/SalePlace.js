@@ -1,4 +1,4 @@
-const db = require('../db-connect');
+const db = require('../../db-connect');
 const helpers = require('../helpers/PurAiHelpers');
 
 const SalePlace = {

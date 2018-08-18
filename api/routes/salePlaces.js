@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
         } else {
             res.json({
                 message: 'Sale Place successfully registered',
-                details: `New UUID: ${newUuid}`
+                uuid: `${newUuid}`
             });
         }
     });

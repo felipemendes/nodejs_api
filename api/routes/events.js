@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
         } else {
             res.json({
                 message: 'Event successfully registered',
-                details: `New UUID: ${newUuid}`
+                uuid: `${newUuid}`
             });
         }
     });

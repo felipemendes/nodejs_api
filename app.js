@@ -7,10 +7,10 @@ var cors = require('cors');
 var swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('./swagger.json');
 
-var indexRouter = require('./routes/index');
-var eventsRouter = require('./routes/events');
-var categoriesRouter = require('./routes/categories');
-var salePlacesRouter = require('./routes/salePlaces');
+var indexRouter = require('./api/routes/index');
+var eventsRouter = require('./api/routes/events');
+var categoriesRouter = require('./api/routes/categories');
+var salePlacesRouter = require('./api/routes/salePlaces');
 
 var app = express();
 

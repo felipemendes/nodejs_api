@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-
     host: 'localhost',
     port: 3306,
     user: 'root',
@@ -68,8 +67,6 @@ function createEventTable(conn) {
         '`date` DATETIME NOT NULL,\n' +
         '`address` varchar(255) NOT NULL,\n' +
         '`city` varchar(255) NOT NULL,\n' +
-        '`sale_place` varchar(255) DEFAULT NULL,\n' +
-        '`sale_place_phone` varchar(255) DEFAULT NULL,\n' +
         '`id_category` int(11) DEFAULT NULL,\n' +
         '`id_sale_place` int(11) DEFAULT NULL,\n' +
         'PRIMARY KEY (`id`),\n' +
@@ -117,10 +114,10 @@ function addCategorySampleData(conn) {
 }
 
 function addEventSampleData(conn) {
-    const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `sale_place`, `sale_place_phone`, `id_category`, `id_sale_place`) VALUES ?';
+    const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
     const values = [
-        ['955b9575-e542-461c-939a-5ef41e733859', 1, new Date(), 'Sample Event', 'uploads/sampleevent.png', 'Apple Infinite Loop', '+1 408-961-1560', '2022-01-01', 'Apple Campus, Cupertino, CA 95014, EUA', 'Cupertino', 'Apple Park Visitor Center', '+1 408-961-1560', 1, 1]
+        ['955b9575-e542-461c-939a-5ef41e733859', 1, new Date(), 'Sample Event', 'uploads/sampleevent.png', 'Apple Infinite Loop', '+1 408-961-1560', '2022-01-01', 'Apple Campus, Cupertino, CA 95014, EUA', 'Cupertino', 1, 1]
     ];
 
     conn.query(sql, [values], (error) => {

@@ -38,12 +38,13 @@ $ npm install
 
 ## Usage
 To automatically restart the application when files get changed run with [nodemon](https://github.com/remy/nodemon).
-And the application will start at `localhost:3000`.
 
 ```
 $ nodemon
 ```
 ![nodemon](/screenshots/nodemon.png "nodemon")
+
+And the application will start at `http://localhost:3000`.
 
 ## Documentation
 Used [Swagger](https://swagger.io/) framework to document and test.

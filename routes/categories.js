@@ -1,14 +1,12 @@
 const express = require('express');
+
 const router = express.Router();
 const Category = require('../models/Category');
 const uuidv1 = require('uuid/v1');
-const helpers = require('../helpers/PurAiHelpers');
-const func = require('../helpers/convertToNestedHelper.js');
-var validate = require('uuid-validate');
+const validate = require('uuid-validate');
 
-router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
-
-    if (req.query.uuid != undefined && !validate(req.query.uuid)) {
+router.get('/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
+    if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
         res.json({
             message: 'Categories cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
@@ -16,7 +14,7 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next)
         return;
     }
 
-    Category.getCategories(req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
+    Category.getCategories(req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, (err, rows) => {
         if (err) {
             res.json({
                 message: 'Categories cannot be returned. Check details message for more info',
@@ -28,14 +26,12 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next)
             });
         }
     });
-
 });
 
-router.post('/', function (req, res, next) {
-
+router.post('/', (req, res) => {
     const newUuid = uuidv1();
 
-    Category.postCategory(req.body, newUuid, function (err, count) {
+    Category.postCategory(req.body, newUuid, (err) => {
         if (err) {
             res.json({
                 message: 'Category cannot be register. Check details message for more info',
@@ -44,16 +40,14 @@ router.post('/', function (req, res, next) {
         } else {
             res.json({
                 message: 'Category successfully registered',
-                details: 'New UUID: ' + newUuid
+                details: `New UUID: ${newUuid}`
             });
         }
     });
-
 });
 
-router.delete('/:uuid', function (req, res, next) {
-
-    if (req.params.uuid != undefined && !validate(req.params.uuid)) {
+router.delete('/:uuid', (req, res) => {
+    if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.json({
             message: 'Categories cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
@@ -61,30 +55,28 @@ router.delete('/:uuid', function (req, res, next) {
         return;
     }
 
-    Category.deleteCategory(req.params.uuid, function (err, count) {
+    Category.deleteCategory(req.params.uuid, (err, count) => {
         if (err) {
             res.json({
                 message: 'Category cannot be remove. Check details message for more info',
                 details: err
             });
-        } else if (count.affectedRows == 0) {
+        } else if (count.affectedRows === 0) {
             res.json({
                 message: 'Category cannot be remove. Check details message for more info',
-                details: 'Category ' + req.params.uuid + ' not found'
+                details: `Category ${req.params.uuid} not found`
             });
         } else {
             res.json({
                 message: 'Category successfully removed',
-                details: 'Affected rows ' + count.affectedRows
+                details: `Affected rows ${count.affectedRows}`
             });
         }
     });
-
 });
 
-router.put('/:uuid', function (req, res, next) {
-
-    if (req.params.uuid != undefined && !validate(req.params.uuid)) {
+router.put('/:uuid', (req, res) => {
+    if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.json({
             message: 'Categories cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
@@ -92,7 +84,7 @@ router.put('/:uuid', function (req, res, next) {
         return;
     }
 
-    Category.putCategory(req.params.uuid, req.body, function (err, rows) {
+    Category.putCategory(req.params.uuid, req.body, (err, rows) => {
         if (err) {
             res.json({
                 message: 'Category cannot be register. Check details message for more info',
@@ -105,7 +97,6 @@ router.put('/:uuid', function (req, res, next) {
             });
         }
     });
-
 });
 
 module.exports = router;

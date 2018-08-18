@@ -1,14 +1,13 @@
 const express = require('express');
+
 const router = express.Router();
 const SalePlace = require('../models/SalePlace');
 const uuidv1 = require('uuid/v1');
 const helpers = require('../helpers/PurAiHelpers');
-const func = require('../helpers/convertToNestedHelper.js');
-var validate = require('uuid-validate');
+const validate = require('uuid-validate');
 
-router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next) {
-
-    if (req.query.uuid != undefined && !validate(req.query.uuid)) {
+router.get('/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
+    if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
         res.json({
             message: 'Sale Places cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
@@ -16,7 +15,7 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next)
         return;
     }
 
-    SalePlace.getSalePlaces(req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, function (err, rows) {
+    SalePlace.getSalePlaces(req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, (err, rows) => {
         if (err) {
             res.json({
                 message: 'Sale Places cannot be returned. Check details message for more info',
@@ -28,15 +27,13 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', function (req, res, next)
             });
         }
     });
-
 });
 
-router.post('/', function (req, res, next) {
-
+router.post('/', (req, res) => {
     const newUuid = uuidv1();
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.phone);
 
-    SalePlace.postSalePlace(req.body, newUuid, salePlacePhoneNumberFormatted, function (err, count) {
+    SalePlace.postSalePlace(req.body, newUuid, salePlacePhoneNumberFormatted, (err) => {
         if (err) {
             res.json({
                 message: 'Sale Place cannot be register. Check details message for more info',
@@ -45,16 +42,14 @@ router.post('/', function (req, res, next) {
         } else {
             res.json({
                 message: 'Sale Place successfully registered',
-                details: 'New UUID: ' + newUuid
+                details: `New UUID: ${newUuid}`
             });
         }
     });
-
 });
 
-router.delete('/:uuid', function (req, res, next) {
-
-    if (req.params.uuid != undefined && !validate(req.params.uuid)) {
+router.delete('/:uuid', (req, res) => {
+    if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.json({
             message: 'Sale Places cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
@@ -62,30 +57,28 @@ router.delete('/:uuid', function (req, res, next) {
         return;
     }
 
-    SalePlace.deleteSalePlace(req.params.uuid, function (err, count) {
+    SalePlace.deleteSalePlace(req.params.uuid, (err, count) => {
         if (err) {
             res.json({
                 message: 'Sale Place cannot be remove. Check details message for more info',
                 details: err
             });
-        } else if (count.affectedRows == 0) {
+        } else if (count.affectedRows === 0) {
             res.json({
                 message: 'Sale Place cannot be remove. Check details message for more info',
-                details: 'Sale Place ' + req.params.uuid + ' not found'
+                details: `Sale Place ${req.params.uuid} not found`
             });
         } else {
             res.json({
                 message: 'Sale Place successfully removed',
-                details: 'Affected rows ' + count.affectedRows
+                details: `Affected rows ${count.affectedRows}`
             });
         }
     });
-
 });
 
-router.put('/:uuid', function (req, res, next) {
-
-    if (req.params.uuid != undefined && !validate(req.params.uuid)) {
+router.put('/:uuid', (req, res) => {
+    if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.json({
             message: 'Sale Places cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
@@ -95,7 +88,7 @@ router.put('/:uuid', function (req, res, next) {
 
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.phone);
 
-    SalePlace.putSalePlace(req.params.uuid, salePlacePhoneNumberFormatted, req.body, function (err, rows) {
+    SalePlace.putSalePlace(req.params.uuid, salePlacePhoneNumberFormatted, req.body, (err, rows) => {
         if (err) {
             res.json({
                 message: 'Sale Places cannot be register. Check details message for more info',
@@ -108,7 +101,6 @@ router.put('/:uuid', function (req, res, next) {
             });
         }
     });
-
 });
 
 module.exports = router;

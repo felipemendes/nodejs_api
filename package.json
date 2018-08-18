@@ -19,5 +19,8 @@
     "swagger-ui-express": "^3.0.10",
     "uuid": "^3.3.2",
     "uuid-validate": "0.0.3"
+  },
+  "devDependencies": {
+    "eslint-config-rallycoding": "^3.2.0"
   }
 }

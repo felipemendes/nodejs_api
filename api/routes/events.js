@@ -9,7 +9,7 @@ const validate = require('uuid-validate');
 
 router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
     if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
-        res.json({
+        res.status(500).json({
             message: 'Events cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
         });
@@ -18,7 +18,7 @@ router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:
 
     Event.getEvents(req.query.saleplace, req.query.category, req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, (err, rows) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Events cannot be returned. Check details message for more info',
                 details: err.sqlMessage
             });
@@ -47,7 +47,7 @@ router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:
             ];
 
             const nestedRows = func.convertToNested(rows, nestingOptions);
-            res.json({
+            res.status(200).json({
                 events: nestedRows
             });
         }
@@ -60,12 +60,12 @@ router.post('/', (req, res) => {
 
     Event.postEvent(req.body, newUuid, placePhoneNumberFormatted, (err) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Event cannot be register. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'Event successfully registered',
                 uuid: `${newUuid}`
             });
@@ -75,26 +75,25 @@ router.post('/', (req, res) => {
 
 router.delete('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'Events cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     Event.deleteEvent(req.params.uuid, (err, count) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Event cannot be remove. Check details message for more info',
                 details: err
             });
         } else if (count.affectedRows === 0) {
-            res.json({
+            res.status(500).json({
                 message: 'Event cannot be remove. Check details message for more info',
                 details: `Event ${req.params.uuid} not found`
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'Event successfully removed',
                 details: `Affected rows ${count.affectedRows}`
             });
@@ -104,7 +103,7 @@ router.delete('/:uuid', (req, res) => {
 
 router.put('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        res.status(500).json({
             message: 'Events cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
         });
@@ -115,12 +114,12 @@ router.put('/:uuid', (req, res) => {
 
     Event.putEvent(req.params.uuid, placePhoneNumberFormatted, req.body, (err, rows) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Event cannot be updated. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'Event successfully updated',
                 details: rows
             });

@@ -7,21 +7,20 @@ const validate = require('uuid-validate');
 
 router.get('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'User cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     User.getUser(req.params.uuid, (err, rows) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'User cannot be returned. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 user: rows
             });
         }
@@ -33,12 +32,12 @@ router.post('/', (req, res) => {
 
     User.postUser(req.body, newUuid, (err) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'User cannot be register. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'User successfully registered',
                 uuid: `${newUuid}`
             });
@@ -48,26 +47,25 @@ router.post('/', (req, res) => {
 
 router.delete('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'Users cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     User.deleteUser(req.params.uuid, (err, count) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'User cannot be remove. Check details message for more info',
                 details: err
             });
         } else if (count.affectedRows === 0) {
-            res.json({
+            res.status(500).json({
                 message: 'User cannot be remove. Check details message for more info',
                 details: `User ${req.params.uuid} not found`
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'User successfully removed',
                 details: `Affected rows ${count.affectedRows}`
             });
@@ -77,21 +75,20 @@ router.delete('/:uuid', (req, res) => {
 
 router.put('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'Users cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     User.putUser(req.body, req.params.uuid, (err, rows) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'User cannot be register. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'User successfully updated',
                 details: rows
             });

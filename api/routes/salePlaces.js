@@ -8,21 +8,20 @@ const validate = require('uuid-validate');
 
 router.get('/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
     if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'Sale Places cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     SalePlace.getSalePlaces(req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, (err, rows) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Sale Places cannot be returned. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 sale_places: rows
             });
         }
@@ -35,12 +34,12 @@ router.post('/', (req, res) => {
 
     SalePlace.postSalePlace(req.body, newUuid, salePlacePhoneNumberFormatted, (err) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Sale Place cannot be register. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'Sale Place successfully registered',
                 uuid: `${newUuid}`
             });
@@ -50,26 +49,25 @@ router.post('/', (req, res) => {
 
 router.delete('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'Sale Places cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     SalePlace.deleteSalePlace(req.params.uuid, (err, count) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Sale Place cannot be remove. Check details message for more info',
                 details: err
             });
         } else if (count.affectedRows === 0) {
-            res.json({
+            res.status(500).json({
                 message: 'Sale Place cannot be remove. Check details message for more info',
                 details: `Sale Place ${req.params.uuid} not found`
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'Sale Place successfully removed',
                 details: `Affected rows ${count.affectedRows}`
             });
@@ -79,23 +77,22 @@ router.delete('/:uuid', (req, res) => {
 
 router.put('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
-        res.json({
+        return res.status(500).json({
             message: 'Sale Places cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
         });
-        return;
     }
 
     const salePlacePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.phone);
 
     SalePlace.putSalePlace(req.params.uuid, salePlacePhoneNumberFormatted, req.body, (err, rows) => {
         if (err) {
-            res.json({
+            res.status(500).json({
                 message: 'Sale Places cannot be register. Check details message for more info',
                 details: err.sqlMessage
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: 'Sale Places successfully updated',
                 details: rows
             });

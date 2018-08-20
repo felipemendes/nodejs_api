@@ -324,6 +324,44 @@
         }
       }
     },
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Add a new user",
+        "description": "Pass User object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "User object that needs to be added",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
+    },
     "/events/{uuid}": {
       "delete": {
         "tags": [
@@ -551,6 +589,117 @@
           }
         }
       }
+    },
+    "/users/{uuid}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user with given UUID",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "uuid",
+          "in": "path",
+          "description": "UUID of user that needs to be found",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete user with given UUID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "uuid",
+          "in": "path",
+          "required": true,
+          "description": "UUID of user that we want to delete",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update a existing user",
+        "description": "Pass User object data in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "description": "UUID of user that we want to delete",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User object that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -650,6 +799,33 @@
           "type": "string"
         },
         "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "default": 1,
+          "enum": [
+            "0",
+            "1"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
           "type": "string"
         }
       }

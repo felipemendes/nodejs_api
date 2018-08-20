@@ -32,7 +32,7 @@ const Category = {
         const validLimit = limit !== 0 ? limit : 10;
         const currentPage = (validPage - 1) * validLimit;
 
-        const query = `SELECT * FROM category${whereClause} LIMIT ${validLimit} OFFSET ${currentPage}`;
+        const query = `SELECT * FROM category ${whereClause} LIMIT ${validLimit} OFFSET ${currentPage}`;
 
         return db.query(query, callback);
     },

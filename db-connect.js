@@ -12,6 +12,7 @@ connection.connect((err) => {
     if (err) return console.log(err);
     console.log('DB connected');
 
+    createUserTable(connection);
     createSalePlaceTable(connection);
     createCategoryTable(connection);
     createEventTable(connection);
@@ -19,7 +20,25 @@ connection.connect((err) => {
     //addSalePlaceSampleData(connection);
     //addCategorySampleData(connection);
     //addEventSampleData(connection);
+    //addUserSampleData(connection);
 });
+
+function createUserTable(conn) {
+    const sql = 'CREATE TABLE IF NOT EXISTS `user` (\n' +
+        '`id` int(10) NOT NULL AUTO_INCREMENT,\n' +
+        '`uuid` varchar(36) NOT NULL,\n' +
+        '`status` TINYINT(1) NOT NULL,\n' +
+        '`name` varchar(255) NOT NULL,\n' +
+        '`email` varchar(255) NOT NULL,\n' +
+        '`password` varchar(255) NOT NULL,\n' +
+        'PRIMARY KEY (`id`)\n' +
+        ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+
+    conn.query(sql, (error) => {
+        if (error) return console.log(error);
+        console.log('Table created: user');
+    });
+}
 
 function createSalePlaceTable(conn) {
     const sql = 'CREATE TABLE IF NOT EXISTS `sale_place` (\n' +
@@ -79,6 +98,19 @@ function createEventTable(conn) {
     conn.query(sql, (error) => {
         if (error) return console.log(error);
         console.log('Table created: event');
+    });
+}
+
+function addUserSampleData(conn) {
+    const sql = 'INSERT INTO `user` (`uuid`, `status`, `name`, `email`, `password`) VALUES ?';
+
+    const values = [
+        ['c32ec86d-ef33-4f5d-9b9a-13d12e3c5cb7', 1, 'John', 'john@email.com', '123']
+    ];
+
+    conn.query(sql, [values], (error) => {
+        if (error) return console.log(error);
+        console.log('Sample data added: user');
     });
 }
 

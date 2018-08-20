@@ -596,20 +596,15 @@
           "users"
         ],
         "summary": "Get user with given UUID",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
         "parameters": [{
           "name": "uuid",
           "in": "path",
-          "description": "UUID of user that needs to be found",
           "required": true,
-          "schema": {
-            "$ref": "#/definitions/User"
-          }
+          "description": "UUID of user that needs to be found",
+          "type": "string"
         }],
         "responses": {
           "200": {

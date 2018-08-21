@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/User');
 const uuidv1 = require('uuid/v1');
 const validate = require('uuid-validate');
+const helpers = require('../helpers/PurAiHelpers');
 
 router.get('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
@@ -28,20 +29,34 @@ router.get('/:uuid', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const newUuid = uuidv1();
+    if (!helpers.validateEmail(req.body.email)) {
+        return res.status(500).json({
+            message: 'Invalid email address'
+        });
+    }
 
-    User.postUser(req.body, newUuid, (err) => {
-        if (err) {
-            res.status(500).json({
-                message: 'User cannot be register. Check details message for more info',
-                details: err.sqlMessage
-            });
-        } else {
-            res.status(200).json({
-                message: 'User successfully registered',
-                uuid: `${newUuid}`
+    User.checkUserExists(req.body.email, (errEmail, rowsEmail) => {
+        if (rowsEmail && rowsEmail.length) {
+            return res.status(409).json({
+                message: 'E-mail address already registered'
             });
         }
+
+        const newUuid = uuidv1();
+        User.postUser(req.body, newUuid, (err) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'User cannot be register. Check details message for more info',
+                    details: err.sqlMessage
+                });
+            } else {
+                res.status(200).json({
+                    message: 'User successfully registered',
+                    uuid: `${newUuid}`
+                });
+            }
+            return;
+        });
     });
 });
 
@@ -74,6 +89,12 @@ router.delete('/:uuid', (req, res) => {
 });
 
 router.put('/:uuid', (req, res) => {
+    if (!helpers.validateEmail(req.body.email)) {
+        return res.status(409).json({
+            message: 'Invalid email address'
+        });
+    }
+
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'Users cannot be updated. Check details message for more info',
@@ -81,18 +102,27 @@ router.put('/:uuid', (req, res) => {
         });
     }
 
-    User.putUser(req.body, req.params.uuid, (err, rows) => {
-        if (err) {
-            res.status(500).json({
-                message: 'User cannot be register. Check details message for more info',
-                details: err.sqlMessage
-            });
-        } else {
-            res.status(200).json({
-                message: 'User successfully updated',
-                details: rows
+    User.checkUserExists(req.body.email, (errEmail, rowsEmail) => {
+        if (rowsEmail && rowsEmail.length) {
+            return res.status(500).json({
+                message: 'E-mail address already registered'
             });
         }
+
+        User.putUser(req.body, req.params.uuid, (err, rows) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'User cannot be register. Check details message for more info',
+                    details: err.sqlMessage
+                });
+            } else {
+                res.status(200).json({
+                    message: 'User successfully updated',
+                    details: rows
+                });
+            }
+            return;
+        });
     });
 });
 

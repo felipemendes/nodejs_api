@@ -18,6 +18,12 @@ const User = {
         return db.query(sql, [values], callback);
     },
 
+    checkUserExists(email, callback) {
+        const query = 'SELECT * FROM user WHERE user.email=?';
+        const values = [email];
+        return db.query(query, values, callback);
+    },
+
     putUser(Body, Uuid, callback) {
         const sql = 'UPDATE user SET status=?, name=?, email=?, password=? where uuid=?';
 

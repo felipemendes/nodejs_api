@@ -8,11 +8,11 @@ const User = {
         return db.query(query, values, callback);
     },
 
-    postUser(Body, Uuid, callback) {
+    postUser(Body, Uuid, Hash, callback) {
         const sql = 'INSERT INTO `user` (`uuid`, `status`, `name`, `email`, `password`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, Body.name, Body.email, Body.password]
+            [Uuid, Body.status, Body.name, Body.email, Hash]
         ];
 
         return db.query(sql, [values], callback);

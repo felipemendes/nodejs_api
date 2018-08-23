@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const uuidv1 = require('uuid/v1');
+const bcrypt = require('bcrypt');
 const validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
-router.get('/user/:uuid', (req, res) => {
+router.get('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'User cannot be returned. Check details message for more info',
@@ -43,7 +44,9 @@ router.post('/signup', (req, res) => {
         }
 
         const newUuid = uuidv1();
-        User.postUser(req.body, newUuid, (err) => {
+        const hash = bcrypt.hashSync(req.body.password, 10);
+        
+        User.postUser(req.body, newUuid, hash, (err) => {
             if (err) {
                 res.status(500).json({
                     message: 'User cannot be register. Check details message for more info',

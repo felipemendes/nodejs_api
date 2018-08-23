@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
         });
     }
 
-    User.checkUserExists(req.body.email, (errEmail, rowsEmail) => {
+    User.checkEmailExists(req.body.email, '', (errEmail, rowsEmail) => {
         if (rowsEmail && rowsEmail.length) {
             return res.status(409).json({
                 message: 'E-mail address already registered'
@@ -102,7 +102,7 @@ router.put('/:uuid', (req, res) => {
         });
     }
 
-    User.checkUserExists(req.body.email, (errEmail, rowsEmail) => {
+    User.checkEmailExists(req.body.email, req.params.uuid, (errEmail, rowsEmail) => {
         if (rowsEmail && rowsEmail.length) {
             return res.status(500).json({
                 message: 'E-mail address already registered'

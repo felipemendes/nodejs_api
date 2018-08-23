@@ -18,9 +18,13 @@ const User = {
         return db.query(sql, [values], callback);
     },
 
-    checkUserExists(email, callback) {
-        const query = 'SELECT * FROM user WHERE user.email=?';
-        const values = [email];
+    checkEmailExists(email, uuid, callback) {
+        let query = 'SELECT * FROM user WHERE user.email=?';
+        if (uuid) {
+            query += ' AND user.uuid <>?';
+        }
+        const values = [email, uuid];
+        console.log(query);
         return db.query(query, values, callback);
     },
 

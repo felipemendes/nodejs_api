@@ -15,14 +15,14 @@ $ cd purai-nodejs
 ```
 
 Create a MySQL database and set the config at `db-connect.js`:
-```
+```javascript
 const connection = mysql.createConnection({
-host: 'localhost',
-port: 3306,
-user: 'root',
-password: 'root',
-database: 'purai_app'
-});
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'root',
+    database: 'purai_app'
+    });
 ```
 All tables will be add when server get started.
 
@@ -86,16 +86,16 @@ http://localhost:3000/documentation/
 #### Event data object example
 ```json
 {
-"status": 1,
-"title": "string",
-"url_image": "uploads/image.jpg",
-"place": "string",
-"place_phone": "string",
-"date": "2022-01-01 20:00",
-"address": "string",
-"city": "string",
-"id_category": 1,
-"id_sale_place": 1
+    "status": 1,
+    "title": "string",
+    "url_image": "uploads/image.jpg",
+    "place": "string",
+    "place_phone": "string",
+    "date": "2022-01-01 20:00",
+    "address": "string",
+    "city": "string",
+    "id_category": 1,
+    "id_sale_place": 1
 }
 ```
 
@@ -130,9 +130,9 @@ http://localhost:3000/documentation/
 #### Category data object example
 ```json
 {
-"status": 1,
-"title": "string",
-"url_image": "uploads/image.jpg"
+    "status": 1,
+    "title": "string",
+    "url_image": "uploads/image.jpg"
 }
 ```
 
@@ -167,9 +167,9 @@ http://localhost:3000/documentation/
 #### Sale Place data object example
 ```json
 {
-"status": 1,
-"title": "string",
-"phone": "string"
+    "status": 1,
+    "title": "string",
+    "phone": "string"
 }
 ```
 

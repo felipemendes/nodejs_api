@@ -324,10 +324,10 @@
         }
       }
     },
-    "/users": {
+    "/user/signup": {
       "post": {
         "tags": [
-          "users"
+          "user"
         ],
         "summary": "Add a new user",
         "description": "Pass User object data in body",
@@ -590,10 +590,10 @@
         }
       }
     },
-    "/users/{uuid}": {
+    "/user/{uuid}": {
       "get": {
         "tags": [
-          "users"
+          "user"
         ],
         "summary": "Get user with given UUID",
         "produces": [
@@ -623,7 +623,7 @@
       },
       "delete": {
         "tags": [
-          "users"
+          "user"
         ],
         "summary": "Delete user with given UUID",
         "produces": [
@@ -653,7 +653,7 @@
       },
       "put": {
         "tags": [
-          "users"
+          "user"
         ],
         "summary": "Update a existing user",
         "description": "Pass User object data in body",

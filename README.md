@@ -5,7 +5,7 @@ This project package the following CRUD functions:
 - [x] Events
 - [x] Categories
 - [x] Sale Places
-- [ ] Users
+- [x] User
 
 ## Installation
 Get via git clone:
@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
     user: 'root',
     password: 'root',
     database: 'purai_app'
-    });
+});
 ```
 All tables will be add when server get started.
 
@@ -37,7 +37,9 @@ $ npm install
 ```
 
 ## Usage
-To automatically restart the application when files get changed run with [nodemon](https://github.com/remy/nodemon).
+Start with `yarn start` or `npm start`.
+
+To automatically restart the application when files get changed just run with [nodemon](https://github.com/remy/nodemon).
 
 ```
 $ nodemon
@@ -170,6 +172,40 @@ http://localhost:3000/documentation/
     "status": 1,
     "title": "string",
     "phone": "string"
+}
+```
+
+## User Endpoints
+
+#### GET `http://localhost:3000/user`
+
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `uuid` | string | Yes | GET filtered by UUID. (e.g.: e7c014b0-a71f-11e8-bce3-53d3696096ed) |
+
+#### DELETE `http://localhost:3000/user/{uuid}`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `uuid` | string | Yes | User UUID to get deleted |
+
+#### POST `http://localhost:3000/user/signup`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `body` | object | Yes | Pass user data object in body |
+
+#### PUT `http://localhost:3000/user/{uuid}`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `uuid` | string | Yes | User UUID to get changed |
+| `body` | object | Yes | Pass user data object in body |
+
+#### User data object example
+```json
+{
+    "status": 1,
+    "name": "string",
+    "email": "string@mail.com",
+    "password": "string"
 }
 ```
 

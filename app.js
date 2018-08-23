@@ -11,7 +11,7 @@ var indexRouter = require('./api/routes/index');
 var eventsRouter = require('./api/routes/events');
 var categoriesRouter = require('./api/routes/categories');
 var salePlacesRouter = require('./api/routes/salePlaces');
-var usersRouter = require('./api/routes/users');
+var userRouter = require('./api/routes/user');
 
 var app = express();
 
@@ -34,7 +34,7 @@ app.use('/', indexRouter);
 app.use('/events', eventsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/salePlaces', salePlacesRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

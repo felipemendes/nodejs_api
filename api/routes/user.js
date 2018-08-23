@@ -6,7 +6,7 @@ const uuidv1 = require('uuid/v1');
 const validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
-router.get('/:uuid', (req, res) => {
+router.get('/user/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'User cannot be returned. Check details message for more info',
@@ -28,7 +28,7 @@ router.get('/:uuid', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/signup', (req, res) => {
     if (!helpers.validateEmail(req.body.email)) {
         return res.status(500).json({
             message: 'Invalid email address'
@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
 router.delete('/:uuid', (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
-            message: 'Users cannot be deleted. Check details message for more info',
+            message: 'User cannot be deleted. Check details message for more info',
             details: 'UUID format is invalid'
         });
     }
@@ -97,7 +97,7 @@ router.put('/:uuid', (req, res) => {
 
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
-            message: 'Users cannot be updated. Check details message for more info',
+            message: 'User cannot be updated. Check details message for more info',
             details: 'UUID format is invalid'
         });
     }

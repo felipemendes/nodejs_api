@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 
 const router = express.Router();
 const User = require('../models/User');
 const uuidv1 = require('uuid/v1');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
@@ -45,7 +47,7 @@ router.post('/signup', (req, res) => {
 
         const newUuid = uuidv1();
         const hash = bcrypt.hashSync(req.body.password, 10);
-        
+
         User.postUser(req.body, newUuid, hash, (err) => {
             if (err) {
                 res.status(500).json({
@@ -59,6 +61,41 @@ router.post('/signup', (req, res) => {
                 });
             }
             return;
+        });
+    });
+});
+
+router.post('/', (req, res) => {
+    if (!helpers.validateEmail(req.body.email)) {
+        return res.status(401).json({
+            message: 'Auth failed'
+        });
+    }
+
+    User.login(req.body.email, (err, rows) => {
+        if (err || rows.length < 1) {
+            return res.status(401).json({
+                message: 'Auth failed'
+            });
+        }
+
+        if (bcrypt.compareSync(req.body.password, rows[0].password)) {
+            const token = jwt.sign({
+                    email: rows[0].email,
+                    userId: rows[0].uuid
+                },
+                process.env.JWT_KEY, {
+                    expiresIn: '1h'
+                }
+            );
+            return res.status(200).json({
+                message: 'Auth successful',
+                token
+            });
+        }
+
+        return res.status(401).json({
+            message: 'Auth failed'
         });
     });
 });

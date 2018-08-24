@@ -8,6 +8,12 @@ const User = {
         return db.query(query, values, callback);
     },
 
+    login(email, callback) {
+        const query = 'SELECT * FROM user WHERE user.email=?';
+        const values = [email];
+        return db.query(query, values, callback);
+    },
+
     postUser(Body, Uuid, Hash, callback) {
         const sql = 'INSERT INTO `user` (`uuid`, `status`, `name`, `email`, `password`) VALUES ?';
 

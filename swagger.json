@@ -362,6 +362,44 @@
         }
       }
     },
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Login",
+        "description": "Pass login credentials in body",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "Login object",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Login"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          },
+          "400": {
+            "description": "Invalid parameter supplied"
+          },
+          "404": {
+            "description": "Results not found"
+          }
+        }
+      }
+    },
     "/events/{uuid}": {
       "delete": {
         "tags": [
@@ -817,6 +855,21 @@
         "name": {
           "type": "string"
         },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
         "email": {
           "type": "string"
         },

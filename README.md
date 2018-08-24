@@ -54,6 +54,57 @@ Used [Swagger](https://swagger.io/) framework to document and test.
 http://localhost:3000/documentation/
 ```
 
+## Login Endpoints
+
+To use login JWT tokens rename file `.env-sample` to `.env` and define a new key.
+
+#### POST `http://localhost:3000/login`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `body` | object | Yes | Pass login credentials in body |
+
+#### Login data object example
+```json
+{
+    "email": "string",
+    "password": "string"
+}
+```
+
+## User Endpoints
+
+#### GET `http://localhost:3000/user`
+
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `uuid` | string | Yes | GET filtered by UUID. (e.g.: e7c014b0-a71f-11e8-bce3-53d3696096ed) |
+
+#### DELETE `http://localhost:3000/user/{uuid}`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `uuid` | string | Yes | User UUID to get deleted |
+
+#### POST `http://localhost:3000/user/signup`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `body` | object | Yes | Pass user data object in body |
+
+#### PUT `http://localhost:3000/user/{uuid}`
+| Parameter | Type | Required | Description
+| --------- | ---- | -------- | ----------- |
+| `uuid` | string | Yes | User UUID to get changed |
+| `body` | object | Yes | Pass user data object in body |
+
+#### User data object example
+```json
+{
+    "status": 1,
+    "name": "string",
+    "email": "string@mail.com",
+    "password": "string"
+}
+```
+
 ## Events Endpoints
 
 #### GET `http://localhost:3000/events`
@@ -172,40 +223,6 @@ http://localhost:3000/documentation/
     "status": 1,
     "title": "string",
     "phone": "string"
-}
-```
-
-## User Endpoints
-
-#### GET `http://localhost:3000/user`
-
-| Parameter | Type | Required | Description
-| --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | GET filtered by UUID. (e.g.: e7c014b0-a71f-11e8-bce3-53d3696096ed) |
-
-#### DELETE `http://localhost:3000/user/{uuid}`
-| Parameter | Type | Required | Description
-| --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | User UUID to get deleted |
-
-#### POST `http://localhost:3000/user/signup`
-| Parameter | Type | Required | Description
-| --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass user data object in body |
-
-#### PUT `http://localhost:3000/user/{uuid}`
-| Parameter | Type | Required | Description
-| --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | User UUID to get changed |
-| `body` | object | Yes | Pass user data object in body |
-
-#### User data object example
-```json
-{
-    "status": 1,
-    "name": "string",
-    "email": "string@mail.com",
-    "password": "string"
 }
 ```
 

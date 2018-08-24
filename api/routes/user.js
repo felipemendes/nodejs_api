@@ -8,8 +8,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
+const checkAuth = require('../middleware/CheckAuth');
 
-router.get('/:uuid', (req, res) => {
+router.get('/:uuid', checkAuth, (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'User cannot be returned. Check details message for more info',
@@ -100,7 +101,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/:uuid', (req, res) => {
+router.delete('/:uuid', checkAuth, (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'User cannot be deleted. Check details message for more info',
@@ -128,7 +129,7 @@ router.delete('/:uuid', (req, res) => {
     });
 });
 
-router.put('/:uuid', (req, res) => {
+router.put('/:uuid', checkAuth, (req, res) => {
     if (!helpers.validateEmail(req.body.email)) {
         return res.status(409).json({
             message: 'Invalid email address'

@@ -4,6 +4,7 @@ const router = express.Router();
 const Category = require('../models/Category');
 const uuidv1 = require('uuid/v1');
 const validate = require('uuid-validate');
+const checkAuth = require('../middleware/CheckAuth');
 
 router.get('/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
     if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
@@ -27,7 +28,7 @@ router.get('/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', checkAuth, (req, res) => {
     const newUuid = uuidv1();
 
     Category.postCategory(req.body, newUuid, (err) => {
@@ -45,7 +46,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/:uuid', (req, res) => {
+router.delete('/:uuid', checkAuth, (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'Categories cannot be deleted. Check details message for more info',
@@ -73,7 +74,7 @@ router.delete('/:uuid', (req, res) => {
     });
 });
 
-router.put('/:uuid', (req, res) => {
+router.put('/:uuid', checkAuth, (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'Categories cannot be updated. Check details message for more info',

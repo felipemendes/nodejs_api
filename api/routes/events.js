@@ -6,6 +6,7 @@ const uuidv1 = require('uuid/v1');
 const helpers = require('../helpers/PurAiHelpers');
 const func = require('../helpers/ConvertToNestedHelper');
 const validate = require('uuid-validate');
+const checkAuth = require('../middleware/CheckAuth');
 
 router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', (req, res) => {
     if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
@@ -54,7 +55,7 @@ router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', checkAuth, (req, res) => {
     const newUuid = uuidv1();
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
 
@@ -73,7 +74,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/:uuid', (req, res) => {
+router.delete('/:uuid', checkAuth, (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'Events cannot be deleted. Check details message for more info',
@@ -101,7 +102,7 @@ router.delete('/:uuid', (req, res) => {
     });
 });
 
-router.put('/:uuid', (req, res) => {
+router.put('/:uuid', checkAuth, (req, res) => {
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.status(500).json({
             message: 'Events cannot be updated. Check details message for more info',

@@ -1,11 +1,12 @@
 # JavaScript PurAí API for Node.js
 Module in Node.js, Express and MySQL that provides an RESTful API. Made with MVC pattern. Support for authorization and authentication with [JWT](https://tools.ietf.org/html/rfc7519) tokens.
 
-This project package the following CRUD functions:
+This project package the following functions:
 - [x] Events
 - [x] Categories
 - [x] Sale Places
 - [x] User
+- [x] Login
 
 ## Installation
 Get via git clone:
@@ -61,7 +62,7 @@ To use login JWT tokens rename file `.env-sample` to `.env` and define a new key
 #### POST `http://localhost:3000/login`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass login credentials in body |
+| `body` | object | Yes | Pass login data object in body |
 
 #### Login data object example
 ```json

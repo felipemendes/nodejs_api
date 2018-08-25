@@ -26,6 +26,13 @@
     "http",
     "https"
   ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "paths": {
     "/events": {
       "get": {
@@ -102,6 +109,9 @@
         }
       },
       "post": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "events"
         ],
@@ -195,6 +205,9 @@
         }
       },
       "post": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "categories"
         ],
@@ -288,6 +301,9 @@
         }
       },
       "post": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "sale places"
         ],
@@ -402,6 +418,9 @@
     },
     "/events/{uuid}": {
       "delete": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "events"
         ],
@@ -432,6 +451,9 @@
         }
       },
       "put": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "events"
         ],
@@ -478,6 +500,9 @@
     },
     "/categories/{uuid}": {
       "delete": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "categories"
         ],
@@ -508,6 +533,9 @@
         }
       },
       "put": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "categories"
         ],
@@ -554,6 +582,9 @@
     },
     "/salePlaces/{uuid}": {
       "delete": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "sale places"
         ],
@@ -584,6 +615,9 @@
         }
       },
       "put": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "sale places"
         ],
@@ -630,6 +664,9 @@
     },
     "/user/{uuid}": {
       "get": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "user"
         ],
@@ -660,6 +697,9 @@
         }
       },
       "delete": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "user"
         ],
@@ -690,6 +730,9 @@
         }
       },
       "put": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "user"
         ],

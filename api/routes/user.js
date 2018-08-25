@@ -91,7 +91,7 @@ router.post('/', (req, res) => {
             );
             return res.status(200).json({
                 message: 'Auth successful',
-                token
+                token: `Bearer ${token}`
             });
         }
 

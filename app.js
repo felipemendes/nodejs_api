@@ -1,18 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var morgan = require('morgan');
-var swaggerUi = require('swagger-ui-express'),
-    swaggerDocument = require('./swagger.json');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
-var indexRouter = require('./api/routes/index');
-var eventsRouter = require('./api/routes/events');
-var categoriesRouter = require('./api/routes/categories');
-var salePlacesRouter = require('./api/routes/salePlaces');
-var userRouter = require('./api/routes/user');
+const indexRouter = require('./api/routes/index');
+const eventsRouter = require('./api/routes/events');
+const categoriesRouter = require('./api/routes/categories');
+const salePlacesRouter = require('./api/routes/salePlaces');
+const userRouter = require('./api/routes/user');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,12 +58,12 @@ app.use((req, res) => {
 });
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

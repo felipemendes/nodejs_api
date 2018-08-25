@@ -1,3 +1,11 @@
+
+![Wercker](https://img.shields.io/wercker/ci/wercker/go-wercker-api.svg)
+![AUR](https://img.shields.io/aur/license/yaourt.svg) 
+![GitHub last commit](https://img.shields.io/github/last-commit/felipemendes/purai_nodejs.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/felipemendes/purai_nodejs.svg)
+
+
+
 # JavaScript PurAí API for Node.js
 Module in Node.js, Express and MySQL that provides an RESTful API. Made with MVC pattern. Support for authorization and authentication with [JWT](https://tools.ietf.org/html/rfc7519) tokens.
 
@@ -29,7 +37,7 @@ All tables will be add when server get started.
 
 Get dependencies with [Yarn](https://github.com/yarnpkg/yarn):
 ```
-$ yarn
+$ yarn install
 ```
 
 Or with [NPM](http://npmjs.org/):
@@ -38,11 +46,14 @@ $ npm install
 ```
 
 ## Usage
-Run with `yarn start` or `npm start`.
+
+Before you start the server rename file `.env-sample` to `.env` and define a new key to use login JWT tokens.
+
+Then run with `yarn start` or `npm start`.
 
 The application will automatically restart when files get changed due [nodemon](https://github.com/remy/nodemon).
 
-![nodemon](/screenshots/nodemon.png "nodemon")
+![server](/screenshots/server.png "server")
 
 And the application will start at `http://localhost:3000`.
 
@@ -53,8 +64,6 @@ http://localhost:3000/documentation/
 ```
 
 ## Login Endpoints
-
-To use login JWT tokens rename file `.env-sample` to `.env` and define a new key.
 
 #### POST `http://localhost:3000/login`
 | Parameter | Type | Required | Description

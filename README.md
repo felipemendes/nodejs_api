@@ -38,13 +38,10 @@ $ npm install
 ```
 
 ## Usage
-Start with `yarn start` or `npm start`.
+Run with `yarn start` or `npm start`.
 
-To automatically restart the application when files get changed just run with [nodemon](https://github.com/remy/nodemon).
+The application will automatically restart when files get changed due [nodemon](https://github.com/remy/nodemon).
 
-```
-$ nodemon
-```
 ![nodemon](/screenshots/nodemon.png "nodemon")
 
 And the application will start at `http://localhost:3000`.
@@ -78,7 +75,7 @@ To use login JWT tokens rename file `.env-sample` to `.env` and define a new key
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | GET filtered by UUID. (e.g.: e7c014b0-a71f-11e8-bce3-53d3696096ed) |
+| `uuid` | string | Yes | GET filtered by UUID. (e.g.: dbfdd3d0-a808-11e8-aa56-a3de1ec713c5) |
 
 #### DELETE `http://localhost:3000/user/{uuid}`
 | Parameter | Type | Required | Description

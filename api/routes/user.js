@@ -69,14 +69,14 @@ router.post('/signup', (req, res) => {
 router.post('/', (req, res) => {
     if (!helpers.validateEmail(req.body.email)) {
         return res.status(401).json({
-            message: 'Auth failed'
+            message: 'Authentication failed'
         });
     }
 
     User.login(req.body.email, (err, rows) => {
         if (err || rows.length < 1) {
             return res.status(401).json({
-                message: 'Auth failed'
+                message: 'Authentication failed'
             });
         }
 
@@ -96,7 +96,7 @@ router.post('/', (req, res) => {
         }
 
         return res.status(401).json({
-            message: 'Auth failed'
+            message: 'Authentication failed'
         });
     });
 });

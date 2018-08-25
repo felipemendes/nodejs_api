@@ -17,10 +17,10 @@ connection.connect((err) => {
     createCategoryTable(connection);
     createEventTable(connection);
 
+    //addUserSampleData(connection);
     //addSalePlaceSampleData(connection);
     //addCategorySampleData(connection);
     //addEventSampleData(connection);
-    //addUserSampleData(connection);
 });
 
 function createUserTable(conn) {
@@ -105,7 +105,7 @@ function addUserSampleData(conn) {
     const sql = 'INSERT INTO `user` (`uuid`, `status`, `name`, `email`, `password`) VALUES ?';
 
     const values = [
-        ['c32ec86d-ef33-4f5d-9b9a-13d12e3c5cb7', 1, 'John', 'john@email.com', '123']
+        ['dbfdd3d0-a808-11e8-aa56-a3de1ec713c5', 1, 'John', 'john@mail.com', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJ1c2VySWQiOiJkYmZkZDNkMC1hODA4LTExZTgtYWE1Ni1hM2RlMWVjNzEzYzUiLCJpYXQiOjE1MzUxNjE2ODcsImV4cCI6MTUzNTE2NTI4N30.uXplxPhNR_s0r7vObHrYbKBMZxwwJAWRPKNoosJpDww']
     ];
 
     conn.query(sql, [values], (error) => {

@@ -17,10 +17,8 @@ connection.connect((err) => {
     createCategoryTable(connection);
     createEventTable(connection);
 
-    //addUserSampleData(connection);
-    //addSalePlaceSampleData(connection);
-    //addCategorySampleData(connection);
-    //addEventSampleData(connection);
+    /* uncomment this call method to add sample data */
+    //addSampleData(connection);
 });
 
 function createUserTable(conn) {
@@ -99,6 +97,13 @@ function createEventTable(conn) {
         if (error) return console.log(error);
         console.log('Table created: event');
     });
+}
+
+function addSampleData(conn) {
+    addUserSampleData(connection);
+    addSalePlaceSampleData(connection);
+    addCategorySampleData(connection);
+    addEventSampleData(connection);
 }
 
 function addUserSampleData(conn) {

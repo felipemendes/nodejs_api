@@ -4,8 +4,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/felipemendes/purai_nodejs.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/felipemendes/purai_nodejs.svg)
 
-
-
 # JavaScript PurAí API for Node.js
 Module in Node.js, Express and MySQL that provides an RESTful API. Made with MVC pattern. Support for authorization and authentication with [JWT](https://tools.ietf.org/html/rfc7519) tokens.
 
@@ -23,7 +21,7 @@ $ git clone https://github.com/felipemendes/purai-nodejs.git
 $ cd purai-nodejs
 ```
 
-Create a MySQL database and set the config at `db-connect.js`:
+Create a MySQL database without any tables. Then just set the database config at `db-connect.js` file:
 ```javascript
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -33,7 +31,7 @@ const connection = mysql.createConnection({
     database: 'purai_app'
 });
 ```
-All tables will be add when server get started.
+All tables will be add when server get started. You can, optionally, uncomment this call method at `db-connect.js` to add sample data in the tables: `addSampleData(connection)`
 
 Get dependencies with [Yarn](https://github.com/yarnpkg/yarn):
 ```
@@ -47,9 +45,8 @@ $ npm install
 
 ## Usage
 
-Before you start the server rename file `.env-sample` to `.env` and define a new key to use login JWT tokens.
-
-Then run with `yarn start` or `npm start`.
+1. Rename file `.env-sample` to `.env` and define a new key for `JWT_KEY` to use login JWT tokens.
+2. Start the server with `yarn start` or `npm start`.
 
 The application will automatically restart when files get changed due [nodemon](https://github.com/remy/nodemon).
 
@@ -62,6 +59,18 @@ Used [Swagger](https://swagger.io/) framework to document and test.
 ```
 http://localhost:3000/documentation/
 ```
+
+## Getting a Token
+
+Send a `POST` request to `http://localhost:3000/login` with user parameters. 
+```json
+{
+    "email": "string",
+    "password": "string"
+}
+```
+
+To request locked methods set the header key `Authorization` and the token as value.
 
 ## Login Endpoints
 

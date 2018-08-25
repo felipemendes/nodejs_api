@@ -72,6 +72,11 @@ Send a `POST` request to `http://localhost:3000/login` with user parameters.
 
 To request locked methods set the header key `Authorization` and the token as value.
 
+#### Curl request example with token
+```curl
+curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0cmluZ0BzdHJpbmcuY29tIiwidXNlcklkIjoiZDViNzJjMDAiLCJpYXQiOjE1MzUyMjcwNTh9.OcIZ0EMDale9Ry5PvDYQAKtup1znaQc2Iti1iBPaBlE"
+```
+
 ## Login Endpoints
 
 #### POST `http://localhost:3000/login`

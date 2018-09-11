@@ -17,8 +17,8 @@ This project package the following functions:
 ## Installation
 Get via git clone:
 ```
-$ git clone https://github.com/felipemendes/purai-nodejs.git
-$ cd purai-nodejs
+$ git clone https://github.com/felipemendes/purai_nodejs.git
+$ cd purai_nodejs
 ```
 
 Create a MySQL database without any tables. Then just set the database config at `db-connect.js` file:
@@ -45,8 +45,7 @@ $ npm install
 
 ## Usage
 
-1. Rename file `.env-sample` to `.env` and define a new key for `JWT_KEY` to use login JWT tokens.
-2. Start the server with `yarn start` or `npm start`.
+Start the server with `yarn start` or `npm start`.
 
 The application will automatically restart when files get changed due [nodemon](https://github.com/remy/nodemon).
 
@@ -82,7 +81,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 #### POST `http://localhost:3000/login`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass login data object in body |
+| `body` | object | :white_check_mark: | Pass login data object in body |
 
 #### Login data object example
 ```json
@@ -98,23 +97,23 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | GET filtered by UUID. (e.g.: dbfdd3d0-a808-11e8-aa56-a3de1ec713c5) |
+| `uuid` | string | :white_check_mark: | GET filtered by UUID. (e.g.: dbfdd3d0-a808-11e8-aa56-a3de1ec713c5) |
 
 #### DELETE `http://localhost:3000/user/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | User UUID to get deleted |
+| `uuid` | string | :white_check_mark: | User UUID to get deleted |
 
 #### POST `http://localhost:3000/user/signup`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass user data object in body |
+| `body` | object | :white_check_mark: | Pass user data object in body |
 
 #### PUT `http://localhost:3000/user/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | User UUID to get changed |
-| `body` | object | Yes | Pass user data object in body |
+| `uuid` | string | :white_check_mark: | User UUID to get changed |
+| `body` | object | :white_check_mark: | Pass user data object in body |
 
 #### User data object example
 ```json
@@ -132,30 +131,30 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `status` | int | Optional | GET filtered by status. (1: Active, 0: Inactive) |
-| `uuid` | string | Optional | GET filtered by UUID. (e.g.: 955b9575-e542-461c-939a-5ef41e733859) |
-| `search` | string | Optional | GET filtered by term in event title, place, address and city |
-| `page` | int | Optional |GET filtered by page number considering limit value. (Default page is 1) |
-| `limit` | int | Optional | GET filtered by limit informed. (Default value is 10) |
-| `upcoming` | string | Optional | GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
-| `category` | string | Optional | GET filtered by terms in category name |
-| `saleplace` | string | Optional | GET filtered by terms in sale places name |
+| `status` | int | :x: | GET filtered by status. (1: Active, 0: Inactive) |
+| `uuid` | string | :x: | GET filtered by UUID. (e.g.: 955b9575-e542-461c-939a-5ef41e733859) |
+| `search` | string | :x: | GET filtered by term in event title, place, address and city |
+| `page` | int | :x: |GET filtered by page number considering limit value. (Default page is 1) |
+| `limit` | int | :x: | GET filtered by limit informed. (Default value is 10) |
+| `upcoming` | string | :x: | GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
+| `category` | string | :x: | GET filtered by terms in category name |
+| `saleplace` | string | :x: | GET filtered by terms in sale places name |
 
 #### DELETE `http://localhost:3000/events/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | Event's UUID to get deleted |
+| `uuid` | string | :white_check_mark: | Event's UUID to get deleted |
 
 #### POST `http://localhost:3000/events`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass event data object in body |
+| `body` | object | :white_check_mark: | Pass event data object in body |
 
 #### PUT `http://localhost:3000/events/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | Event's UUID to get changed |
-| `body` | object | Yes | Pass event data object in body |
+| `uuid` | string | :white_check_mark: | Event's UUID to get changed |
+| `body` | object | :white_check_mark: | Pass event data object in body |
 
 #### Event data object example
 ```json
@@ -179,27 +178,27 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `status` | int | Optional | GET filtered by status. (1: Active, 0: Inactive) |
-| `uuid` | string | Optional | GET filtered by UUID. (e.g.: 1670d1f8-8d9e-46bb-8a19-b85cdd27e016) |
-| `search` | string | Optional | GET filtered by term in category title |
-| `page` | int | Optional |GET filtered by page number considering limit value. (Default page is 1) |
-| `limit` | int | Optional | GET filtered by limit informed. (Default value is 10) |
+| `status` | int | :x: | GET filtered by status. (1: Active, 0: Inactive) |
+| `uuid` | string | :x: | GET filtered by UUID. (e.g.: 1670d1f8-8d9e-46bb-8a19-b85cdd27e016) |
+| `search` | string | :x: | GET filtered by term in category title |
+| `page` | int | :x: |GET filtered by page number considering limit value. (Default page is 1) |
+| `limit` | int | :x: | GET filtered by limit informed. (Default value is 10) |
 
 #### DELETE `http://localhost:3000/categories/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | Category's UUID to get deleted |
+| `uuid` | string | :white_check_mark: | Category's UUID to get deleted |
 
 #### POST `http://localhost:3000/categories`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass category data object in body |
+| `body` | object | :white_check_mark: | Pass category data object in body |
 
 #### PUT `http://localhost:3000/categories/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | Category's UUID to get changed |
-| `body` | object | Yes | Pass category data object in body |
+| `uuid` | string | :white_check_mark: | Category's UUID to get changed |
+| `body` | object | :white_check_mark: | Pass category data object in body |
 
 #### Category data object example
 ```json
@@ -216,27 +215,27 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `status` | int | Optional | GET filtered by status. (1: Active, 0: Inactive) |
-| `uuid` | string | Optional | GET filtered by UUID. (e.g.: ffd9d343-585a-40ee-bc58-c1e6935dcbdd) |
-| `search` | string | Optional | GET filtered by term in sale place title |
-| `page` | int | Optional |GET filtered by page number considering limit value. (Default page is 1) |
-| `limit` | int | Optional | GET filtered by limit informed. (Default value is 10) |
+| `status` | int | :x: | GET filtered by status. (1: Active, 0: Inactive) |
+| `uuid` | string | :x: | GET filtered by UUID. (e.g.: ffd9d343-585a-40ee-bc58-c1e6935dcbdd) |
+| `search` | string | :x: | GET filtered by term in sale place title |
+| `page` | int | :x: |GET filtered by page number considering limit value. (Default page is 1) |
+| `limit` | int | :x: | GET filtered by limit informed. (Default value is 10) |
 
 #### DELETE `http://localhost:3000/salePlaces/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | Sale Places' UUID to get deleted |
+| `uuid` | string | :white_check_mark: | Sale Places' UUID to get deleted |
 
 #### POST `http://localhost:3000/salePlaces`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `body` | object | Yes | Pass sale place data object in body |
+| `body` | object | :white_check_mark: | Pass sale place data object in body |
 
 #### PUT `http://localhost:3000/salePlaces/{uuid}`
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
-| `uuid` | string | Yes | Sale Places' UUID to get changed |
-| `body` | object | Yes | Pass sale place data object in body |
+| `uuid` | string | :white_check_mark: | Sale Places' UUID to get changed |
+| `body` | object | :white_check_mark: | Pass sale place data object in body |
 
 #### Sale Place data object example
 ```json

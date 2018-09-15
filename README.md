@@ -38,14 +38,9 @@ Get dependencies with [Yarn](https://github.com/yarnpkg/yarn):
 $ yarn install
 ```
 
-Or with [NPM](http://npmjs.org/):
-```
-$ npm install
-```
-
 ## Usage
 
-Start the server with `yarn start` or `npm start`.
+Start the server with `yarn start`.
 
 The application will automatically restart when files get changed due [nodemon](https://github.com/remy/nodemon).
 

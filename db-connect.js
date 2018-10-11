@@ -123,7 +123,7 @@ function addSalePlaceSampleData(conn) {
     const sql = 'INSERT INTO `sale_place` (`uuid`, `status`, `title`, `phone`) VALUES ?';
 
     const values = [
-        ['ffd9d343-585a-40ee-bc58-c1e6935dcbdd', 1, 'Apple Infinite Loop', '+1 408-961-1560']
+        ['ffd9d343-585a-40ee-bc58-c1e6935dcbdd', 1, 'Entre em contato para mais detalhes', '']
     ];
 
     conn.query(sql, [values], (error) => {

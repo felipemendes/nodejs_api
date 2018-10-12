@@ -11,6 +11,7 @@ const eventsRouter = require('./api/routes/events');
 const categoriesRouter = require('./api/routes/categories');
 const salePlacesRouter = require('./api/routes/salePlaces');
 const userRouter = require('./api/routes/user');
+const cors = require('cors');
 
 const app = express();
 
@@ -23,18 +24,7 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-        'Access-Control-Allow-Origin',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Origin', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-    next();
-});
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

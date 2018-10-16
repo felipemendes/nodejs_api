@@ -6,7 +6,7 @@ const UsersController = require('../controllers/users');
 
 router.get('/:uuid', checkAuth, UsersController.get_users);
 
-router.post('/signup', UsersController.signup);
+router.post('/signup', checkAuth, UsersController.signup);
 
 router.post('/', UsersController.login);
 

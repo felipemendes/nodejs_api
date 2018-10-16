@@ -342,6 +342,9 @@
     },
     "/user/signup": {
       "post": {
+        "security": [{
+          "Bearer": []
+        }],
         "tags": [
           "user"
         ],

@@ -25,9 +25,17 @@ exports.get_categories = (req, res) => {
 };
 
 exports.create_category = (req, res) => {
+    if (req.file === undefined) {
+        res.json({
+            message: 'Category cannot be register. Check details message for more info',
+            details: 'Column \'url_image\' cannot be null'
+        });
+        return;
+    }
+
     const newUuid = uuidv1();
 
-    Category.postCategory(req.body, newUuid, (err) => {
+    Category.postCategory(req.body, req.file, newUuid, (err) => {
         if (err) {
             res.status(500).json({
                 message: 'Category cannot be register. Check details message for more info',
@@ -71,6 +79,14 @@ exports.delete_category = (req, res) => {
 };
 
 exports.update_category = (req, res) => {
+    if (req.file === undefined) {
+        res.json({
+            message: 'Category cannot be register. Check details message for more info',
+            details: 'Column \'url_image\' cannot be null'
+        });
+        return;
+    }
+
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'Categories cannot be updated. Check details message for more info',
@@ -78,7 +94,7 @@ exports.update_category = (req, res) => {
         });
     }
 
-    Category.putCategory(req.params.uuid, req.body, (err, rows) => {
+    Category.putCategory(req.params.uuid, req.body, req.file, (err, rows) => {
         if (err) {
             res.status(500).json({
                 message: 'Category cannot be register. Check details message for more info',

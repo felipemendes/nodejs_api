@@ -37,20 +37,20 @@ const Category = {
         return db.query(query, callback);
     },
 
-    postCategory(Body, Uuid, callback) {
+    postCategory(Body, File, Uuid, callback) {
         const sql = 'INSERT INTO `category` (`uuid`, `status`, `title`, `url_image`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, Body.title, Body.url_image]
+            [Uuid, Body.status, Body.title, File.path]
         ];
 
         return db.query(sql, [values], callback);
     },
 
-    putCategory(Uuid, Body, callback) {
+    putCategory(Uuid, Body, File, callback) {
         const sql = 'UPDATE category SET status=?, title=?, url_image=? where uuid=?';
 
-        const values = [Body.status, Body.title, Body.url_image, Uuid];
+        const values = [Body.status, Body.title, File.path, Uuid];
 
         return db.query(sql, values, callback);
     },

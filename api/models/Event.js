@@ -64,20 +64,20 @@ const Event = {
         return db.query(options, callback);
     },
 
-    postEvent(Body, Uuid, PlacePhoneNumber, callback) {
+    postEvent(Body, File, Uuid, PlacePhoneNumber, callback) {
         const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, new Date(), Body.title, Body.url_image, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
+            [Uuid, Body.status, new Date(), Body.title, File.path, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
         ];
 
         return db.query(sql, [values], callback);
     },
 
-    putEvent(Uuid, PlacePhoneNumber, Body, callback) {
+    putEvent(Uuid, PlacePhoneNumber, Body, File, callback) {
         const sql = 'UPDATE event SET status=?, updated_at=?, title=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
 
-        const values = [Body.status, new Date(), Body.title, Body.url_image, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+        const values = [Body.status, new Date(), Body.title, File.path, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
 
         return db.query(sql, values, callback);
     },

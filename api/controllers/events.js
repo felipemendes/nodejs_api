@@ -52,10 +52,18 @@ exports.get_events = (req, res) => {
 };
 
 exports.create_event = (req, res) => {
+    if (req.file === undefined) {
+        res.json({
+            message: 'Event cannot be register. Check details message for more info',
+            details: 'Column \'url_image\' cannot be null'
+        });
+        return;
+    }
+
     const newUuid = uuidv1();
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
 
-    Event.postEvent(req.body, newUuid, placePhoneNumberFormatted, (err) => {
+    Event.postEvent(req.body, req.file, newUuid, placePhoneNumberFormatted, (err) => {
         if (err) {
             res.status(500).json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -99,6 +107,14 @@ exports.delete_event = (req, res) => {
 };
 
 exports.update_event = (req, res) => {
+    if (req.file === undefined) {
+        res.json({
+            message: 'Event cannot be register. Check details message for more info',
+            details: 'Column \'url_image\' cannot be null'
+        });
+        return;
+    }
+
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.status(500).json({
             message: 'Events cannot be updated. Check details message for more info',
@@ -109,7 +125,7 @@ exports.update_event = (req, res) => {
 
     const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
 
-    Event.putEvent(req.params.uuid, placePhoneNumberFormatted, req.body, (err, rows) => {
+    Event.putEvent(req.params.uuid, placePhoneNumberFormatted, req.body, req.file, (err, rows) => {
         if (err) {
             res.status(500).json({
                 message: 'Event cannot be updated. Check details message for more info',

@@ -107,14 +107,6 @@ exports.delete_event = (req, res) => {
 };
 
 exports.update_event = (req, res) => {
-    if (req.file === undefined) {
-        res.json({
-            message: 'Event cannot be register. Check details message for more info',
-            details: 'Column \'url_image\' cannot be null'
-        });
-        return;
-    }
-
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         res.status(500).json({
             message: 'Events cannot be updated. Check details message for more info',

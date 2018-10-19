@@ -79,14 +79,6 @@ exports.delete_category = (req, res) => {
 };
 
 exports.update_category = (req, res) => {
-    if (req.file === undefined) {
-        res.json({
-            message: 'Category cannot be register. Check details message for more info',
-            details: 'Column \'url_image\' cannot be null'
-        });
-        return;
-    }
-
     if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
         return res.status(500).json({
             message: 'Categories cannot be updated. Check details message for more info',

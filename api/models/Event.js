@@ -75,9 +75,16 @@ const Event = {
     },
 
     putEvent(Uuid, PlacePhoneNumber, Body, File, callback) {
-        const sql = 'UPDATE event SET status=?, updated_at=?, title=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+        let sql = '';
+        let values = '';
 
-        const values = [Body.status, new Date(), Body.title, File.path, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+        if (File !== undefined) {
+            sql += 'UPDATE event SET status=?, updated_at=?, title=?, url_image=?, place=?, place_phone=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, new Date(), Body.title, File.path, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+        } else {
+            sql += 'UPDATE event SET status=?, updated_at=?, title=?, place=?, place_phone=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, new Date(), Body.title, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+        }
 
         return db.query(sql, values, callback);
     },

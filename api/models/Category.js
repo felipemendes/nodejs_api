@@ -48,9 +48,16 @@ const Category = {
     },
 
     putCategory(Uuid, Body, File, callback) {
-        const sql = 'UPDATE category SET status=?, title=?, url_image=? where uuid=?';
+        let sql = '';
+        let values = '';
 
-        const values = [Body.status, Body.title, File.path, Uuid];
+        if (File !== undefined) {
+            sql += 'UPDATE category SET status=?, title=?, url_image=? where uuid=?';
+            values = [Body.status, Body.title, File.path, Uuid];
+        } else {
+            sql += 'UPDATE category SET status=?, title=? where uuid=?';
+            values = [Body.status, Body.title, Uuid];
+        }
 
         return db.query(sql, values, callback);
     },

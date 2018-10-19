@@ -136,12 +136,12 @@ function addCategorySampleData(conn) {
     const sql = 'INSERT INTO `category` (`uuid`, `status`, `title`, `url_image`) VALUES ?';
 
     const values = [
-        ['1670d1f8-8d9e-46bb-8a19-b85cdd27e016', 1, 'Festa e Show', 'uploads/sample-category.png'],
-        ['2ddbd4bd-527a-428b-b640-d3f9318b06b8', 1, 'Curso e Workshop', 'uploads/sample-category.png'],
-        ['f5c0330f-3975-466f-bd13-69264aafe03a', 1, 'Esportivo', 'uploads/sample-category.png'],
-        ['4fd37ef8-a1b3-48cb-b22f-9aeb5d23bc19', 1, 'Congresso e Seminário', 'uploads/sample-category.png'],
-        ['18093681-f35a-4345-bbd6-5880cdffa347', 1, 'Gastronômico', 'uploads/sample-category.png'],
-        ['68000d0d-20cb-4328-840f-565ac1932e5e', 1, 'Encontro e Networking', 'uploads/sample-category.png']
+        ['1670d1f8-8d9e-46bb-8a19-b85cdd27e016', 1, 'Festa e Show', 'uploads/categories/sample-category.jpg'],
+        ['2ddbd4bd-527a-428b-b640-d3f9318b06b8', 1, 'Curso e Workshop', 'uploads/categories/sample-category.jpg'],
+        ['f5c0330f-3975-466f-bd13-69264aafe03a', 1, 'Esportivo', 'uploads/categories/sample-category.jpg'],
+        ['4fd37ef8-a1b3-48cb-b22f-9aeb5d23bc19', 1, 'Congresso e Seminário', 'uploads/categories/sample-category.jpg'],
+        ['18093681-f35a-4345-bbd6-5880cdffa347', 1, 'Gastronômico', 'uploads/categories/sample-category.jpg'],
+        ['68000d0d-20cb-4328-840f-565ac1932e5e', 1, 'Encontro e Networking', 'uploads/categories/sample-category.jpg']
     ];
 
     conn.query(sql, [values], (error) => {
@@ -154,7 +154,7 @@ function addEventSampleData(conn) {
     const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
     const values = [
-        ['955b9575-e542-461c-939a-5ef41e733859', 1, new Date(), 'Sample Event', 'uploads/sampleevent.png', 'Apple Infinite Loop', '+1 408-961-1560', '2022-01-01', 'Apple Campus, Cupertino, CA 95014, EUA', 'Cupertino', 1, 1]
+        ['955b9575-e542-461c-939a-5ef41e733859', 1, new Date(), 'Sample Event', 'uploads/events/sample-event.jpg', 'Apple Infinite Loop', '+1 408-961-1560', '2022-01-01', 'Apple Campus, Cupertino, CA 95014, EUA', 'Cupertino', 1, 1]
     ];
 
     conn.query(sql, [values], (error) => {

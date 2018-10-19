@@ -3,3 +3,5 @@ build
 npm-debug.log
 .DS_Store
 package-lock.json
+uploads/categories
+uploads/events

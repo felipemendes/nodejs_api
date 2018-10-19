@@ -156,7 +156,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 {
     "status": 1,
     "title": "string",
-    "url_image": "uploads/image.jpg",
+    "url_image": File,
     "place": "string",
     "place_phone": "string",
     "date": "2022-01-01 20:00",
@@ -200,7 +200,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 {
     "status": 1,
     "title": "string",
-    "url_image": "uploads/image.jpg"
+    "url_image": File
 }
 ```
 

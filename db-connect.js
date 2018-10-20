@@ -18,7 +18,7 @@ connection.connect((err) => {
     createEventTable(connection);
 
     /* uncomment this call method to add sample data */
-    //addSampleData(connection);
+    // addSampleData(connection);
 });
 
 function createUserTable(conn) {
@@ -110,7 +110,7 @@ function addUserSampleData(conn) {
     const sql = 'INSERT INTO `user` (`uuid`, `status`, `name`, `email`, `password`) VALUES ?';
 
     const values = [
-        ['dbfdd3d0-a808-11e8-aa56-a3de1ec713c5', 1, 'John', 'john@mail.com', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJ1c2VySWQiOiJkYmZkZDNkMC1hODA4LTExZTgtYWE1Ni1hM2RlMWVjNzEzYzUiLCJpYXQiOjE1MzUxNjE2ODcsImV4cCI6MTUzNTE2NTI4N30.uXplxPhNR_s0r7vObHrYbKBMZxwwJAWRPKNoosJpDww']
+        ['dbfdd3d0-a808-11e8-aa56-a3de1ec713c5', 1, 'admin', 'admin@mail.com', '$2b$10$bbE8Fn5K8PZYrThPnI25JefkHYermyOJq5Xim3ToxAijDR9ngPDSO']
     ];
 
     conn.query(sql, [values], (error) => {

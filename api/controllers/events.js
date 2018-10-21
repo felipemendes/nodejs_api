@@ -45,7 +45,8 @@ exports.get_events = (req, res) => {
 
             const nestedRows = nested.convertToNested(rows, nestingOptions);
             res.status(200).json({
-                events: nestedRows
+                // events: nestedRows
+                events: rows
             });
         }
     });

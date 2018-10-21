@@ -55,11 +55,13 @@ const Event = {
         const validLimit = limit !== 0 ? limit : 10;
         const currentPage = (validPage - 1) * validLimit;
 
-        const query = `SELECT * FROM event INNER JOIN category ON event.id_category=category.id INNER JOIN sale_place ON event.id_sale_place=sale_place.id ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date LIMIT ${validLimit} OFFSET ${currentPage}`;
+        // const query = `SELECT * FROM event INNER JOIN category ON event.id_category=category.id INNER JOIN sale_place ON event.id_sale_place=sale_place.id ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date LIMIT ${validLimit} OFFSET ${currentPage}`;
+
+        const query = `SELECT *, DATE_FORMAT(event.created_at, '%Y-%m-%dT%T') as created_at, DATE_FORMAT(event.updated_at, '%Y-%m-%dT%T') as updated_at, DATE_FORMAT(event.date, '%Y-%m-%dT%T') as date FROM event ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date LIMIT ${validLimit} OFFSET ${currentPage}`;
 
         const options = {
             sql: query,
-            nestTables: true
+            nestTables: false
         };
         return db.query(options, callback);
     },

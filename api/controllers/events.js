@@ -20,30 +20,30 @@ exports.get_events = (req, res) => {
                 details: err.sqlMessage
             });
         } else {
-            const nestingOptions = [{
-                    tableName: 'event',
-                    pkey: 'id',
-                    fkeys: [{
-                            table: 'category',
-                            col: 'id_category'
-                        },
-                        {
-                            table: 'sale_place',
-                            col: 'id_sale_place'
-                        }
-                    ]
-                },
-                {
-                    tableName: 'category',
-                    pkey: 'id'
-                },
-                {
-                    tableName: 'sale_place',
-                    pkey: 'id'
-                },
-            ];
+            // const nestingOptions = [{
+            //         tableName: 'event',
+            //         pkey: 'id',
+            //         fkeys: [{
+            //                 table: 'category',
+            //                 col: 'id_category'
+            //             },
+            //             {
+            //                 table: 'sale_place',
+            //                 col: 'id_sale_place'
+            //             }
+            //         ]
+            //     },
+            //     {
+            //         tableName: 'category',
+            //         pkey: 'id'
+            //     },
+            //     {
+            //         tableName: 'sale_place',
+            //         pkey: 'id'
+            //     },
+            // ];
 
-            const nestedRows = nested.convertToNested(rows, nestingOptions);
+            // const nestedRows = nested.convertToNested(rows, nestingOptions);
             res.status(200).json({
                 // events: nestedRows
                 events: rows

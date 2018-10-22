@@ -51,13 +51,15 @@ const Event = {
 
         const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
 
-        const validPage = page !== 0 ? page : 1;
-        const validLimit = limit !== 0 ? limit : 10;
-        const currentPage = (validPage - 1) * validLimit;
+        // let query = `SELECT * FROM event INNER JOIN category ON event.id_category=category.id INNER JOIN sale_place ON event.id_sale_place=sale_place.id ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date`;
 
-        // const query = `SELECT * FROM event INNER JOIN category ON event.id_category=category.id INNER JOIN sale_place ON event.id_sale_place=sale_place.id ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date LIMIT ${validLimit} OFFSET ${currentPage}`;
+        let query = `SELECT *, DATE_FORMAT(event.created_at, '%Y-%m-%dT%T') as created_at, DATE_FORMAT(event.updated_at, '%Y-%m-%dT%T') as updated_at, DATE_FORMAT(event.date, '%Y-%m-%dT%T') as date FROM event ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date`;
 
-        const query = `SELECT *, DATE_FORMAT(event.created_at, '%Y-%m-%dT%T') as created_at, DATE_FORMAT(event.updated_at, '%Y-%m-%dT%T') as updated_at, DATE_FORMAT(event.date, '%Y-%m-%dT%T') as date FROM event ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date LIMIT ${validLimit} OFFSET ${currentPage}`;
+        if (limit != 0) {
+            const validPage = page !== 0 ? page : 1;
+            const currentPage = (validPage - 1) * limit;
+            query += ` LIMIT ${limit} OFFSET ${currentPage}`;
+        }
 
         const options = {
             sql: query,
@@ -67,10 +69,10 @@ const Event = {
     },
 
     postEvent(Body, File, Uuid, PlacePhoneNumber, callback) {
-        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
+        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `url_image`, `place`, `place_phone`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, new Date(), Body.title, File.path, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
+            [Uuid, Body.status, new Date(), new Date(), Body.title, File.path, Body.place, PlacePhoneNumber, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
         ];
 
         return db.query(sql, [values], callback);

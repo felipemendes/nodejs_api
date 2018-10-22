@@ -28,11 +28,13 @@ const SalePlace = {
 
         const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
 
-        const validPage = page !== 0 ? page : 1;
-        const validLimit = limit !== 0 ? limit : 10;
-        const currentPage = (validPage - 1) * validLimit;
+        let query = `SELECT * FROM sale_place${whereClause}`;
 
-        const query = `SELECT * FROM sale_place${whereClause} LIMIT ${validLimit} OFFSET ${currentPage}`;
+        if (limit != 0) {
+            const validPage = page !== 0 ? page : 1;
+            const currentPage = (validPage - 1) * limit;
+            query += ` LIMIT ${limit} OFFSET ${currentPage}`;
+        }
 
         return db.query(query, callback);
     },

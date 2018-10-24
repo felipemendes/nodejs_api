@@ -17,6 +17,11 @@ exports.get_categories = (req, res) => {
                 details: err.sqlMessage
             });
         } else {
+            const serverUrl = `${req.protocol}://${req.get('host')}/`;
+            rows.forEach(i => {
+                i.url_image = serverUrl + i.url_image;
+            });
+
             res.status(200).json({
                 categories: rows
             });

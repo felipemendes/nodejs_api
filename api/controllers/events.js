@@ -1,9 +1,9 @@
 const Event = require('../models/Event');
 const uuidv1 = require('uuid/v1');
+const dateFormat = require('dateformat');
 const helpers = require('../helpers/PurAiHelpers');
 const validate = require('uuid-validate');
 const nested = require('../helpers/ConvertToNestedHelper');
-const dateFormat = require('dateformat');
 
 exports.get_events = (req, res) => {
     if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
@@ -45,11 +45,15 @@ exports.get_events = (req, res) => {
             ];
 
             const nestedRows = nested.convertToNested(rows, nestingOptions);
+            const serverUrl = `${req.protocol}://${req.get('host')}/`;
 
             nestedRows.forEach(i => {
                 i.created_at = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
                 i.updated_at = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
                 i.date = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
+
+                i.url_image = serverUrl + i.url_image;
+                i.category.url_image = serverUrl + i.category.url_image;
             });
 
             res.status(200).json({

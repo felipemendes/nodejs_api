@@ -3,6 +3,7 @@ const uuidv1 = require('uuid/v1');
 const helpers = require('../helpers/PurAiHelpers');
 const validate = require('uuid-validate');
 const nested = require('../helpers/ConvertToNestedHelper');
+const dateFormat = require('dateformat');
 
 exports.get_events = (req, res) => {
     if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
@@ -20,33 +21,39 @@ exports.get_events = (req, res) => {
                 details: err.sqlMessage
             });
         } else {
-            // const nestingOptions = [{
-            //         tableName: 'event',
-            //         pkey: 'id',
-            //         fkeys: [{
-            //                 table: 'category',
-            //                 col: 'id_category'
-            //             },
-            //             {
-            //                 table: 'sale_place',
-            //                 col: 'id_sale_place'
-            //             }
-            //         ]
-            //     },
-            //     {
-            //         tableName: 'category',
-            //         pkey: 'id'
-            //     },
-            //     {
-            //         tableName: 'sale_place',
-            //         pkey: 'id'
-            //     },
-            // ];
+            const nestingOptions = [{
+                    tableName: 'event',
+                    pkey: 'id',
+                    fkeys: [{
+                            table: 'category',
+                            col: 'id_category'
+                        },
+                        {
+                            table: 'sale_place',
+                            col: 'id_sale_place'
+                        }
+                    ]
+                },
+                {
+                    tableName: 'category',
+                    pkey: 'id'
+                },
+                {
+                    tableName: 'sale_place',
+                    pkey: 'id'
+                },
+            ];
 
-            // const nestedRows = nested.convertToNested(rows, nestingOptions);
+            const nestedRows = nested.convertToNested(rows, nestingOptions);
+
+            nestedRows.forEach(i => {
+                i.created_at = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
+                i.updated_at = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
+                i.date = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
+            });
+
             res.status(200).json({
-                // events: nestedRows
-                events: rows
+                events: nestedRows
             });
         }
     });

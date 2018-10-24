@@ -5,8 +5,7 @@ const connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'root',
-    database: 'purai_app',
-    dateStrings: 'date'
+    database: 'purai_app'
 });
 
 connection.connect((err) => {

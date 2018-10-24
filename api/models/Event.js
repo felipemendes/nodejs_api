@@ -38,7 +38,10 @@ const Event = {
         if (search === undefined) {
             searchWhere = '';
         } else {
-            searchWhere = `event.title LIKE '%${search}%' or event.place LIKE '%${search}%' or event.address LIKE '%${search}%' or event.city LIKE '%${search}%'`;
+            searchWhere = `event.title LIKE '%${search}%' or 
+                           event.place LIKE '%${search}%' or 
+                           event.address LIKE '%${search}%' or 
+                           event.city LIKE '%${search}%'`;
         }
 
         const valuesForWhere = Array(
@@ -51,9 +54,11 @@ const Event = {
 
         const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
 
-        // let query = `SELECT * FROM event INNER JOIN category ON event.id_category=category.id INNER JOIN sale_place ON event.id_sale_place=sale_place.id ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date`;
-
-        let query = `SELECT *, DATE_FORMAT(event.created_at, '%Y-%m-%dT%T') as created_at, DATE_FORMAT(event.updated_at, '%Y-%m-%dT%T') as updated_at, DATE_FORMAT(event.date, '%Y-%m-%dT%T') as date FROM event ${whereClause} AND date >= '${upcomingFilter}' ORDER BY date`;
+        let query = `SELECT * FROM event
+                    INNER JOIN category ON event.id_category=category.id 
+                    INNER JOIN sale_place ON event.id_sale_place=sale_place.id 
+                    ${whereClause} 
+                    AND date >= '${upcomingFilter}' ORDER BY date`;
 
         if (limit != 0) {
             const validPage = page !== 0 ? page : 1;
@@ -63,7 +68,7 @@ const Event = {
 
         const options = {
             sql: query,
-            nestTables: false
+            nestTables: true
         };
         return db.query(options, callback);
     },

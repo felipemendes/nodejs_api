@@ -73,9 +73,8 @@ exports.create_event = (req, res) => {
     }
 
     const newUuid = uuidv1();
-    const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
 
-    Event.postEvent(req.body, req.file, newUuid, placePhoneNumberFormatted, (err) => {
+    Event.postEvent(req.body, req.file, newUuid, (err) => {
         if (err) {
             res.status(500).json({
                 message: 'Event cannot be register. Check details message for more info',
@@ -127,9 +126,7 @@ exports.update_event = (req, res) => {
         return;
     }
 
-    const placePhoneNumberFormatted = helpers.formatPhoneNumber(req.body.place_phone);
-
-    Event.putEvent(req.params.uuid, placePhoneNumberFormatted, req.body, req.file, (err, rows) => {
+    Event.putEvent(req.params.uuid, req.body, req.file, (err, rows) => {
         if (err) {
             res.status(500).json({
                 message: 'Event cannot be updated. Check details message for more info',

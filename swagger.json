@@ -792,8 +792,6 @@
       "required": [
         "title",
         "url_image",
-        "place",
-        "place_phone",
         "date",
         "address",
         "city",
@@ -815,12 +813,6 @@
         "url_image": {
           "type": "string",
           "format": "file"
-        },
-        "place": {
-          "type": "string"
-        },
-        "place_phone": {
-          "type": "string"
         },
         "date": {
           "type": "string",

@@ -172,8 +172,6 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
     "status": 1,
     "title": "string",
     "url_image": File,
-    "place": "string",
-    "place_phone": "string",
     "date": "2022-01-01 20:00",
     "address": "string",
     "city": "string",
@@ -190,17 +188,29 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
             "id": 1,
             "uuid": "955b9575-e542-461c-939a-5ef41e733859",
             "status": 1,
-            "created_at": "2018-10-21T23:25:02",
-            "updated_at": "2018-10-21T23:25:02",
+            "created_at": "2022-01-01T00:00:00",
+            "updated_at": "2022-01-01T00:00:00",
             "title": "Sample Event",
-            "url_image": "uploads/events/sample-event.jpg",
-            "place": "Apple Infinite Loop",
-            "place_phone": "+1 408-961-1560",
+            "url_image": "http://localhost:3000/uploads/events/sample-event.jpg",
             "date": "2022-01-01T00:00:00",
             "address": "Apple Campus, Cupertino, CA 95014, EUA",
             "city": "Cupertino",
             "id_category": 1,
-            "id_sale_place": 1
+            "id_sale_place": 1,
+            "sale_place": {
+                "id": 1,
+                "uuid": "ffd9d343-585a-40ee-bc58-c1e6935dcbdd",
+                "status": 1,
+                "title": "Entre em contato para mais detalhes",
+                "phone": ""
+            },
+            "category": {
+                "id": 1,
+                "uuid": "1670d1f8-8d9e-46bb-8a19-b85cdd27e016",
+                "status": 1,
+                "title": "Festa e Show",
+                "url_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
+            }
         }
     ]
 }
@@ -252,14 +262,14 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
             "uuid": "1670d1f8-8d9e-46bb-8a19-b85cdd27e016",
             "status": 1,
             "title": "Festa e Show",
-            "url_image": "uploads/categories/sample-category.jpg"
+            "url_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
         },
         {
             "id": 2,
             "uuid": "2ddbd4bd-527a-428b-b640-d3f9318b06b8",
             "status": 1,
             "title": "Curso e Workshop",
-            "url_image": "uploads/categories/sample-category.jpg"
+            "url_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
         }
     ]
 }

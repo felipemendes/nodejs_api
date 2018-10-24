@@ -665,7 +665,7 @@
         }
       }
     },
-    "/user/{uuid}": {
+    "/user": {
       "get": {
         "security": [{
           "Bearer": []
@@ -678,10 +678,15 @@
           "application/json"
         ],
         "parameters": [{
+          "name": "status",
+          "in": "query",
+          "description": "Status of users that we want to find. (1: Active, 0: Inactive)",
+          "type": "integer"
+        },
+        {
           "name": "uuid",
-          "in": "path",
-          "required": true,
-          "description": "UUID of user that needs to be found",
+          "in": "query",
+          "description": "UUID of user that we want to find. (e.g.: 955b9575-e542-461c-939a-5ef41e733859)",
           "type": "string"
         }],
         "responses": {

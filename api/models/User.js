@@ -1,11 +1,27 @@
 const db = require('../../db-connect');
+const helpers = require('../helpers/PurAiHelpers');
 
 const User = {
 
-    getUser(uuid, callback) {
-        const query = 'SELECT * FROM user WHERE user.uuid=?';
-        const values = [uuid];
-        return db.query(query, values, callback);
+    getUser(status = 1, uuid, callback) {
+        const statusWhere = `user.status='${status}'`;
+
+        let uuidWhere;
+        if (uuid === undefined) {
+            uuidWhere = '';
+        } else {
+            uuidWhere = `user.uuid='${uuid}'`;
+        }
+
+        const valuesForWhere = Array(
+            uuidWhere,
+            statusWhere
+        ).filter(item => item !== '');
+
+        const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
+        const query = `SELECT user.uuid, user.status, user.name, user.email FROM user ${whereClause}`;
+        
+        return db.query(query, callback);
     },
 
     login(email, callback) {

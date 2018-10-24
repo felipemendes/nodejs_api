@@ -8,14 +8,14 @@ const validate = require('uuid-validate');
 const helpers = require('../helpers/PurAiHelpers');
 
 exports.get_users = (req, res) => {
-    if (req.params.uuid !== undefined && !validate(req.params.uuid)) {
+    if (req.query.uuid !== undefined && !validate(req.query.uuid)) {
         return res.status(500).json({
             message: 'User cannot be returned. Check details message for more info',
             details: 'UUID format is invalid'
         });
     }
 
-    User.getUser(req.params.uuid, (err, rows) => {
+    User.getUser(req.query.status, req.query.uuid, (err, rows) => {
         if (err) {
             res.status(500).json({
                 message: 'User cannot be returned. Check details message for more info',
@@ -23,7 +23,7 @@ exports.get_users = (req, res) => {
             });
         } else {
             res.status(200).json({
-                user: rows
+                users: rows
             });
         }
     });

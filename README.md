@@ -92,6 +92,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
+| `status` | int | :x: | GET filtered by status. (1: Active, 0: Inactive) |
 | `uuid` | string | :white_check_mark: | GET filtered by UUID. (e.g.: dbfdd3d0-a808-11e8-aa56-a3de1ec713c5) |
 
 #### DELETE `http://localhost:3000/user/{uuid}`
@@ -123,14 +124,12 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 #### User data response example
 ```json
 {
-    "user": [
+    "users": [
         {
-            "id": 1,
             "uuid": "dbfdd3d0-a808-11e8-aa56-a3de1ec713c5",
             "status": 1,
             "name": "admin",
-            "email": "admin@mail.com",
-            "password": "$2b$10$bbE8Fn5K8PZYrThPnI25JefkHYermyOJq5Xim3ToxAijDR9ngPDSO"
+            "email": "admin@mail.com"
         }
     ]
 }

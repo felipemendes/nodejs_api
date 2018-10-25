@@ -93,7 +93,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
 | `status` | int | :x: | GET filtered by status. (1: Active, 0: Inactive) |
-| `uuid` | string | :white_check_mark: | GET filtered by UUID. (e.g.: dbfdd3d0-a808-11e8-aa56-a3de1ec713c5) |
+| `uuid` | string | :x: | GET filtered by UUID. (e.g.: dbfdd3d0-a808-11e8-aa56-a3de1ec713c5) |
 
 #### DELETE `http://localhost:3000/user/{uuid}`
 | Parameter | Type | Required | Description

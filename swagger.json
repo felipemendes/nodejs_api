@@ -472,7 +472,7 @@
             "name": "uuid",
             "in": "path",
             "required": true,
-            "description": "UUID of event that we want to delete",
+            "description": "UUID of event that we want to update",
             "type": "string"
           },
           {
@@ -554,7 +554,7 @@
             "name": "uuid",
             "in": "path",
             "required": true,
-            "description": "UUID of category that we want to delete",
+            "description": "UUID of category that we want to update",
             "type": "string"
           },
           {
@@ -636,7 +636,7 @@
             "name": "uuid",
             "in": "path",
             "required": true,
-            "description": "UUID of sale place that we want to delete",
+            "description": "UUID of sale place that we want to update",
             "type": "string"
           },
           {
@@ -703,7 +703,9 @@
             "description": "Results not found"
           }
         }
-      },
+      }
+    },
+    "/user/{uuid}": {
       "delete": {
         "security": [{
           "Bearer": []
@@ -756,7 +758,7 @@
             "name": "uuid",
             "in": "path",
             "required": true,
-            "description": "UUID of user that we want to delete",
+            "description": "UUID of user that we want to update",
             "type": "string"
           },
           {

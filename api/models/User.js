@@ -19,7 +19,7 @@ const User = {
         ).filter(item => item !== '');
 
         const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
-        const query = `SELECT user.uuid, user.status, user.name, user.email FROM user ${whereClause}`;
+        const query = `SELECT * FROM user ${whereClause}`;
         
         return db.query(query, callback);
     },
@@ -46,7 +46,6 @@ const User = {
             query += ' AND user.uuid <>?';
         }
         const values = [email, uuid];
-        console.log(query);
         return db.query(query, values, callback);
     },
 

@@ -50,10 +50,10 @@ const User = {
         return db.query(query, values, callback);
     },
 
-    putUser(Body, Uuid, callback) {
+    putUser(Body, Uuid, Hash, callback) {
         const sql = 'UPDATE user SET status=?, name=?, email=?, password=? where uuid=?';
 
-        const values = [Body.status, Body.name, Body.email, Body.password, Uuid];
+        const values = [Body.status, Body.name, Body.email, Hash, Uuid];
 
         return db.query(sql, values, callback);
     },

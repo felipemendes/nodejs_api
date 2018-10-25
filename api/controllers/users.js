@@ -143,11 +143,13 @@ exports.update_user = (req, res) => {
     User.checkEmailExists(req.body.email, req.params.uuid, (errEmail, rowsEmail) => {
         if (rowsEmail && rowsEmail.length) {
             return res.status(500).json({
-                message: 'E-mail address already registered'
+                message: 'Invalid data. Please try again [E001]'
             });
         }
 
-        User.putUser(req.body, req.params.uuid, (err, rows) => {
+        const hash = bcrypt.hashSync(req.body.password, 10);
+
+        User.putUser(req.body, req.params.uuid, hash, (err, rows) => {
             if (err) {
                 res.status(500).json({
                     message: 'User cannot be register. Check details message for more info',

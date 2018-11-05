@@ -40,7 +40,7 @@ const Category = {
     },
 
     postCategory(Body, File, Uuid, callback) {
-        const sql = 'INSERT INTO `category` (`uuid`, `status`, `title`, `url_image`) VALUES ?';
+        const sql = 'INSERT INTO `category` (`uuid`, `status`, `title`, `category_image`) VALUES ?';
 
         const values = [
             [Uuid, Body.status, Body.title, File.path]
@@ -54,7 +54,7 @@ const Category = {
         let values = '';
 
         if (File !== undefined) {
-            sql += 'UPDATE category SET status=?, title=?, url_image=? where uuid=?';
+            sql += 'UPDATE category SET status=?, title=?, category_image=? where uuid=?';
             values = [Body.status, Body.title, File.path, Uuid];
         } else {
             sql += 'UPDATE category SET status=?, title=? where uuid=?';

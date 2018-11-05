@@ -53,7 +53,7 @@ exports.get_events = (req, res) => {
                 i.date = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
 
                 i.url_image = serverUrl + i.url_image;
-                i.category.url_image = serverUrl + i.category.url_image;
+                i.category.category_image = serverUrl + i.category.category_image;
             });
 
             res.status(200).json({

@@ -19,7 +19,7 @@ exports.get_categories = (req, res) => {
         } else {
             const serverUrl = `${req.protocol}://${req.get('host')}/`;
             rows.forEach(i => {
-                i.url_image = serverUrl + i.url_image;
+                i.category_image = serverUrl + i.category_image;
             });
 
             res.status(200).json({
@@ -33,7 +33,7 @@ exports.create_category = (req, res) => {
     if (req.file === undefined) {
         res.json({
             message: 'Category cannot be register. Check details message for more info',
-            details: 'Column \'url_image\' cannot be null'
+            details: 'Column \'category_image\' cannot be null'
         });
         return;
     }

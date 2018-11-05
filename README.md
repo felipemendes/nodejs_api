@@ -209,7 +209,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
                 "uuid": "1670d1f8-8d9e-46bb-8a19-b85cdd27e016",
                 "status": 1,
                 "title": "Festa e Show",
-                "url_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
+                "category_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
             }
         }
     ]
@@ -249,7 +249,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 {
     "status": 1,
     "title": "string",
-    "url_image": File
+    "category_image": File
 }
 ```
 
@@ -262,14 +262,14 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
             "uuid": "1670d1f8-8d9e-46bb-8a19-b85cdd27e016",
             "status": 1,
             "title": "Festa e Show",
-            "url_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
+            "category_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
         },
         {
             "id": 2,
             "uuid": "2ddbd4bd-527a-428b-b640-d3f9318b06b8",
             "status": 1,
             "title": "Curso e Workshop",
-            "url_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
+            "category_image": "http://localhost:3000/uploads/categories/sample-category.jpg"
         }
     ]
 }

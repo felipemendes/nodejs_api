@@ -18,7 +18,7 @@ connection.connect((err) => {
     createEventTable(connection);
 
     /* uncomment this call method to add sample data */
-    // addSampleData(connection);
+    addSampleData(connection);
 });
 
 function createUserTable(conn) {
@@ -60,7 +60,7 @@ function createCategoryTable(conn) {
         '`uuid` varchar(36) NOT NULL,\n' +
         '`status` TINYINT(1) NOT NULL,\n' +
         '`title` varchar(255) NOT NULL,\n' +
-        '`url_image` varchar(255) NOT NULL,\n' +
+        '`category_image` varchar(255) NOT NULL,\n' +
         'PRIMARY KEY (`id`)\n' +
         ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 
@@ -131,7 +131,7 @@ function addSalePlaceSampleData(conn) {
 }
 
 function addCategorySampleData(conn) {
-    const sql = 'INSERT INTO `category` (`uuid`, `status`, `title`, `url_image`) VALUES ?';
+    const sql = 'INSERT INTO `category` (`uuid`, `status`, `title`, `category_image`) VALUES ?';
 
     const values = [
         ['1670d1f8-8d9e-46bb-8a19-b85cdd27e016', 1, 'Festa e Show', 'uploads/categories/sample-category.jpg'],

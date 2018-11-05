@@ -838,7 +838,7 @@
       "type": "object",
       "required": [
         "title",
-        "url_image"
+        "category_image"
       ],
       "properties": {
         "status": {
@@ -852,7 +852,7 @@
         "title": {
           "type": "string"
         },
-        "url_image": {
+        "category_image": {
           "type": "string",
           "format": "file"
         }

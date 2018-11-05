@@ -38,10 +38,10 @@ const upload = multer({
 
 router.get('/:status?/:uuid?/:search?/:page?/:limit?', CategoriesController.get_categories);
 
-router.post('/', upload.single('url_image'), checkAuth, CategoriesController.create_category);
+router.post('/', upload.single('category_image'), checkAuth, CategoriesController.create_category);
 
 router.delete('/:uuid', checkAuth, CategoriesController.delete_category);
 
-router.put('/:uuid', upload.single('url_image'), checkAuth, CategoriesController.update_category);
+router.put('/:uuid', upload.single('category_image'), checkAuth, CategoriesController.update_category);
 
 module.exports = router;

@@ -39,7 +39,6 @@ const Event = {
             searchWhere = '';
         } else {
             searchWhere = `event.title LIKE '%${search}%' or 
-                           event.place LIKE '%${search}%' or 
                            event.address LIKE '%${search}%' or 
                            event.city LIKE '%${search}%'`;
         }

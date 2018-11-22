@@ -18,12 +18,12 @@ const Event = {
             categoryWhere = `category.title LIKE '%${category}%'`;
         }
 
-        let upcomingFilter;
-        if (upcoming !== undefined) {
-            upcomingFilter = upcoming;
-        } else {
-            upcomingFilter = new Date().toJSON().slice(0, 10);
-        }
+        // let upcomingFilter;
+        // if (upcoming !== undefined) {
+        //     upcomingFilter = upcoming;
+        // } else {
+        //     upcomingFilter = new Date().toJSON().slice(0, 10);
+        // }
 
         const statusWhere = `event.status='${status}'`;
 
@@ -56,8 +56,8 @@ const Event = {
         let query = `SELECT * FROM event
                     INNER JOIN category ON event.id_category=category.id 
                     INNER JOIN sale_place ON event.id_sale_place=sale_place.id 
-                    ${whereClause} 
-                    AND date >= '${upcomingFilter}' ORDER BY date`;
+                    ${whereClause}`;
+                    //AND date >= '${upcomingFilter}' ORDER BY date`;
 
         if (limit != 0) {
             const validPage = page !== 0 ? page : 1;

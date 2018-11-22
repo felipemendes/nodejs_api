@@ -146,7 +146,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 | `search` | string | :x: | GET filtered by term in event title, place, address and city |
 | `page` | int | :x: |GET filtered by page number considering limit value. (Default page is 1) |
 | `limit` | int | :x: | GET filtered by limit informed. If `0` returns all records. (Default value is 10) |
-| `upcoming` | string | :x: | GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
+| `upcoming` | string | :x: | **deprecated** GET filtered by upcoming events. By default only events with a date greater than or equal to the current date will be returned. Date format yyyy-MM-dd |
 | `category` | string | :x: | GET filtered by terms in category name |
 | `saleplace` | string | :x: | GET filtered by terms in sale places name |
 

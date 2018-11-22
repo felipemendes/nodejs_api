@@ -18,7 +18,7 @@ connection.connect((err) => {
     createEventTable(connection);
 
     /* uncomment this call method to add sample data */
-    addSampleData(connection);
+    // addSampleData(connection);
 });
 
 function createUserTable(conn) {

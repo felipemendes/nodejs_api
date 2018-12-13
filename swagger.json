@@ -793,7 +793,7 @@
       "type": "object",
       "required": [
         "title",
-        "url_image",
+        "image",
         "date",
         "address",
         "city",
@@ -812,7 +812,7 @@
         "title": {
           "type": "string"
         },
-        "url_image": {
+        "image": {
           "type": "string",
           "format": "file"
         },

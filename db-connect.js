@@ -78,7 +78,7 @@ function createEventTable(conn) {
         '`created_at` DATETIME NULL,\n' +
         '`updated_at` DATETIME NULL,\n' +
         '`title` varchar(255) NOT NULL,\n' +
-        '`url_image` varchar(255) NOT NULL,\n' +
+        '`image` varchar(255) NOT NULL,\n' +
         '`date` DATETIME NOT NULL,\n' +
         '`address` varchar(255) NOT NULL,\n' +
         '`city` varchar(255) NOT NULL,\n' +
@@ -149,7 +149,7 @@ function addCategorySampleData(conn) {
 }
 
 function addEventSampleData(conn) {
-    const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `url_image`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
+    const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `image`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
     const values = [
         ['955b9575-e542-461c-939a-5ef41e733859', 1, new Date(), new Date(), 'Sample Event', 'uploads/events/sample-event.jpg', '2022-01-01', 'Apple Campus, Cupertino, CA 95014, EUA', 'Cupertino', 1, 1]

@@ -52,7 +52,7 @@ exports.get_events = (req, res) => {
                 i.updated_at = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
                 i.date = dateFormat(i.date, "yyyy-mm-dd'T'HH:MM:ss");
 
-                i.url_image = serverUrl + i.url_image;
+                i.image = serverUrl + i.image;
                 i.category.category_image = serverUrl + i.category.category_image;
             });
 
@@ -67,7 +67,7 @@ exports.create_event = (req, res) => {
     if (req.file === undefined) {
         res.json({
             message: 'Event cannot be register. Check details message for more info',
-            details: 'Column \'url_image\' cannot be null'
+            details: 'Column \'image\' cannot be null'
         });
         return;
     }

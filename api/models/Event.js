@@ -73,7 +73,7 @@ const Event = {
     },
 
     postEvent(Body, File, Uuid, callback) {
-        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `url_image`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
+        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `image`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
         const values = [
             [Uuid, Body.status, new Date(), new Date(), Body.title, File.path, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
@@ -87,7 +87,7 @@ const Event = {
         let values = '';
 
         if (File !== undefined) {
-            sql += 'UPDATE event SET status=?, updated_at=?, title=?, url_image=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            sql += 'UPDATE event SET status=?, updated_at=?, title=?, image=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
             values = [Body.status, new Date(), Body.title, File.path, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         } else {
             sql += 'UPDATE event SET status=?, updated_at=?, title=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';

@@ -171,7 +171,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 {
     "status": 1,
     "title": "string",
-    "url_image": File,
+    "image": File,
     "date": "2022-01-01 20:00",
     "address": "string",
     "city": "string",
@@ -191,7 +191,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
             "created_at": "2022-01-01T00:00:00",
             "updated_at": "2022-01-01T00:00:00",
             "title": "Sample Event",
-            "url_image": "http://localhost:3000/uploads/events/sample-event.jpg",
+            "image": "http://localhost:3000/uploads/events/sample-event.jpg",
             "date": "2022-01-01T00:00:00",
             "address": "Apple Campus, Cupertino, CA 95014, EUA",
             "city": "Cupertino",

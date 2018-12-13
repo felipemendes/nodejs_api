@@ -38,10 +38,10 @@ const upload = multer({
 
 router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', EventsController.get_events);
 
-router.post('/', upload.single('url_image'), checkAuth, EventsController.create_event);
+router.post('/', upload.single('image'), checkAuth, EventsController.create_event);
 
 router.delete('/:uuid', checkAuth, EventsController.delete_event);
 
-router.put('/:uuid', upload.single('url_image'), checkAuth, EventsController.update_event);
+router.put('/:uuid', upload.single('image'), checkAuth, EventsController.update_event);
 
 module.exports = router;

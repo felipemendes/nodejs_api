@@ -14,6 +14,12 @@ This project package the following functions:
 - [x] User
 - [x] Login
 
+Features must be added:
+- [ ] [Knex](https://github.com/tgriesser/knex) query builder
+- [ ] [GraphQL](https://graphql.org/)
+- [ ] [Redis Cache](https://redis.io/)
+- [ ] Unit testing
+
 ## Installation
 Get via git clone:
 ```

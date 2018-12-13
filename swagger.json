@@ -794,6 +794,8 @@
       "required": [
         "title",
         "image",
+        "description",
+        "price",
         "date",
         "address",
         "city",
@@ -815,6 +817,12 @@
         "image": {
           "type": "string",
           "format": "file"
+        },
+        "description": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
         },
         "date": {
           "type": "string",

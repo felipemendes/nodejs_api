@@ -1,7 +1,6 @@
 const Event = require('../models/Event');
 const uuidv1 = require('uuid/v1');
 const dateFormat = require('dateformat');
-const helpers = require('../helpers/PurAiHelpers');
 const validate = require('uuid-validate');
 const nested = require('../helpers/ConvertToNestedHelper');
 

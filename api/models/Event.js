@@ -59,7 +59,7 @@ const Event = {
                     ${whereClause}`;
                     //AND date >= '${upcomingFilter}' ORDER BY date`;
 
-        if (limit != 0) {
+        if (limit !== 0) {
             const validPage = page !== 0 ? page : 1;
             const currentPage = (validPage - 1) * limit;
             query += ` LIMIT ${limit} OFFSET ${currentPage}`;
@@ -73,10 +73,10 @@ const Event = {
     },
 
     postEvent(Body, File, Uuid, callback) {
-        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `image`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
+        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `image`, `description`, `price`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, new Date(), new Date(), Body.title, File.path, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
+            [Uuid, Body.status, new Date(), new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
         ];
 
         return db.query(sql, [values], callback);
@@ -87,11 +87,11 @@ const Event = {
         let values = '';
 
         if (File !== undefined) {
-            sql += 'UPDATE event SET status=?, updated_at=?, title=?, image=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
-            values = [Body.status, new Date(), Body.title, File.path, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+            sql += 'UPDATE event SET status=?, updated_at=?, title=?, image=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         } else {
-            sql += 'UPDATE event SET status=?, updated_at=?, title=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
-            values = [Body.status, new Date(), Body.title, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+            sql += 'UPDATE event SET status=?, updated_at=?, title=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, new Date(), Body.title, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         }
 
         return db.query(sql, values, callback);

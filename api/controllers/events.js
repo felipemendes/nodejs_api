@@ -13,7 +13,7 @@ exports.get_events = (req, res) => {
         return;
     }
 
-    Event.getEvents(req.query.saleplace, req.query.category, req.query.upcoming, req.query.status, req.query.uuid, req.query.search, req.query.page, req.query.limit, (err, rows) => {
+    Event.getEvents(req.query.saleplace, req.query.category, req.query.upcoming, req.query.status, req.query.featured, req.query.uuid, req.query.search, req.query.page, req.query.limit, (err, rows) => {
         if (err) {
             res.status(500).json({
                 message: 'Events cannot be returned. Check details message for more info',

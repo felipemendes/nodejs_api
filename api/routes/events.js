@@ -36,7 +36,7 @@ const upload = multer({
 
 });
 
-router.get('/:saleplace?/:category?/:upcoming?/:status?/:uuid?/:search?/:page?/:limit?', EventsController.get_events);
+router.get('/:saleplace?/:category?/:upcoming?/:status?/:featured?/:uuid?/:search?/:page?/:limit?', EventsController.get_events);
 
 router.post('/', upload.single('image'), checkAuth, EventsController.create_event);
 

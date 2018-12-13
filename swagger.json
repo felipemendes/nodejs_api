@@ -40,7 +40,7 @@
           "events"
         ],
         "summary": "Get all events",
-        "description": "Optional parameters are: Category, Upcoming events, Status, UUID, search term, page and limit",
+        "description": "Optional parameters are: Category, Upcoming events, Status, Featured, UUID, search term, page and limit",
         "produces": [
           "application/json"
         ],
@@ -48,6 +48,12 @@
             "name": "status",
             "in": "query",
             "description": "Status of event that we want to find. (1: Active, 0: Inactive)",
+            "type": "integer"
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Get featured events. (1: True, 0: False)",
             "type": "integer"
           },
           {
@@ -806,6 +812,14 @@
         "status": {
           "type": "boolean",
           "default": 1,
+          "enum": [
+            "0",
+            "1"
+          ]
+        },
+        "featured": {
+          "type": "boolean",
+          "default": 0,
           "enum": [
             "0",
             "1"

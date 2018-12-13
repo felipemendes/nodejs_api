@@ -142,6 +142,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 | Parameter | Type | Required | Description
 | --------- | ---- | -------- | ----------- |
 | `status` | int | :x: | GET filtered by status. (1: Active, 0: Inactive) |
+| `featured` | int | :x: | GET filtered by featured. (1: True, 0: False) |
 | `uuid` | string | :x: | GET filtered by UUID. (e.g.: 955b9575-e542-461c-939a-5ef41e733859) |
 | `search` | string | :x: | GET filtered by term in event title, place, address and city |
 | `page` | int | :x: |GET filtered by page number considering limit value. (Default page is 1) |
@@ -170,6 +171,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
 ```json
 {
     "status": 1,
+    "featured": 0,
     "title": "string",
     "image": File,
     "description": "string",
@@ -190,6 +192,7 @@ curl -X POST "http://localhost:3000/events" -H "accept: application/json" -H "Au
             "id": 1,
             "uuid": "955b9575-e542-461c-939a-5ef41e733859",
             "status": 1,
+            "featured": 0,
             "created_at": "2022-01-01T00:00:00",
             "updated_at": "2022-01-01T00:00:00",
             "title": "Sample Event",

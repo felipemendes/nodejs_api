@@ -3,7 +3,7 @@ const helpers = require('../helpers/PurAiHelpers');
 
 const Event = {
 
-    getEvents(saleplace, category, upcoming, status = 1, uuid, search, page = 1, limit = 10, callback) {
+    getEvents(saleplace, category, upcoming, status = 1, featured, uuid, search, page = 1, limit = 10, callback) {
         let salePlaceWhere;
         if (saleplace === undefined) {
             salePlaceWhere = '';
@@ -27,6 +27,13 @@ const Event = {
 
         const statusWhere = `event.status='${status}'`;
 
+        let featuredWhere;
+        if (featured === undefined) {
+            featuredWhere = '';
+        } else {
+            featuredWhere = `event.featured='${featured}'`;
+        }
+
         let uuidWhere;
         if (uuid === undefined) {
             uuidWhere = '';
@@ -48,7 +55,8 @@ const Event = {
                 categoryWhere,
                 uuidWhere,
                 searchWhere,
-                statusWhere
+                statusWhere,
+                featuredWhere
             ).filter(item => item !== '');
 
         const whereClause = helpers.buildSqlWhereClause(valuesForWhere);
@@ -73,10 +81,10 @@ const Event = {
     },
 
     postEvent(Body, File, Uuid, callback) {
-        const sql = 'INSERT INTO `event` (`uuid`, `status`, `created_at`, `updated_at`, `title`, `image`, `description`, `price`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
+        const sql = 'INSERT INTO `event` (`uuid`, `status`, `featured`, `created_at`, `updated_at`, `title`, `image`, `description`, `price`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, new Date(), new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
+            [Uuid, Body.status, Body.featured, new Date(), new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
         ];
 
         return db.query(sql, [values], callback);
@@ -87,11 +95,11 @@ const Event = {
         let values = '';
 
         if (File !== undefined) {
-            sql += 'UPDATE event SET status=?, updated_at=?, title=?, image=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
-            values = [Body.status, new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+            sql += 'UPDATE event SET status=?, featured=?, updated_at=?, title=?, image=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, Body.featured, new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         } else {
-            sql += 'UPDATE event SET status=?, updated_at=?, title=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
-            values = [Body.status, new Date(), Body.title, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+            sql += 'UPDATE event SET status=?, featured=?, updated_at=?, title=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, Body.featured, new Date(), Body.title, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         }
 
         return db.query(sql, values, callback);

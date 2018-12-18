@@ -81,10 +81,10 @@ const Event = {
     },
 
     postEvent(Body, File, Uuid, callback) {
-        const sql = 'INSERT INTO `event` (`uuid`, `status`, `featured`, `created_at`, `updated_at`, `title`, `image`, `description`, `price`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
+        const sql = 'INSERT INTO `event` (`uuid`, `status`, `featured`, `created_at`, `updated_at`, `title`, `image`, `about`, `price`, `date`, `address`, `city`, `id_category`, `id_sale_place`) VALUES ?';
 
         const values = [
-            [Uuid, Body.status, Body.featured, new Date(), new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
+            [Uuid, Body.status, Body.featured, new Date(), new Date(), Body.title, File.path, Body.about, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place]
         ];
 
         return db.query(sql, [values], callback);
@@ -95,11 +95,11 @@ const Event = {
         let values = '';
 
         if (File !== undefined) {
-            sql += 'UPDATE event SET status=?, featured=?, updated_at=?, title=?, image=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
-            values = [Body.status, Body.featured, new Date(), Body.title, File.path, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+            sql += 'UPDATE event SET status=?, featured=?, updated_at=?, title=?, image=?, about=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, Body.featured, new Date(), Body.title, File.path, Body.about, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         } else {
-            sql += 'UPDATE event SET status=?, featured=?, updated_at=?, title=?, description=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
-            values = [Body.status, Body.featured, new Date(), Body.title, Body.description, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
+            sql += 'UPDATE event SET status=?, featured=?, updated_at=?, title=?, about=?, price=?, date=?, address=?, city=?, id_category=?, id_sale_place=? where uuid=?';
+            values = [Body.status, Body.featured, new Date(), Body.title, Body.about, Body.price, Body.date, Body.address, Body.city, Body.id_category, Body.id_sale_place, Uuid];
         }
 
         return db.query(sql, values, callback);

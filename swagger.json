@@ -800,7 +800,7 @@
       "required": [
         "title",
         "image",
-        "description",
+        "about",
         "price",
         "date",
         "address",
@@ -832,7 +832,7 @@
           "type": "string",
           "format": "file"
         },
-        "description": {
+        "about": {
           "type": "string"
         },
         "price": {

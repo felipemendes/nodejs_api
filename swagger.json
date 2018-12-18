@@ -71,7 +71,7 @@
           {
             "name": "category",
             "in": "query",
-            "description": "Search events by terms in category name",
+            "description": "Search events by category UUID",
             "type": "string"
           },
           {

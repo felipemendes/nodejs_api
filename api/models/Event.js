@@ -15,7 +15,7 @@ const Event = {
         if (category === undefined) {
             categoryWhere = '';
         } else {
-            categoryWhere = `category.title LIKE '%${category}%'`;
+            categoryWhere = `category.uuid LIKE '%${category}%'`;
         }
 
         // let upcomingFilter;

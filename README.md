@@ -1,8 +1,8 @@
 
 ![Wercker](https://img.shields.io/wercker/ci/wercker/go-wercker-api.svg)
 ![AUR](https://img.shields.io/aur/license/yaourt.svg) 
-![GitHub last commit](https://img.shields.io/github/last-commit/felipemendes/purai_nodejs.svg)
-![GitHub contributors](https://img.shields.io/github/contributors/felipemendes/purai_nodejs.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/purai/node_api.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/purai/node_api.svg)
 
 # JavaScript PurAí API for Node.js
 Module in Node.js, Express and MySQL that provides an RESTful API. Made with MVC pattern. Support for authorization and authentication with [JWT](https://tools.ietf.org/html/rfc7519) tokens.
@@ -23,7 +23,7 @@ Features must be added:
 ## Installation
 Get via git clone:
 ```
-$ git clone https://github.com/felipemendes/purai_nodejs.git
+$ git clone https://github.com/purai/node_api.git
 $ cd purai_nodejs
 ```
 

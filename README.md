@@ -23,8 +23,8 @@ Features must be added:
 ## Installation
 Get via git clone:
 ```
-$ git clone https://github.com/purai/node_api.git
-$ cd purai_nodejs
+$ git clone https://github.com/purai/nodejs_api.git
+$ cd nodejs_api
 ```
 
 Create a MySQL database without any tables. Then just set the database config at `db-connect.js` file:
